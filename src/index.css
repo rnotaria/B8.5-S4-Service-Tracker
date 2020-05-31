@@ -1,0 +1,26 @@
+html,
+body,
+#app {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans,
+    Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+}
+
+.profile-pic {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.profile-pic img {
+  height: 300px;
+  width: 500px;
+}
+
+.carInfo {
+  display: inline-block;
+}
