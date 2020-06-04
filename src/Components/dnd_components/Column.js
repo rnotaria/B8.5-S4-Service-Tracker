@@ -5,7 +5,7 @@ import { Droppable } from "react-beautiful-dnd";
 
 const Container = styled.div`
   margin-top: 10px;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
   margin-left: 5px;
   margin-right: 5px;
   width: 48%;

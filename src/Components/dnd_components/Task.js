@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 
-const Container = styled.div`
+const TaskContainer = styled.div`
   border: 1px solid lightgrey;
-  border-radius: 10px;
+  border-radius: 100px;
   overflow: hidden;
   background-color: ${(props) => (props.isDragging ? "lightgreen" : "#A9A9A9")};
 
@@ -13,6 +13,9 @@ const Container = styled.div`
 
   font-weight: bold;
   text-align: center;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export default function Task({ task, index }) {
@@ -25,7 +28,7 @@ export default function Task({ task, index }) {
       isDragDisabled={isDragDisabled}
     >
       {(provided, snapshot) => (
-        <Container
+        <TaskContainer
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
@@ -33,7 +36,7 @@ export default function Task({ task, index }) {
           isDragDisabled={isDragDisabled}
         >
           {task.content}
-        </Container>
+        </TaskContainer>
       )}
     </Draggable>
   );

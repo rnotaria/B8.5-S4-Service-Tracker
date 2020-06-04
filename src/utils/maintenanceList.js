@@ -16,12 +16,17 @@ const maintenanceList = {
       id: "task4",
       content: "Replace Ribbed V-Belt",
     },
+    task5: {
+      id: "task5",
+      content:
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGH",
+    },
   },
   columns: {
     column1: {
       id: "column1",
       title: "To Do",
-      taskIds: ["task1", "task2", "task3", "task4"],
+      taskIds: ["task1", "task2", "task3", "task4", "task5"],
     },
     column2: {
       id: "column2",

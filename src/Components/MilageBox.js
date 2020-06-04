@@ -5,8 +5,8 @@ import Collapsible from "react-collapsible";
 import Board from "./dnd_components/Board";
 
 const MilageBoxContainer = styled.div`
-  background-color: black;
-  border: 1px solid lightgrey;
+  // background-color: black;
+  // border: 1px solid lightgrey;
   // border-radius: 10px;
   padding: 10px;
 

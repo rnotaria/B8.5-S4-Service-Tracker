@@ -30,6 +30,9 @@ body {
     linear-gradient(to bottom, rgb(8, 8, 8), rgb(32, 32, 32));
   background-size: 10px 10px, 10px 10px, 10px 5px;
   background-position: 0px 0px, 5px 5px, 0px 0px;
+
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .MilageBarText {
