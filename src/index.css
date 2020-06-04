@@ -11,16 +11,6 @@ body {
     Ubuntu, Cantarell, Helvetica Neue, sans-serif;
 }
 
-.profile-pic {
-  display: inline-block;
-  vertical-align: top;
-}
-
-.profile-pic img {
-  height: 300px;
-  width: 500px;
-}
-
-.carInfo {
-  display: inline-block;
+.MilageBarText {
+  font-weight: bold;
 }

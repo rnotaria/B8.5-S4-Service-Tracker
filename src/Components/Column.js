@@ -4,13 +4,17 @@ import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
 
 const Container = styled.div`
-  margin: 8px;
-  border: 5px solid lightgrey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 2px solid lightgrey;
   width: 50%;
+  max-width: 1000px;
 
   display: flex;
   flex-direction: column;
-  background-color: blue;
+  background-color: darkblue;
 `;
 const Title = styled.h3`
   margin-top: 0;
@@ -18,6 +22,7 @@ const Title = styled.h3`
   padding: 8px;
   background-color: rgb(50, 50, 50);
   color: rgb(230, 0, 0);
+  border-bottom: 2px solid lightgrey;
 `;
 const TaskList = styled.div`
   padding: 8px;
