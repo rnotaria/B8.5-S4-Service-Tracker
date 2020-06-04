@@ -1,10 +1,8 @@
 import React from "react";
-import "./index.css";
-import Milage from "./Components/Milage";
-import CarInfo from "./Components/CarInfo";
+import Board from "./Components/Board";
 
 function App() {
-  return <CarInfo />;
+  return <Board />;
 }
 
 export default App;
