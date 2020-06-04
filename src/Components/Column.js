@@ -8,13 +8,14 @@ const Container = styled.div`
   margin-bottom: 10px;
   margin-left: 5px;
   margin-right: 5px;
-  border: 2px solid lightgrey;
-  width: 50%;
-  max-width: 1000px;
+  width: 48%;
 
   display: flex;
   flex-direction: column;
   background-color: darkblue;
+  border: 2px solid lightgrey;
+  border-radius: 10px;
+  overflow: hidden;
 `;
 const Title = styled.h3`
   margin-top: 0;

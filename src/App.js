@@ -3,13 +3,11 @@ import Board from "./Components/Board";
 import MilageBar from "./Components/MilageBar";
 
 function App() {
-  // useEffect(() => {
-  //   document.body.style.background = "black";
-  // }, []);
+  const milageList = ["55,000", "65,000"];
 
   return (
     <React.Fragment>
-      <MilageBar />
+      <MilageBar milageList={milageList} />
     </React.Fragment>
   );
 }

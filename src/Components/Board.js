@@ -11,7 +11,8 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-export default function Board() {
+export default function Board({ milage }) {
+  // set state based on milage prop
   const [maintenance, setMaintenance] = useState(maintenanceList);
 
   const onDragEnd = (result) => {
