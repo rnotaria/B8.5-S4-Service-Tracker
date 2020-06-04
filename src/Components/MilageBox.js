@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import "../index.css";
 import Collapsible from "react-collapsible";
-import Board from "./Board";
+import Board from "./dnd_components/Board";
 
-const Box = styled.div`
+const MilageBoxContainer = styled.div`
   background-color: black;
   border: 1px solid lightgrey;
   // border-radius: 10px;
@@ -29,12 +29,11 @@ const MilageBarContainer = styled.div`
   overflow: hidden;
 `;
 
-export default function MilageBar({ milageList }) {
+export default function MilageBox({ milageList }) {
   const [openMilage, setOpenMilage] = useState(milageList[0]);
-  // console.log(openMilage);
 
   return milageList.map((milage, index) => (
-    <Box key={index} milage={milage}>
+    <MilageBoxContainer key={index} milage={milage}>
       <Collapsible
         trigger={
           <MilageBarContainer>
@@ -49,6 +48,6 @@ export default function MilageBar({ milageList }) {
       >
         <Board milage={milage} />
       </Collapsible>
-    </Box>
+    </MilageBoxContainer>
   ));
 }

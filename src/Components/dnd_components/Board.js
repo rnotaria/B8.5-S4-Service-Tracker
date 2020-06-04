@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import maintenanceList from "../utils/maintenanceList";
+import maintenanceList from "../../utils/maintenanceList";
 // import "@atlaskit/css-reset";  Do I need this??
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import Column from "./Column";
-import MilageBar from "./MilageBar";
 
 const Container = styled.div`
   display: flex;

@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
-import Board from "./Components/Board";
-import MilageBar from "./Components/MilageBar";
+import MilageBox from "./Components/MilageBox";
 
 function App() {
   const milageList = ["55,000", "65,000"];
 
   return (
     <React.Fragment>
-      <MilageBar milageList={milageList} />
+      <MilageBox milageList={milageList} />
     </React.Fragment>
   );
 }
