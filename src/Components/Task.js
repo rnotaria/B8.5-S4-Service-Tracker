@@ -10,6 +10,9 @@ const Container = styled.div`
 
   padding: 8px;
   margin-bottom: 8px;
+
+  font-weight: bold;
+  text-align: center;
 `;
 
 export default function Task({ task, index }) {
