@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MilageBox from "./Components/MilageBox";
 
 function App() {
-  const currentMiles = 56123;
+  const currentMiles = 57123;
   return (
     <React.Fragment>
-      <h1 style={{ color: "red", "text-align": "center" }}>
+      <h1 style={{ color: "red", textAlign: "center" }}>
         Current Miles: {currentMiles}
       </h1>
       <MilageBox currentMiles={currentMiles} />

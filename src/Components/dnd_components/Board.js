@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { getServiceList } from "../../utils/getMaintenanceInfo";
 // import "@atlaskit/css-reset";  Do I need this??
 import styled from "styled-components";
@@ -10,9 +10,8 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-export default function Board({ milage }) {
-  // set state based on milage prop
-  const [maintenance, setMaintenance] = useState(getServiceList(milage));
+export default function Board({ milage, currentMiles }) {
+  var init_maintenance = getServiceList(milage);
 
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";
@@ -83,6 +82,26 @@ export default function Board({ milage }) {
       setMaintenance(newmaintenance);
     }
   };
+
+  // If previous service, set tasks to complete
+  if (milage < currentMiles) {
+    init_maintenance = {
+      ...init_maintenance,
+      columns: {
+        ...init_maintenance.columns,
+        column1: {
+          ...init_maintenance.columns.column1,
+          taskIds: [],
+        },
+        column2: {
+          ...init_maintenance.columns.column2,
+          taskIds: init_maintenance.columns.column1.taskIds,
+        },
+      },
+    };
+  }
+
+  const [maintenance, setMaintenance] = useState(init_maintenance);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>

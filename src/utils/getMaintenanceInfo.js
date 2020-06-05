@@ -23,6 +23,10 @@ export const getMilesArray = (currentMiles) => {
     );
   }
 
+  if (serviceIntervalArray[0] >= 15000) {
+    serviceIntervalArray.unshift(serviceIntervalArray[0] - 10000);
+  }
+
   return serviceIntervalArray;
 };
 

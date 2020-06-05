@@ -32,8 +32,8 @@ const MilageBarContainer = styled.div`
 
 export default function MilageBox({ currentMiles }) {
   const milesArray = getMilesArray(currentMiles);
-
-  const [openMilage, setOpenMilage] = useState(milesArray[0]);
+  const open = milesArray[0] < currentMiles ? milesArray[1] : milesArray[0];
+  const [openMilage, setOpenMilage] = useState(open);
 
   return milesArray.map((milage, index) => (
     <MilageBoxContainer key={index} milage={milage}>
@@ -49,7 +49,7 @@ export default function MilageBox({ currentMiles }) {
         triggerDisabled={milage === openMilage ? true : false}
         triggerStyle={milage !== openMilage ? { cursor: "pointer" } : null}
       >
-        <Board milage={milage} />
+        <Board milage={milage} currentMiles={currentMiles} />
       </Collapsible>
     </MilageBoxContainer>
   ));
