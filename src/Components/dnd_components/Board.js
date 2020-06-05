@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import maintenanceList from "../../utils/maintenanceList";
+import { getServiceList } from "../../utils/getMaintenanceInfo";
 // import "@atlaskit/css-reset";  Do I need this??
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -12,7 +12,7 @@ const Container = styled.div`
 
 export default function Board({ milage }) {
   // set state based on milage prop
-  const [maintenance, setMaintenance] = useState(maintenanceList);
+  const [maintenance, setMaintenance] = useState(getServiceList(milage));
 
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";

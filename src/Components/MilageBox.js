@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import "../index.css";
+import { getMilesArray } from "../utils/getMaintenanceInfo";
 import Collapsible from "react-collapsible";
 import Board from "./dnd_components/Board";
 
@@ -29,10 +30,12 @@ const MilageBarContainer = styled.div`
   overflow: hidden;
 `;
 
-export default function MilageBox({ milageList }) {
-  const [openMilage, setOpenMilage] = useState(milageList[0]);
+export default function MilageBox({ currentMiles }) {
+  const milesArray = getMilesArray(currentMiles);
 
-  return milageList.map((milage, index) => (
+  const [openMilage, setOpenMilage] = useState(milesArray[0]);
+
+  return milesArray.map((milage, index) => (
     <MilageBoxContainer key={index} milage={milage}>
       <Collapsible
         trigger={

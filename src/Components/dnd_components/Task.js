@@ -6,6 +6,7 @@ const TaskContainer = styled.div`
   border: 1px solid lightgrey;
   border-radius: 100px;
   overflow: hidden;
+  // transition: background-color 1s ease;
   background-color: ${(props) => (props.isDragging ? "lightgreen" : "#A9A9A9")};
 
   padding: 8px;
@@ -16,6 +17,7 @@ const TaskContainer = styled.div`
 
   white-space: nowrap;
   text-overflow: ellipsis;
+  user-select: none;
 `;
 
 export default function Task({ task, index }) {

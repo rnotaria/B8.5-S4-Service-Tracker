@@ -12,7 +12,7 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  background-color: darkblue;
+  background-color: black;
   border: 2px solid lightgrey;
   border-radius: 10px;
   overflow: hidden;
@@ -22,7 +22,7 @@ const Title = styled.h3`
   text-align: center;
   padding: 8px;
   background-color: rgb(50, 50, 50);
-  color: rgb(230, 0, 0);
+  color: rgb(240, 240, 240);
   border-bottom: 2px solid lightgrey;
 `;
 const TaskList = styled.div`
