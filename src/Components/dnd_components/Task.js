@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 
 const TaskContainer = styled.div`
-  border: 1px solid lightgrey;
+  border: ${(props) =>
+    props.isDragging ? "1px solid lightgreen" : "1px solid lightgrey"};
   border-radius: 100px;
   overflow: hidden;
-  // transition: background-color 1s ease;
-  background-color: ${(props) => (props.isDragging ? "lightgreen" : "#A9A9A9")};
 
+  background-color: ${(props) => props.bgColor};
+  transition: background-color 1s ease-in-out;
   padding: 8px;
   margin-bottom: 8px;
 
@@ -20,22 +21,31 @@ const TaskContainer = styled.div`
   user-select: none;
 `;
 
-export default function Task({ task, index }) {
-  const isDragDisabled = false;
+export default function Task({ task, index, column }) {
+  console.log("render");
+  const [bgColor, setBgColor] = useState("#A9A9A9");
+
+  useEffect(
+    (bgColor) => {
+      if (column === "Complete") {
+        const id = window.setTimeout(() => {
+          setBgColor("green");
+        }, 1000);
+      }
+    },
+    [bgColor]
+  );
 
   return (
-    <Draggable
-      draggableId={task.id}
-      index={index}
-      isDragDisabled={isDragDisabled}
-    >
+    <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => (
         <TaskContainer
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
           isDragging={snapshot.isDragging}
-          isDragDisabled={isDragDisabled}
+          column={column}
+          bgColor={bgColor}
         >
           {task.content}
         </TaskContainer>
