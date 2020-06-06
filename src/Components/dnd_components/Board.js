@@ -10,7 +10,8 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-export default function Board({ milage, currentMiles }) {
+function Board({ milage, currentMiles }) {
+  console.log("rendering Board")
   var init_maintenance = getServiceList(milage);
 
   const onDragEnd = (result) => {
@@ -117,3 +118,5 @@ export default function Board({ milage, currentMiles }) {
     </DragDropContext>
   );
 }
+
+export default React.memo(Board)

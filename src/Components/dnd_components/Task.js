@@ -21,19 +21,17 @@ const TaskContainer = styled.div`
   user-select: none;
 `;
 
-export default function Task({ task, index, column }) {
-  console.log("render");
+function Task({ task, index, column }) {
+  console.log("rendering Task");
   const [bgColor, setBgColor] = useState("#A9A9A9");
 
   useEffect(
     (bgColor) => {
       if (column === "Complete") {
-        const id = window.setTimeout(() => {
-          setBgColor("green");
-        }, 1000);
+        setBgColor("green");
       }
     },
-    [bgColor]
+    [column, bgColor]
   );
 
   return (
@@ -53,3 +51,5 @@ export default function Task({ task, index, column }) {
     </Draggable>
   );
 }
+
+export default React.memo(Task);

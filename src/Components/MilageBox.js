@@ -30,13 +30,16 @@ const MilageBarContainer = styled.div`
   overflow: hidden;
 `;
 
-export default function MilageBox({ currentMiles }) {
+function MilageBox({ currentMiles }) {
+  console.log("Rendering milagebox")
   const milesArray = getMilesArray(currentMiles);
   const open = milesArray[0] < currentMiles ? milesArray[1] : milesArray[0];
   const [openMilage, setOpenMilage] = useState(open);
 
+  console.log("rendering milage")
+  
   return milesArray.map((milage, index) => (
-    <MilageBoxContainer key={index} milage={milage}>
+    <MilageBoxContainer key={index} milage={milage}>      
       <Collapsible
         trigger={
           <MilageBarContainer>
@@ -49,8 +52,10 @@ export default function MilageBox({ currentMiles }) {
         triggerDisabled={milage === openMilage ? true : false}
         triggerStyle={milage !== openMilage ? { cursor: "pointer" } : null}
       >
-        <Board milage={milage} currentMiles={currentMiles} />
+        milage === openMilage ? <Board milage={milage} currentMiles={currentMiles} /> : null
       </Collapsible>
     </MilageBoxContainer>
   ));
 }
+
+export default React.memo(MilageBox)

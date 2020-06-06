@@ -31,7 +31,9 @@ const TaskList = styled.div`
   min-height: 100px;
 `;
 
-export default function Column({ column, tasks }) {
+function Column({ column, tasks }) {
+  console.log("rendering column");
+
   return (
     <Container>
       <Title>{column.title}</Title>
@@ -57,3 +59,5 @@ export default function Column({ column, tasks }) {
     </Container>
   );
 }
+
+export default React.memo(Column)
