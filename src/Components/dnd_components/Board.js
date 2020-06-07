@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { getServiceList } from "../../utils/getMaintenanceInfo";
 // import "@atlaskit/css-reset";  Do I need this??
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -10,9 +9,10 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-function Board({ milage, currentMiles }) {
-  console.log("rendering Board")
-  var init_maintenance = getServiceList(milage);
+function Board({ prop_data }) {
+  // console.log("rendering Board")
+
+  const [data, setData] = useState(prop_data)
 
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";
@@ -33,8 +33,8 @@ function Board({ milage, currentMiles }) {
       return;
     }
 
-    const startColumn = maintenance.columns[source.droppableId];
-    const endColumn = maintenance.columns[destination.droppableId];
+    const startColumn = data.columns[source.droppableId];
+    const endColumn = data.columns[destination.droppableId];
 
     if (startColumn === endColumn) {
       const newTaskIds = Array.from(startColumn.taskIds);
@@ -47,15 +47,15 @@ function Board({ milage, currentMiles }) {
         taskIds: newTaskIds,
       };
 
-      const newmaintenance = {
-        ...maintenance,
+      const newData = {
+        ...data,
         columns: {
-          ...maintenance.columns,
+          ...data.columns,
           [newColumn.id]: newColumn,
         },
       };
 
-      setMaintenance(newmaintenance);
+      setData(newData);
     } else {
       const startColumnTaskIds = Array.from(startColumn.taskIds);
       startColumnTaskIds.splice(source.index, 1);
@@ -71,46 +71,26 @@ function Board({ milage, currentMiles }) {
         taskIds: endColumnTaskIds,
       };
 
-      const newmaintenance = {
-        ...maintenance,
+      const newData = {
+        ...data,
         columns: {
-          ...maintenance.columns,
+          ...data.columns,
           [newStartColumn.id]: newStartColumn,
           [newEndColumn.id]: newEndColumn,
         },
       };
 
-      setMaintenance(newmaintenance);
+      setData(newData);
     }
   };
-
-  // If previous service, set tasks to complete
-  if (milage < currentMiles) {
-    init_maintenance = {
-      ...init_maintenance,
-      columns: {
-        ...init_maintenance.columns,
-        column1: {
-          ...init_maintenance.columns.column1,
-          taskIds: [],
-        },
-        column2: {
-          ...init_maintenance.columns.column2,
-          taskIds: init_maintenance.columns.column1.taskIds,
-        },
-      },
-    };
-  }
-
-  const [maintenance, setMaintenance] = useState(init_maintenance);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Container>
-        {maintenance.columnOrder.map((columnId) => {
-          const column = maintenance.columns[columnId];
+        {data.columnOrder.map((columnId) => {
+          const column = data.columns[columnId];
           const tasks = column.taskIds.map(
-            (taskId) => maintenance.tasks[taskId]
+            (taskId) => data.tasks[taskId]
           );
           return <Column key={column.id} column={column} tasks={tasks} />;
         })}

@@ -32,7 +32,7 @@ const TaskList = styled.div`
 `;
 
 function Column({ column, tasks }) {
-  console.log("rendering column");
+  // console.log("rendering column");
 
   return (
     <Container>

@@ -1,14 +1,15 @@
 import React from "react";
-import MilageBox from "./Components/MilageBox";
+import RenderXMilageBoxes from "./Components/RenderXMilageBoxes"
 
 function App() {
-  const currentMiles = 57123;
+  const currentMiles = 5001;
+  
   return (
     <React.Fragment>
       <h1 style={{ color: "red", textAlign: "center" }}>
         Current Miles: {currentMiles}
       </h1>
-      <MilageBox currentMiles={currentMiles} />
+      <RenderXMilageBoxes currentMiles={currentMiles}/>
     </React.Fragment>
   );
 }

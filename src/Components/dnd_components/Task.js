@@ -22,7 +22,7 @@ const TaskContainer = styled.div`
 `;
 
 function Task({ task, index, column }) {
-  console.log("rendering Task");
+  // console.log("rendering Task", task.content.substr(0,10));
   const [bgColor, setBgColor] = useState("#A9A9A9");
 
   useEffect(

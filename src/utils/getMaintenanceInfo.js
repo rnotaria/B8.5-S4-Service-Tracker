@@ -1,3 +1,5 @@
+// This file contains helper functions that provide or alter maintenanceList data
+
 import maintenanceList from "./maintenanceList";
 
 // Round to the nearest ___5000 Miles
@@ -11,11 +13,12 @@ const nearest5000 = (currentMiles) => {
   return nextService.substr(0, nextService.length - 4) + "5000";
 };
 
-// Returns an array of the next 5 maintenance schedules
-export const getMilesArray = (currentMiles) => {
+// Returns an array of the next X maintenance schedules
+export const getMilesArray = (currentMiles, numFutureServices) => {
+  numFutureServices--;
   const serviceIntervalArray = [nearest5000(currentMiles)];
 
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < numFutureServices; i++) {
     serviceIntervalArray.push(
       (
         parseInt(serviceIntervalArray[serviceIntervalArray.length - 1]) + 10000
@@ -24,17 +27,21 @@ export const getMilesArray = (currentMiles) => {
   }
 
   if (serviceIntervalArray[0] >= 15000) {
-    serviceIntervalArray.unshift(serviceIntervalArray[0] - 10000);
+    serviceIntervalArray.unshift((serviceIntervalArray[0] - 10000).toString());
   }
 
   return serviceIntervalArray;
 };
 
 // Returns object of maintenance tasks
-export const getServiceList = (miles) => {
-  if (parseInt(miles) < 15000 || parseInt(miles[miles.length - 5]) % 2 === 0) {
-    return maintenanceList("standard");
-  } else {
-    return maintenanceList("major");
-  }
+export const getServiceData = (milesArray) => {
+  var serviceData = []
+  milesArray.map(miles => {
+    if (parseInt(miles) < 15000 || parseInt(miles[miles.length - 5]) % 2 === 0) {
+      return serviceData.push(maintenanceList("standard"));
+    } else {
+      return serviceData.push(maintenanceList("major"));
+    }
+  })
+  return serviceData
 };
