@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 // import "@atlaskit/css-reset";  Do I need this??
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -11,8 +11,9 @@ const Container = styled.div`
 
 function Board({ prop_data }) {
   // console.log("rendering Board")
+  const newTaskId = useRef(0);
 
-  const [data, setData] = useState(prop_data)
+  const [data, setData] = useState(prop_data);
 
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";
@@ -84,19 +85,30 @@ function Board({ prop_data }) {
     }
   };
 
+  const addTask = (column) => {
+    //   console.log(column);
+    //   newTaskId.current = newTaskId.current + 1;
+    //   console.log(newTaskId.current);
+  };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Container>
         {data.columnOrder.map((columnId) => {
           const column = data.columns[columnId];
-          const tasks = column.taskIds.map(
-            (taskId) => data.tasks[taskId]
+          const tasks = column.taskIds.map((taskId) => data.tasks[taskId]);
+          return (
+            <Column
+              key={column.id}
+              column={column}
+              tasks={tasks}
+              addTask={addTask}
+            />
           );
-          return <Column key={column.id} column={column} tasks={tasks} />;
         })}
       </Container>
     </DragDropContext>
   );
 }
 
-export default React.memo(Board)
+export default React.memo(Board);

@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, { useState, useRef } from "react";
 import Task from "./Task";
 import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
@@ -32,30 +32,16 @@ const TaskList = styled.div`
   min-height: 100px;
 `;
 
-function Column({ column, tasks }) {
+function Column({ column, tasks, addTask }) {
   // const newTaskId = useRef(0)
 
-  // pass info back to Board.js to update data and then pass that back as props to this component
+  // console.log(tasks);
 
-  console.log(tasks)
-  const addTask = () => {
-  //   newTaskId.current=newTaskId.current+1;
-  //   // console.log(column.id+"."+newTaskId.current)
-  //   // console.log(column)
-
-  //   // const newTasks = {
-  //   //   id: "column2"
-  //   //   taskIds: []
-  //   //   title: "Complete"
-  //   // }
-    
-  }
-  
   return (
     <Container>
       <Title>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <button onClick={addTask}>+</button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <button onClick={() => addTask(column)}>+</button>
           <div>{column.title}</div>
           <button>-</button>
         </div>
@@ -67,7 +53,6 @@ function Column({ column, tasks }) {
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
           >
-            {window.setTimeout(()=>"hi", 5)}
             {tasks.map((task, index) => (
               <Task
                 key={task.id}
@@ -84,4 +69,4 @@ function Column({ column, tasks }) {
   );
 }
 
-export default React.memo(Column)
+export default React.memo(Column);
