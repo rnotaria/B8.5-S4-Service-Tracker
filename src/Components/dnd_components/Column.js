@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useRef} from "react";
 import Task from "./Task";
 import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
@@ -12,15 +12,16 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  background-color: black;
+  background-color: grey;
   border: 2px solid lightgrey;
   border-radius: 10px;
   overflow: hidden;
 `;
 const Title = styled.h3`
   margin-top: 0;
-  text-align: center;
   padding: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
   background-color: rgb(50, 50, 50);
   color: rgb(240, 240, 240);
   border-bottom: 2px solid lightgrey;
@@ -32,11 +33,33 @@ const TaskList = styled.div`
 `;
 
 function Column({ column, tasks }) {
-  console.log("rendering column");
+  // const newTaskId = useRef(0)
 
+  // pass info back to Board.js to update data and then pass that back as props to this component
+
+  console.log(tasks)
+  const addTask = () => {
+  //   newTaskId.current=newTaskId.current+1;
+  //   // console.log(column.id+"."+newTaskId.current)
+  //   // console.log(column)
+
+  //   // const newTasks = {
+  //   //   id: "column2"
+  //   //   taskIds: []
+  //   //   title: "Complete"
+  //   // }
+    
+  }
+  
   return (
     <Container>
-      <Title>{column.title}</Title>
+      <Title>
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <button onClick={addTask}>+</button>
+          <div>{column.title}</div>
+          <button>-</button>
+        </div>
+      </Title>
       <Droppable droppableId={column.id}>
         {(provided, snapshot) => (
           <TaskList
@@ -44,6 +67,7 @@ function Column({ column, tasks }) {
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
           >
+            {window.setTimeout(()=>"hi", 5)}
             {tasks.map((task, index) => (
               <Task
                 key={task.id}
