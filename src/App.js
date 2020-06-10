@@ -13,7 +13,7 @@ function App() {
       </h1> */}
       {/* <RenderXMilageBoxes currentMiles={currentMiles}/> */}
 
-      <BottomPane height="80vh" marginTop="20vh" />
+      <BottomPane height={80} />
     </React.Fragment>
   );
 }
