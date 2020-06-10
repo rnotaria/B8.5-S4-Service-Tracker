@@ -1,21 +1,20 @@
 // This file will render x number of <MilageBox/>  passing it the appropriate props
 
 import React, { useState } from "react";
-import MilageBox from "./MilageBox"
+import MilageBox from "./MilageBox";
 import { getMilesArray, getServiceData } from "../utils/getMaintenanceInfo";
 
-
-function RenderXMilageBoxes({currentMiles}) {
+function RenderXMilageBoxes({ currentMiles, numFutureServices }) {
   // console.log("RenderXMilageBoxes")
-
-  const numFutureServices = 5
 
   // Get Data
   const milesArray = getMilesArray(currentMiles, numFutureServices);
-  var serviceData = getServiceData(milesArray)
+  var serviceData = getServiceData(milesArray);
 
   // State that determines which collapsible Milage Box is open
-  const [openBox, setOpenBox] = useState(milesArray[0] < currentMiles ? milesArray[1] : milesArray[0]);
+  const [openBox, setOpenBox] = useState(
+    milesArray[0] < currentMiles ? milesArray[1] : milesArray[0]
+  );
 
   // If previous service, set tasks to complete
   if (milesArray[0] < currentMiles) {
@@ -36,20 +35,18 @@ function RenderXMilageBoxes({currentMiles}) {
   }
 
   const handleSetOpenBox = (miles) => {
-    setOpenBox(miles)
-  }
+    setOpenBox(miles);
+  };
 
-  return (
-    milesArray.map((miles, index) => (
-      <MilageBox
-        key={miles}
-        miles={miles}
-        serviceData={serviceData[index]}
-        open={miles===openBox ? true : false}
-        handleSetOpenBox={handleSetOpenBox}
-      />
-    ))
-  )
+  return milesArray.map((miles, index) => (
+    <MilageBox
+      key={miles}
+      miles={miles}
+      serviceData={serviceData[index]}
+      open={miles === openBox ? true : false}
+      handleSetOpenBox={handleSetOpenBox}
+    />
+  ));
 }
 
-export default React.memo(RenderXMilageBoxes)
+export default React.memo(RenderXMilageBoxes);

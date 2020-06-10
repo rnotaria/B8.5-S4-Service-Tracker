@@ -1,20 +1,20 @@
 import React from "react";
 import "./index.css";
-// import RenderXMilageBoxes from "./Components/RenderXMilageBoxes";
+import RenderXMilageBoxes from "./Components/RenderXMilageBoxes";
 import BottomPane from "./Components/BottomPane";
 
 function App() {
-  // const currentMiles = 5001;
+  const currentMiles = 56001;
 
   return (
-    <React.Fragment>
-      {/* <h1 style={{ color: "red", textAlign: "center" }}>
+    <div>
+      <h1 style={{ color: "red", textAlign: "center" }}>
         Current Miles: {currentMiles}
-      </h1> */}
-      {/* <RenderXMilageBoxes currentMiles={currentMiles}/> */}
+      </h1>
+      <RenderXMilageBoxes currentMiles={currentMiles} numFutureServices={10} />
 
-      <BottomPane height={80} />
-    </React.Fragment>
+      <BottomPane height={80} paneTitle={"title"} />
+    </div>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SlidingPane from "../utils/react-sliding-pane/react-sliding-pane";
 import styled, { keyframes } from "styled-components";
 import "../utils/react-sliding-pane/react-sliding-pane.css";
-import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
 
 // Translate Up Styled Component
 const translateUp = (height) => keyframes`
@@ -52,15 +52,15 @@ const Rotate = styled.div`
 
 // Styled Objects
 const closedButtonPosition = () => ({
-  position: "absolute",
+  position: "fixed",
   left: "50%",
-  bottom: "0",
+  bottom: "0px",
   transform: "translate(-50%)",
   zIndex: 1,
 });
 
 const openedButtonPosition = (height) => ({
-  position: "absolute",
+  position: "fixed",
   left: "50%",
   bottom: height,
   transform: "translate(-50%)",
@@ -75,11 +75,23 @@ const arrowStyle = {
 
   background: "rgba(230,230,230,1)",
   color: "rgb(255,0,0)",
-  border: "1px solid lightgrey",
+  borderLeft: "2px solid grey",
+  borderRight: "2px solid grey",
+  borderTop: "2px solid grey",
+
+  cursor: "pointer",
 };
 
-export default function BottomPane({ height, delay = 0.5 }) {
-  console.log("BottomPane");
+export default function BottomPane({
+  height = 50,
+  delay = 0.5,
+  paneTitle = "",
+  paneContent = <div></div>,
+  init_func = () => {},
+}) {
+  // console.log("BottomPane");
+
+  init_func();
 
   const [open, setOpen] = useState(false);
   const [opened, setOpened] = useState(false);
@@ -134,7 +146,6 @@ export default function BottomPane({ height, delay = 0.5 }) {
       );
       // Currently closing
     } else if (open === false && opened === false && closed === false) {
-      console.log("Click4");
       buttonJSX = (
         <div style={closedButtonPosition()}>
           <TranslateDown delay={delay} height={height + "vh"}>
@@ -172,6 +183,7 @@ export default function BottomPane({ height, delay = 0.5 }) {
     <div>
       {renderButton()}
       <SlidingPane
+        title={paneTitle}
         from="bottom"
         className="some-custom-class"
         overlayClassName="some-custom-overlay-class"
@@ -184,7 +196,7 @@ export default function BottomPane({ height, delay = 0.5 }) {
         height={height + "vh"}
         marginTop={100 - height + "vh"}
       >
-        <div></div>
+        {paneContent}
       </SlidingPane>
     </div>
   );
