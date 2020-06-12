@@ -1,7 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useContext } from "react";
 import Task from "./Task";
 import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
+import { TaskManipulatorContext } from "../../App";
 
 const Container = styled.div`
   margin-top: 10px;
@@ -32,16 +33,24 @@ const TaskList = styled.div`
   min-height: 100px;
 `;
 
-function Column({ column, tasks, addTask }) {
-  // const newTaskId = useRef(0)
-
+function Column({ column, tasks }) {
   // console.log(tasks);
+
+  const taskManipulatorContext = useContext(TaskManipulatorContext);
 
   return (
     <Container>
       <Title>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <button onClick={() => addTask(column)}>+</button>
+          <button
+            onClick={() =>
+              taskManipulatorContext.taskManipulatorDispatch({
+                type: "addTask-botPanel",
+              })
+            }
+          >
+            +
+          </button>
           <div>{column.title}</div>
           <button>-</button>
         </div>

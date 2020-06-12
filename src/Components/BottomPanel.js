@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useReducer, useContext } from "react";
 import SlidingPane from "../utils/react-sliding-pane/react-sliding-pane";
 import styled, { keyframes } from "styled-components";
 import "../utils/react-sliding-pane/react-sliding-pane.css";
 import { FaChevronUp } from "react-icons/fa";
+import { TaskManipulatorContext } from "../App";
 
+/* * * * * * * * * * * * * *
+ * * * * * STYLES  * * * * *
+ * * * * * * * * * * * * * */
 // Translate Up Styled Component
 const translateUp = (height) => keyframes`
 from {
@@ -82,40 +86,64 @@ const arrowStyle = {
   cursor: "pointer",
 };
 
-export default function BottomPane({
+/* * * * * * * * * * * * * *
+ * * * * * REDUCER * * * * *
+ * * * * * * * * * * * * * */
+const initialState = {
+  opened: false,
+  closed: true,
+  opening: false,
+  closing: false,
+};
+
+const reducer = (state, action) => {
+  switch (action) {
+    case "closed":
+      return { ...state, closing: false, closed: true };
+    case "opening":
+      return { ...state, closed: false, opening: true };
+    case "opened":
+      return { ...state, opening: false, opened: true };
+    case "closing":
+      return { ...state, opened: false, closing: true };
+    default:
+      return { ...initialState };
+  }
+};
+
+/* * * * * * * * * * * * * *
+ * * * MAIN FUNCTION * * * *
+ * * * * * * * * * * * * * */
+export default function BottomPanel({
   height = 50,
   delay = 0.5,
-  paneTitle = "",
-  paneContent = <div></div>,
-  init_func = () => {},
+  panelData = { title: "", content: "" },
+  open = false,
 }) {
-  // console.log("BottomPane");
+  // console.log(open);
 
-  init_func();
+  // Contexts
+  const taskManipulatorContext = useContext(TaskManipulatorContext);
 
-  const [open, setOpen] = useState(false);
-  const [opened, setOpened] = useState(false);
-  const [closed, setClosed] = useState(true);
+  // Set State
+  const [isOpen, dispatch] = useReducer(reducer, {
+    ...initialState,
+    opening: open,
+    closed: !open,
+  });
 
+  // Condition render button to follow pane on open/close
   const renderButton = () => {
     var buttonJSX;
-    // Currently closed
-    if (open === false && opened === false && closed === true) {
+    if (isOpen.closed === true) {
       buttonJSX = (
-        <div
-          style={closedButtonPosition()}
-          onClick={() => {
-            setOpen(true);
-            setClosed(false);
-          }}
-        >
+        <div style={closedButtonPosition()} onClick={() => dispatch("opening")}>
           <div style={arrowStyle}>
             <FaChevronUp size={20} />
           </div>
         </div>
       );
-      // Currently opening
-    } else if (open === true && opened === false && closed === false) {
+    } else if (isOpen.opening === true) {
       buttonJSX = (
         <div style={closedButtonPosition()}>
           <TranslateUp delay={delay} height={height + "vh"}>
@@ -127,14 +155,13 @@ export default function BottomPane({
           </TranslateUp>
         </div>
       );
-      // Currently opened
-    } else if (open === true && opened === true && closed === false) {
+    } else if (isOpen.opened === true) {
       buttonJSX = (
         <div
           style={openedButtonPosition(height + "vh")}
           onClick={() => {
-            setOpen(false);
-            setOpened(false);
+            dispatch("closing");
+            taskManipulatorContext.taskManipulatorDispatch({ type: "reset" });
           }}
         >
           <div style={arrowStyle}>
@@ -144,8 +171,7 @@ export default function BottomPane({
           </div>
         </div>
       );
-      // Currently closing
-    } else if (open === false && opened === false && closed === false) {
+    } else if (isOpen.closing === true) {
       buttonJSX = (
         <div style={closedButtonPosition()}>
           <TranslateDown delay={delay} height={height + "vh"}>
@@ -162,41 +188,45 @@ export default function BottomPane({
     return buttonJSX;
   };
 
+  // useEffects
   useEffect(() => {
     var id;
-
-    if (open === true && opened === false && closed === false) {
+    if (isOpen.opening === true) {
       id = window.setTimeout(() => {
-        setOpened(true);
+        dispatch("opened");
       }, delay * 1000);
-    } else if (open === false && opened === false && closed === false) {
+    } else if (isOpen.closing === true) {
       id = window.setTimeout(() => {
-        setClosed(true);
+        dispatch("closed");
       }, delay * 1000);
     }
     return () => {
       clearTimeout(id);
     };
-  }, [open, opened, closed, delay]);
+  }, [isOpen.opening, isOpen.closing, delay]);
 
+  useEffect(() => {
+    open === true ? dispatch("opening") : dispatch("closing");
+  }, [open]);
+
+  // Render
   return (
     <div>
       {renderButton()}
       <SlidingPane
-        title={paneTitle}
+        title={panelData.title}
         from="bottom"
         className="some-custom-class"
         overlayClassName="some-custom-overlay-class"
-        isOpen={open}
+        isOpen={isOpen.opening || isOpen.opened}
         onRequestClose={() => {
-          setOpen(false);
-          setOpened(false);
+          dispatch("closing");
+          taskManipulatorContext.taskManipulatorDispatch({ type: "reset" });
         }}
         width="100%"
         height={height + "vh"}
-        marginTop={100 - height + "vh"}
       >
-        {paneContent}
+        {panelData.content}
       </SlidingPane>
     </div>
   );

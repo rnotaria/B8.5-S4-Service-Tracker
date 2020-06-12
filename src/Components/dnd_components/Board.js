@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 // import "@atlaskit/css-reset";  Do I need this??
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -11,7 +11,6 @@ const Container = styled.div`
 
 function Board({ prop_data }) {
   // console.log("rendering Board")
-  const newTaskId = useRef(0);
 
   const [data, setData] = useState(prop_data);
 

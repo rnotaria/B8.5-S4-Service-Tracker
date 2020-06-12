@@ -19,7 +19,7 @@ function ReactSlidingPane(_ref) {
     from = _ref$from === void 0 ? "right" : _ref$from,
     width = _ref.width,
     height = _ref.height,
-    marginTop = _ref.marginTop,
+    // marginTop = _ref.marginTop,
     shouldCloseOnEsc = _ref.shouldCloseOnEsc;
   var directionClass = "slide-pane_from_".concat(from);
   return /*#__PURE__*/ React.createElement(
@@ -32,8 +32,9 @@ function ReactSlidingPane(_ref) {
       style: {
         content: {
           width: width || "100%",
-          height: height || "50vh",
-          marginTop: marginTop || "50vh",
+          height: height || "auto",
+          position: "absolute",
+          bottom: "0px",
         },
       },
       overlayClassName: "slide-pane__overlay ".concat(overlayClassName || ""),

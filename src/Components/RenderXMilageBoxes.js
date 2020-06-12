@@ -38,15 +38,22 @@ function RenderXMilageBoxes({ currentMiles, numFutureServices }) {
     setOpenBox(miles);
   };
 
-  return milesArray.map((miles, index) => (
-    <MilageBox
-      key={miles}
-      miles={miles}
-      serviceData={serviceData[index]}
-      open={miles === openBox ? true : false}
-      handleSetOpenBox={handleSetOpenBox}
-    />
-  ));
+  return (
+    <div>
+      <h1 style={{ color: "red", textAlign: "center" }}>
+        Current Miles: {currentMiles}
+      </h1>
+      {milesArray.map((miles, index) => (
+        <MilageBox
+          key={miles}
+          miles={miles}
+          serviceData={serviceData[index]}
+          open={miles === openBox ? true : false}
+          handleSetOpenBox={handleSetOpenBox}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default React.memo(RenderXMilageBoxes);
