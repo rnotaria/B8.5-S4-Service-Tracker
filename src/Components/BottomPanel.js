@@ -5,9 +5,9 @@ import "../utils/react-sliding-pane/react-sliding-pane.css";
 import { FaChevronUp } from "react-icons/fa";
 import { TaskManipulatorContext } from "../App";
 
-/* * * * * * * * * * * * * *
- * * * * * STYLES  * * * * *
- * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * STYLES  * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 // Translate Up Styled Component
 const translateUp = (height) => keyframes`
 from {
@@ -86,9 +86,9 @@ const arrowStyle = {
   cursor: "pointer",
 };
 
-/* * * * * * * * * * * * * *
- * * * * * REDUCER * * * * *
- * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * REDUCER * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 const initialState = {
   opened: false,
   closed: true,
@@ -99,34 +99,27 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action) {
     case "closed":
-      return { ...state, closing: false, closed: true };
+      return { opening: false, opened: false, closing: false, closed: true };
     case "opening":
-      return { ...state, closed: false, opening: true };
+      return { opening: true, opened: false, closing: false, closed: false };
     case "opened":
-      return { ...state, opening: false, opened: true };
+      return { opening: false, opened: true, closing: false, closed: false };
     case "closing":
-      return { ...state, opened: false, closing: true };
+      return { opening: false, opened: false, closing: true, closed: false };
     default:
       return { ...initialState };
   }
 };
 
-/* * * * * * * * * * * * * *
- * * * MAIN COMPONENT  * * *
- * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * MAIN COMPONENT  * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export default function BottomPanel({
   delay = 0.5,
   panelData = { height: 10, open: false, title: "", content: "" },
 }) {
-  // Contexts
   const taskManipulatorContext = useContext(TaskManipulatorContext);
-
-  // Set State
-  const [isOpen, dispatch] = useReducer(reducer, {
-    ...initialState,
-    opening: panelData.open,
-    closed: !panelData.open,
-  });
+  const [isOpen, dispatch] = useReducer(reducer, initialState);
 
   // Condition render button to follow pane on open/close
   const renderButton = () => {
@@ -157,10 +150,6 @@ export default function BottomPanel({
           style={openedButtonPosition(panelData.height + "vh")}
           onClick={() => {
             dispatch("closing");
-            window.setTimeout(
-              () => taskManipulatorContext.dispatch({ type: "reset" }),
-              delay * 1000
-            );
           }}
         >
           <div style={arrowStyle}>
@@ -187,7 +176,10 @@ export default function BottomPanel({
     return buttonJSX;
   };
 
-  // useEffects
+  /* * * * * * * * * * * * * * * * * * * *
+   * * * * * * * useEffects  * * * * * * *
+   * * * * * * * * * * * * * * * * * * * */
+  // used to set state to opened/closed after opening/closing animation is complete
   useEffect(() => {
     var id;
     if (isOpen.opening === true) {
@@ -197,26 +189,26 @@ export default function BottomPanel({
     } else if (isOpen.closing === true) {
       id = window.setTimeout(() => {
         dispatch("closed");
+        taskManipulatorContext.dispatch({ type: "reset" });
       }, delay * 1000);
     }
     return () => {
       clearTimeout(id);
     };
-  }, [isOpen.opening, isOpen.closing, delay]);
+  }, [isOpen, delay, taskManipulatorContext]);
 
   useEffect(() => {
     if (panelData.open === true) {
       dispatch("opening");
-    } else {
-      dispatch("closing");
-      window.setTimeout(
-        () => taskManipulatorContext.dispatch({ type: "reset" }),
-        delay * 1000
-      );
     }
-  }, [panelData.open]);
+    if (panelData.closing === true) {
+      dispatch("closing");
+    }
+  }, [panelData.open, panelData.closing]);
 
-  // Render
+  /* * * * * * * * * * * * * * * * * * * *
+   * * * * * * * * RENDER  * * * * * * * *
+   * * * * * * * * * * * * * * * * * * * */
   return (
     <div>
       {renderButton()}
@@ -228,10 +220,6 @@ export default function BottomPanel({
         isOpen={isOpen.opening || isOpen.opened}
         onRequestClose={() => {
           dispatch("closing");
-          window.setTimeout(
-            () => taskManipulatorContext.dispatch({ type: "reset" }),
-            delay * 1000
-          );
         }}
         width="100%"
         height={panelData.height + "vh"}

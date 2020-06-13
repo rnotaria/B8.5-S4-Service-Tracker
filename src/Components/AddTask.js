@@ -15,12 +15,12 @@ export default function AddTask() {
         onChange={(e) => setTask(e.target.value)}
       />
       <button
-        onClick={() =>
+        onClick={() => {
           taskManipulatorContext.dispatch({
             type: "addTask-submitTask",
             value: task,
-          })
-        }
+          });
+        }}
       >
         Submit
       </button>

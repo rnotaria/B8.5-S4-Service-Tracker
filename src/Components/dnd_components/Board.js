@@ -19,6 +19,7 @@ function Board({ prop_data, miles }) {
 
   const newTaskId = useRef(0);
 
+  // Render new task if any
   useEffect(() => {
     if (
       taskManipulatorContext.state.newTask &&
@@ -49,8 +50,6 @@ function Board({ prop_data, miles }) {
           },
         },
       }));
-
-      taskManipulatorContext.dispatch("reset");
     }
   }, [taskManipulatorContext, miles]);
 

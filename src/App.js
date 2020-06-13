@@ -4,9 +4,9 @@ import RenderXMilageBoxes from "./Components/RenderXMilageBoxes";
 import BottomPanel from "./Components/BottomPanel";
 import AddTask from "./Components/AddTask";
 
-/* * * * * * * * * * * * * *
- * * * * * CONTEXTS  * * * *
- * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * CONTEXTS  * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export const TaskManipulatorContext = React.createContext();
 
 const taskManipulatorInitialState = {
@@ -39,14 +39,14 @@ const taskManipulatorReducer = (state, action) => {
           ...action.value,
         },
       };
+
     case "addTask-submitTask":
       // Submits task and adds it to list
       return {
         ...state,
         panelData: {
           ...state.panelData,
-          height: 20,
-          open: false,
+          closing: true,
         },
         newTask: true,
         taskContainer: {
@@ -54,6 +54,7 @@ const taskManipulatorReducer = (state, action) => {
           newTask: action.value,
         },
       };
+
     case "reset":
       // Reset back to initial state
       return taskManipulatorInitialState;
@@ -62,9 +63,9 @@ const taskManipulatorReducer = (state, action) => {
   }
 };
 
-/* * * * * * * * * * * * * *
- * * * MAIN  COMPONENT * * *
- * * * * * * * * * * * * * */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * MAIN COMPONENT  * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 function App() {
   // Contexts
   const [state, dispatch] = useReducer(
