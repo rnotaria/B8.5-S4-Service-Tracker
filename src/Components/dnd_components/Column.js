@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
 import { TaskManipulatorContext } from "../../App";
 
-const Container = styled.div`
+const ContainerStyle = styled.div`
   margin-top: 10px;
   // margin-bottom: 10px;
   margin-left: 5px;
@@ -18,7 +18,7 @@ const Container = styled.div`
   border-radius: 10px;
   overflow: hidden;
 `;
-const Title = styled.h3`
+const TitleStyle = styled.h3`
   margin-top: 0;
   padding: 8px;
   padding-left: 16px;
@@ -27,25 +27,56 @@ const Title = styled.h3`
   color: rgb(240, 240, 240);
   border-bottom: 2px solid lightgrey;
 `;
-const TaskList = styled.div`
+const TaskListStyle = styled.div`
   padding: 8px;
   flex-grow: 1;
   min-height: 100px;
 `;
 
-function Column({ column, tasks }) {
-  // console.log(tasks);
+function Column({ column, tasks, miles }) {
+  // console.log("Rendering Column...");
 
   const taskManipulatorContext = useContext(TaskManipulatorContext);
 
+  // const [column, setColumn] = useState(_column);
+  // const [tasks, setTasks] = useState(_tasks);
+
+  // console.log(column);
+
+  // const t1 = [
+  //   {
+  //     id: "task10",
+  //     content:
+  //       "Battery - Check for clean terminals (no corrosion), properly mounted housing and no damage; replace if necessary.",
+  //   },
+  // ];
+
+  // const c1 = {
+  //   id: "column1",
+  //   title: "Complete",
+  //   taskIds: ["task10"],
+  // };
+
+  // const temp = () => {
+  //   setTasks(t1);
+  //   setColumn(c1);
+  // };
+
+  // console.log(column);
+
   return (
-    <Container>
-      <Title>
+    <ContainerStyle>
+      <TitleStyle>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <button
             onClick={() =>
-              taskManipulatorContext.taskManipulatorDispatch({
+              taskManipulatorContext.dispatch({
                 type: "addTask-botPanel",
+                value: {
+                  miles,
+                  tasks,
+                  column,
+                },
               })
             }
           >
@@ -54,10 +85,10 @@ function Column({ column, tasks }) {
           <div>{column.title}</div>
           <button>-</button>
         </div>
-      </Title>
+      </TitleStyle>
       <Droppable droppableId={column.id}>
         {(provided, snapshot) => (
-          <TaskList
+          <TaskListStyle
             ref={provided.innerRef}
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
@@ -70,11 +101,19 @@ function Column({ column, tasks }) {
                 column={column.title}
               />
             ))}
+            {/* {tasks.map((task, index) => (
+              <Task
+                key={task.id + "2"}
+                task={{ ...task, id: task.id + "2" }}
+                index={index + 5}
+                column={column.title}
+              />
+            ))} */}
             {provided.placeholder}
-          </TaskList>
+          </TaskListStyle>
         )}
       </Droppable>
-    </Container>
+    </ContainerStyle>
   );
 }
 

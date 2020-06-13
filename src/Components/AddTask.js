@@ -16,9 +16,9 @@ export default function AddTask() {
       />
       <button
         onClick={() =>
-          taskManipulatorContext.taskManipulatorDispatch({
+          taskManipulatorContext.dispatch({
             type: "addTask-submitTask",
-            value: { task },
+            value: task,
           })
         }
       >

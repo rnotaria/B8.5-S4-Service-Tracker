@@ -112,24 +112,20 @@ const reducer = (state, action) => {
 };
 
 /* * * * * * * * * * * * * *
- * * * MAIN FUNCTION * * * *
+ * * * MAIN COMPONENT  * * *
  * * * * * * * * * * * * * */
 export default function BottomPanel({
-  height = 50,
   delay = 0.5,
-  panelData = { title: "", content: "" },
-  open = false,
+  panelData = { height: 10, open: false, title: "", content: "" },
 }) {
-  // console.log(open);
-
   // Contexts
   const taskManipulatorContext = useContext(TaskManipulatorContext);
 
   // Set State
   const [isOpen, dispatch] = useReducer(reducer, {
     ...initialState,
-    opening: open,
-    closed: !open,
+    opening: panelData.open,
+    closed: !panelData.open,
   });
 
   // Condition render button to follow pane on open/close
@@ -146,7 +142,7 @@ export default function BottomPanel({
     } else if (isOpen.opening === true) {
       buttonJSX = (
         <div style={closedButtonPosition()}>
-          <TranslateUp delay={delay} height={height + "vh"}>
+          <TranslateUp delay={delay} height={panelData.height + "vh"}>
             <div style={arrowStyle}>
               <Rotate start={0} end={180} delay={delay}>
                 <FaChevronUp size={20} />
@@ -158,10 +154,13 @@ export default function BottomPanel({
     } else if (isOpen.opened === true) {
       buttonJSX = (
         <div
-          style={openedButtonPosition(height + "vh")}
+          style={openedButtonPosition(panelData.height + "vh")}
           onClick={() => {
             dispatch("closing");
-            taskManipulatorContext.taskManipulatorDispatch({ type: "reset" });
+            window.setTimeout(
+              () => taskManipulatorContext.dispatch({ type: "reset" }),
+              delay * 1000
+            );
           }}
         >
           <div style={arrowStyle}>
@@ -174,7 +173,7 @@ export default function BottomPanel({
     } else if (isOpen.closing === true) {
       buttonJSX = (
         <div style={closedButtonPosition()}>
-          <TranslateDown delay={delay} height={height + "vh"}>
+          <TranslateDown delay={delay} height={panelData.height + "vh"}>
             <div style={arrowStyle}>
               <Rotate start={180} end={360} delay={delay}>
                 <FaChevronUp size={20} />
@@ -206,8 +205,16 @@ export default function BottomPanel({
   }, [isOpen.opening, isOpen.closing, delay]);
 
   useEffect(() => {
-    open === true ? dispatch("opening") : dispatch("closing");
-  }, [open]);
+    if (panelData.open === true) {
+      dispatch("opening");
+    } else {
+      dispatch("closing");
+      window.setTimeout(
+        () => taskManipulatorContext.dispatch({ type: "reset" }),
+        delay * 1000
+      );
+    }
+  }, [panelData.open]);
 
   // Render
   return (
@@ -221,10 +228,13 @@ export default function BottomPanel({
         isOpen={isOpen.opening || isOpen.opened}
         onRequestClose={() => {
           dispatch("closing");
-          taskManipulatorContext.taskManipulatorDispatch({ type: "reset" });
+          window.setTimeout(
+            () => taskManipulatorContext.dispatch({ type: "reset" }),
+            delay * 1000
+          );
         }}
         width="100%"
-        height={height + "vh"}
+        height={panelData.height + "vh"}
       >
         {panelData.content}
       </SlidingPane>

@@ -30,7 +30,9 @@ const MilageBarContainer = styled.div`
 `;
 
 function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
-  // console.log("Rendering milagebox")
+  // console.log("Rendering milagebox");
+
+  // console.log(miles);
 
   return (
     <MilageBoxContainer>
@@ -46,10 +48,10 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
         triggerDisabled={open}
         triggerStyle={!open ? { cursor: "pointer" } : null}
       >
-        <Board prop_data = {serviceData} />
+        <Board prop_data={serviceData} miles={miles} />
       </Collapsible>
     </MilageBoxContainer>
-  )
+  );
 }
 
-export default React.memo(MilageBox)
+export default React.memo(MilageBox);

@@ -10,12 +10,14 @@ import AddTask from "./Components/AddTask";
 export const TaskManipulatorContext = React.createContext();
 
 const taskManipulatorInitialState = {
-  height: 50,
-  open: false,
   panelData: {
+    height: 50,
+    open: false,
     title: "title",
     content: "content",
   },
+  newTask: false,
+  deleteTask: false,
   taskContainer: null,
 };
 
@@ -25,18 +27,32 @@ const taskManipulatorReducer = (state, action) => {
       // Brings up bottom panel to add new task
       return {
         ...state,
-        open: true,
         panelData: {
+          ...state.panelData,
+          height: 20,
+          open: true,
           title: "Add Task",
           content: <AddTask />,
+        },
+        taskContainer: {
+          ...state.taskContainer,
+          ...action.value,
         },
       };
     case "addTask-submitTask":
       // Submits task and adds it to list
-      console.log(action.value);
       return {
         ...state,
-        open: false,
+        panelData: {
+          ...state.panelData,
+          height: 20,
+          open: false,
+        },
+        newTask: true,
+        taskContainer: {
+          ...state.taskContainer,
+          newTask: action.value,
+        },
       };
     case "reset":
       // Reset back to initial state
@@ -51,23 +67,21 @@ const taskManipulatorReducer = (state, action) => {
  * * * * * * * * * * * * * */
 function App() {
   // Contexts
-  const [taskManipulatorState, taskManipulatorDispatch] = useReducer(
+  const [state, dispatch] = useReducer(
     taskManipulatorReducer,
     taskManipulatorInitialState
   );
-
-  // console.log(taskManipulatorState.taskContainer);
 
   return (
     <div>
       <TaskManipulatorContext.Provider
         value={{
-          taskManipulatorState,
-          taskManipulatorDispatch,
+          state,
+          dispatch,
         }}
       >
-        <RenderXMilageBoxes currentMiles={5001} numFutureServices={10} />
-        <BottomPanel {...taskManipulatorState} />
+        <RenderXMilageBoxes currentMiles={5001} numFutureServices={5} />
+        <BottomPanel panelData={state.panelData} />
       </TaskManipulatorContext.Provider>
     </div>
   );

@@ -1,18 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 // import "@atlaskit/css-reset";  Do I need this??
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import Column from "./Column";
+import { TaskManipulatorContext } from "../../App";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-function Board({ prop_data }) {
-  // console.log("rendering Board")
+function Board({ prop_data, miles }) {
+  // console.log("rendering Board");
+
+  const taskManipulatorContext = useContext(TaskManipulatorContext);
 
   const [data, setData] = useState(prop_data);
+
+  const newTaskId = useRef(0);
+
+  useEffect(() => {
+    if (
+      taskManipulatorContext.state.newTask &&
+      taskManipulatorContext.state.taskContainer.miles === miles
+    ) {
+      newTaskId.current = newTaskId.current + 1;
+
+      setData((prevData) => ({
+        ...prevData,
+        tasks: {
+          ...prevData.tasks,
+          ["newTask" + newTaskId.current]: {
+            id: "newTask" + newTaskId.current,
+            content: taskManipulatorContext.state.taskContainer.newTask,
+          },
+        },
+        columns: {
+          ...prevData.columns,
+          [taskManipulatorContext.state.taskContainer.column.id]: {
+            ...prevData.columns[
+              taskManipulatorContext.state.taskContainer.column.id
+            ],
+            taskIds: ["newTask" + newTaskId.current].concat(
+              prevData.columns[
+                taskManipulatorContext.state.taskContainer.column.id
+              ].taskIds
+            ),
+          },
+        },
+      }));
+
+      taskManipulatorContext.dispatch("reset");
+    }
+  }, [taskManipulatorContext, miles]);
 
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";
@@ -84,12 +124,6 @@ function Board({ prop_data }) {
     }
   };
 
-  const addTask = (column) => {
-    //   console.log(column);
-    //   newTaskId.current = newTaskId.current + 1;
-    //   console.log(newTaskId.current);
-  };
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Container>
@@ -101,7 +135,7 @@ function Board({ prop_data }) {
               key={column.id}
               column={column}
               tasks={tasks}
-              addTask={addTask}
+              miles={miles}
             />
           );
         })}
