@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { TaskManipulatorContext } from "../../Contexts/TaskManipulatorContext";
 
 export default function AddTask() {
@@ -6,15 +6,31 @@ export default function AddTask() {
 
   const taskManipulatorContext = useContext(TaskManipulatorContext);
 
+  useEffect(() => {
+    const listener = (event) => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        taskManipulatorContext.dispatch({
+          type: "addTask-submitTask",
+          value: task,
+        });
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, [task, taskManipulatorContext]);
+
   return (
     <div>
       <input
         type="text"
-        placeholder="Add Task"
+        placeholder="Enter new task..."
         value={task}
         onChange={(e) => setTask(e.target.value)}
       />
       <button
+        type="submit"
         onClick={() => {
           taskManipulatorContext.dispatch({
             type: "addTask-submitTask",
@@ -22,7 +38,7 @@ export default function AddTask() {
           });
         }}
       >
-        Submit
+        Add Task
       </button>
     </div>
   );
