@@ -3,7 +3,7 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import Column from "./Column";
-import { TaskManipulatorContext } from "../../App";
+import { TaskManipulatorContext } from "../../Contexts/TaskManipulatorContext";
 
 const Container = styled.div`
   display: flex;

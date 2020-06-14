@@ -3,7 +3,7 @@ import SlidingPane from "../utils/react-sliding-pane/react-sliding-pane";
 import styled, { keyframes } from "styled-components";
 import "../utils/react-sliding-pane/react-sliding-pane.css";
 import { FaChevronUp } from "react-icons/fa";
-import { TaskManipulatorContext } from "../App";
+import { TaskManipulatorContext } from "../Contexts/TaskManipulatorContext";
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * STYLES  * * * * * * * * * * * * * *

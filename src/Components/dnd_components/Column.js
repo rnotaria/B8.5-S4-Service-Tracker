@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Task from "./Task";
 import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
-import { TaskManipulatorContext } from "../../App";
+import { TaskManipulatorContext } from "../../Contexts/TaskManipulatorContext";
 
 const ContainerStyle = styled.div`
   margin-top: 10px;

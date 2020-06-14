@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { TaskManipulatorContext } from "../../App";
+import { TaskManipulatorContext } from "../../Contexts/TaskManipulatorContext";
 
 export default function AddTask() {
   const [task, setTask] = useState("");
