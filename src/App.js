@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import "./index.css";
 import RenderXMilageBoxes from "./Components/RenderXMilageBoxes";
 import BottomPanel from "./Components/BottomPanel";
-import AddTask from "./Components/AddTask";
+import AddTask from "./Components/dnd_components/AddTask";
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * CONTEXTS  * * * * * * * * * * * * * *
