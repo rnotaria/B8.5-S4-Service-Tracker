@@ -32,8 +32,6 @@ const MilageBarContainer = styled.div`
 function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
   // console.log("Rendering milagebox");
 
-  // console.log(miles);
-
   return (
     <MilageBoxContainer>
       <Collapsible
