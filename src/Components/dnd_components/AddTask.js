@@ -24,7 +24,9 @@ export default function AddTask() {
   return (
     <div>
       <input
+        autoFocus={true}
         type="text"
+        id="addText"
         placeholder="Enter new task..."
         value={task}
         onChange={(e) => setTask(e.target.value)}

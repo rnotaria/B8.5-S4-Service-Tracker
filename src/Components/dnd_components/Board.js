@@ -53,6 +53,9 @@ function Board({ prop_data, miles }) {
     }
   }, [taskManipulatorContext, miles]);
 
+  // Delete task if any
+  useEffect(() => {});
+
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";
     document.body.style.backgroundColor = "inherit";

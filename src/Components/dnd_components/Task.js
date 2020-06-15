@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
+import { FaTrash } from "react-icons/fa";
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const TaskContainer = styled.div`
   border: ${(props) =>
@@ -11,7 +17,7 @@ const TaskContainer = styled.div`
   background-color: ${(props) => props.bgColor};
   transition: background-color 1s ease-in-out;
   padding: 8px;
-  margin-bottom: 8px;
+  margin: 5px;
 
   font-weight: bold;
   text-align: center;
@@ -19,13 +25,17 @@ const TaskContainer = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
   user-select: none;
+
+  flex: 1;
 `;
 
-function Task({ task, index, column }) {
-  // console.log("rendering Task", task.content.substr(0,10));
-  // console.log(index)
-  // console.log(task.id)
+const TrashStyle = {
+  color: "rgb(225,0,0)",
+  cursor: "pointer",
+  padding: "4px",
+};
 
+function Task({ task, index, column, deleteTask }) {
   const [bgColor, setBgColor] = useState("#A9A9A9");
 
   useEffect(
@@ -38,20 +48,27 @@ function Task({ task, index, column }) {
   );
 
   return (
-    <Draggable draggableId={task.id} index={index}>
-      {(provided, snapshot) => (
-        <TaskContainer
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          ref={provided.innerRef}
-          isDragging={snapshot.isDragging}
-          column={column}
-          bgColor={bgColor}
-        >
-          {task.content}
-        </TaskContainer>
-      )}
-    </Draggable>
+    <Container>
+      {deleteTask === true ? <FaTrash style={TrashStyle} /> : null}
+      <Draggable
+        draggableId={task.id}
+        index={index}
+        isDragDisabled={deleteTask}
+      >
+        {(provided, snapshot) => (
+          <TaskContainer
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+            isDragging={snapshot.isDragging}
+            column={column}
+            bgColor={bgColor}
+          >
+            {task.content}
+          </TaskContainer>
+        )}
+      </Draggable>
+    </Container>
   );
 }
 

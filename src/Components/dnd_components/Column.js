@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Task from "./Task";
 import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
@@ -10,7 +10,6 @@ const ContainerStyle = styled.div`
   margin-left: 5px;
   margin-right: 5px;
   width: 48%;
-
   display: flex;
   flex-direction: column;
   background-color: grey;
@@ -20,6 +19,7 @@ const ContainerStyle = styled.div`
 `;
 const TitleStyle = styled.h3`
   margin-top: 0;
+  margin-bottom: 0px;
   padding: 8px;
   padding-left: 16px;
   padding-right: 16px;
@@ -33,42 +33,27 @@ const TaskListStyle = styled.div`
   min-height: 100px;
 `;
 
+const ButtonStyle = {
+  width: "30px",
+  cursor: "pointer",
+};
+
 function Column({ column, tasks, miles }) {
   // console.log("Rendering Column...");
 
   const taskManipulatorContext = useContext(TaskManipulatorContext);
+  const [deleteTask, setDeleteTask] = useState(false);
 
-  // const [column, setColumn] = useState(_column);
-  // const [tasks, setTasks] = useState(_tasks);
-
-  // console.log(column);
-
-  // const t1 = [
-  //   {
-  //     id: "task10",
-  //     content:
-  //       "Battery - Check for clean terminals (no corrosion), properly mounted housing and no damage; replace if necessary.",
-  //   },
-  // ];
-
-  // const c1 = {
-  //   id: "column1",
-  //   title: "Complete",
-  //   taskIds: ["task10"],
-  // };
-
-  // const temp = () => {
-  //   setTasks(t1);
-  //   setColumn(c1);
-  // };
-
-  // console.log(column);
+  const toggleDeleteTask = () => {
+    setDeleteTask(!deleteTask);
+  };
 
   return (
     <ContainerStyle>
       <TitleStyle>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <button
+            style={ButtonStyle}
             onClick={() =>
               taskManipulatorContext.dispatch({
                 type: "addTask-botPanel",
@@ -83,7 +68,17 @@ function Column({ column, tasks, miles }) {
             +
           </button>
           <div>{column.title}</div>
-          <button>-</button>
+          <button
+            style={{
+              ...ButtonStyle,
+              backgroundColor: `${
+                deleteTask === true ? "rgb(150,150,150" : "rgb(230,230,230"
+              }`,
+            }}
+            onClick={toggleDeleteTask}
+          >
+            -
+          </button>
         </div>
       </TitleStyle>
       <Droppable droppableId={column.id}>
@@ -99,16 +94,9 @@ function Column({ column, tasks, miles }) {
                 task={task}
                 index={index}
                 column={column.title}
+                deleteTask={deleteTask}
               />
             ))}
-            {/* {tasks.map((task, index) => (
-              <Task
-                key={task.id + "2"}
-                task={{ ...task, id: task.id + "2" }}
-                index={index + 5}
-                column={column.title}
-              />
-            ))} */}
             {provided.placeholder}
           </TaskListStyle>
         )}
