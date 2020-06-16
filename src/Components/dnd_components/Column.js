@@ -94,6 +94,8 @@ function Column({ column, tasks, miles }) {
                 task={task}
                 index={index}
                 column={column.title}
+                columnId={column.id}
+                miles={miles}
                 deleteTask={deleteTask}
               />
             ))}

@@ -49,6 +49,18 @@ const taskManipulatorReducer = (state, action) => {
         },
       };
 
+    case "deleteTask":
+      return {
+        ...state,
+        deleteTask: true,
+        taskContainer: {
+          ...state.taskContainer,
+          miles: action.value.miles,
+          columnId: action.value.columnId,
+          taskId: action.value.taskId,
+        },
+      };
+
     case "reset":
       // Reset back to initial state
       return taskManipulatorInitialState;

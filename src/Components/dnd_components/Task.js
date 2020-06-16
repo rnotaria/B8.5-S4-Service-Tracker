@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import { FaTrash } from "react-icons/fa";
+import { TaskManipulatorContext } from "../../Contexts/TaskManipulatorContext";
 
 const Container = styled.div`
   display: flex;
@@ -35,8 +36,9 @@ const TrashStyle = {
   padding: "4px",
 };
 
-function Task({ task, index, column, deleteTask }) {
+function Task({ task, index, column, columnId, deleteTask, miles }) {
   const [bgColor, setBgColor] = useState("#A9A9A9");
+  const taskManipulatorContext = useContext(TaskManipulatorContext);
 
   useEffect(
     (bgColor) => {
@@ -49,7 +51,21 @@ function Task({ task, index, column, deleteTask }) {
 
   return (
     <Container>
-      {deleteTask === true ? <FaTrash style={TrashStyle} /> : null}
+      {deleteTask === true ? (
+        <FaTrash
+          style={TrashStyle}
+          onClick={() =>
+            taskManipulatorContext.dispatch({
+              type: "deleteTask",
+              value: {
+                miles,
+                taskId: task.id,
+                columnId,
+              },
+            })
+          }
+        />
+      ) : null}
       <Draggable
         draggableId={task.id}
         index={index}

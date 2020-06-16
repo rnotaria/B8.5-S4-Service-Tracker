@@ -22,7 +22,7 @@ function Board({ prop_data, miles }) {
   // Render new task if any
   useEffect(() => {
     if (
-      taskManipulatorContext.state.newTask &&
+      taskManipulatorContext.state.newTask === true &&
       taskManipulatorContext.state.taskContainer.miles === miles
     ) {
       newTaskId.current = newTaskId.current + 1;
@@ -54,7 +54,32 @@ function Board({ prop_data, miles }) {
   }, [taskManipulatorContext, miles]);
 
   // Delete task if any
-  useEffect(() => {});
+  useEffect(() => {
+    if (
+      taskManipulatorContext.state.deleteTask === true &&
+      taskManipulatorContext.state.taskContainer.miles === miles
+    ) {
+      console.log(miles);
+      var newData = JSON.parse(JSON.stringify(data));
+
+      delete newData.tasks[taskManipulatorContext.state.taskContainer.taskId];
+
+      var newTaskIdsArray =
+        newData.columns[taskManipulatorContext.state.taskContainer.columnId]
+          .taskIds;
+
+      newTaskIdsArray.splice(
+        newTaskIdsArray.indexOf(
+          taskManipulatorContext.state.taskContainer.taskId
+        ),
+        1
+      );
+
+      taskManipulatorContext.dispatch({ type: "reset" });
+
+      setData(newData);
+    }
+  }, [taskManipulatorContext.state, miles, data]);
 
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";
@@ -63,7 +88,6 @@ function Board({ prop_data, miles }) {
     const { destination, source, draggableId } = result;
 
     if (!destination) {
-      console.log("No destination");
       return;
     }
 
