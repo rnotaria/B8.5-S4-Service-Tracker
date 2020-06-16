@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaTools } from "react-icons/fa";
+import { GoInfo } from "react-icons/go";
 import { TaskManipulatorContext } from "../../Contexts/TaskManipulatorContext";
 
-const Container = styled.div`
+const MainContainer = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -17,23 +18,36 @@ const TaskContainer = styled.div`
 
   background-color: ${(props) => props.bgColor};
   transition: background-color 1s ease-in-out;
-  padding: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   margin: 5px;
 
   font-weight: bold;
+  font-size: 16px;
   text-align: center;
 
+  user-select: none;
+  flex: 1;
+
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Ellipsis = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
-  user-select: none;
-
-  flex: 1;
+  overflow: hidden;
 `;
 
 const TrashStyle = {
   color: "rgb(225,0,0)",
   cursor: "pointer",
   padding: "4px",
+};
+
+const iconStyle = {
+  paddingLeft: "16px",
+  paddingRight: "16px",
 };
 
 function Task({ task, index, column, columnId, deleteTask, miles }) {
@@ -50,7 +64,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
   );
 
   return (
-    <Container>
+    <MainContainer>
       {deleteTask === true ? (
         <FaTrash
           style={TrashStyle}
@@ -69,7 +83,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
       <Draggable
         draggableId={task.id}
         index={index}
-        isDragDisabled={deleteTask}
+        isDragDisabled={deleteTask || column === "Complete"}
       >
         {(provided, snapshot) => (
           <TaskContainer
@@ -80,11 +94,17 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
             column={column}
             bgColor={bgColor}
           >
-            {task.content}
+            <div>
+              <FaTools style={iconStyle} />
+            </div>
+            <Ellipsis>{task.content}</Ellipsis>
+            <div>
+              <GoInfo style={iconStyle} />
+            </div>
           </TaskContainer>
         )}
       </Draggable>
-    </Container>
+    </MainContainer>
   );
 }
 

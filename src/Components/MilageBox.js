@@ -26,7 +26,9 @@ const MilageBarContainer = styled.div`
   background-color: grey;
   border: 2px solid lightgrey;
   border-radius: 10px;
+
   overflow: hidden;
+  user-select: none;
 `;
 
 function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {

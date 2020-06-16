@@ -15,7 +15,9 @@ const ContainerStyle = styled.div`
   background-color: grey;
   border: 2px solid lightgrey;
   border-radius: 10px;
+
   overflow: hidden;
+  user-select: none;
 `;
 const TitleStyle = styled.h3`
   margin-top: 0;
