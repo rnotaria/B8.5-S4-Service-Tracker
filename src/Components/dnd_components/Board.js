@@ -79,7 +79,7 @@ function Board({ prop_data, miles }) {
 
       setData(newData);
     }
-  }, [taskManipulatorContext.state, miles, data]);
+  }, [taskManipulatorContext, miles, data]);
 
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";
