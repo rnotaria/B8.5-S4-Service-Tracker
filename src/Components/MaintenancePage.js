@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import RenderXMilageBoxes from "./RenderXMilageBoxes";
 import BottomPanel from "./BottomPanel";
-import { TaskManipulatorContext } from "../Contexts/TaskManipulatorContext";
+import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 
 export default function MaintenancePage() {
-  const taskManipulatorContext = useContext(TaskManipulatorContext);
+  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   return (
     <div>
       <RenderXMilageBoxes currentMiles={5001} numFutureServices={5} />
-      <BottomPanel panelData={taskManipulatorContext.state.panelData} />
+      <BottomPanel panelData={maintenanceTrackerContext.state.panelData} />
     </div>
   );
 }

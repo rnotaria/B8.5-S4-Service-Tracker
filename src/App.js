@@ -1,14 +1,14 @@
 import React from "react";
 import "./index.css";
-import { TaskManipulatorContextProvider } from "./Contexts/TaskManipulatorContext";
+import { MaintenanceTrackerContextProvider } from "./Contexts/MaintenanceTrackerContext";
 import MaintenancePage from "./Components/MaintenancePage";
 
 export default function App() {
   return (
     <div>
-      <TaskManipulatorContextProvider>
+      <MaintenanceTrackerContextProvider>
         <MaintenancePage />
-      </TaskManipulatorContextProvider>
+      </MaintenanceTrackerContextProvider>
     </div>
   );
 }

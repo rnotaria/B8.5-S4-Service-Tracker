@@ -1,9 +1,9 @@
 import React, { useEffect, useReducer, useContext } from "react";
-import SlidingPane from "../utils/react-sliding-pane/react-sliding-pane";
+import SlidingPane from "../Components/react-sliding-pane/react-sliding-pane";
 import styled, { keyframes } from "styled-components";
-import "../utils/react-sliding-pane/react-sliding-pane.css";
+import "../Components/react-sliding-pane/react-sliding-pane.css";
 import { FaChevronUp } from "react-icons/fa";
-import { TaskManipulatorContext } from "../Contexts/TaskManipulatorContext";
+import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * STYLES  * * * * * * * * * * * * * *
@@ -118,7 +118,7 @@ export default function BottomPanel({
   delay = 0.5,
   panelData = { height: 10, open: false, title: "", content: "" },
 }) {
-  const taskManipulatorContext = useContext(TaskManipulatorContext);
+  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const [isOpen, dispatch] = useReducer(reducer, initialState);
 
   // Condition render button to follow pane on open/close
@@ -189,13 +189,13 @@ export default function BottomPanel({
     } else if (isOpen.closing === true) {
       id = window.setTimeout(() => {
         dispatch("closed");
-        taskManipulatorContext.dispatch({ type: "reset" });
+        maintenanceTrackerContext.dispatch({ type: "reset" });
       }, delay * 1000);
     }
     return () => {
       clearTimeout(id);
     };
-  }, [isOpen, delay, taskManipulatorContext]);
+  }, [isOpen, delay, maintenanceTrackerContext]);
 
   useEffect(() => {
     if (panelData.open === true) {

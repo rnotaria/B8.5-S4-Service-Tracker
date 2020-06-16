@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Task from "./Task";
 import styled from "styled-components";
 import { Droppable } from "react-beautiful-dnd";
-import { TaskManipulatorContext } from "../../Contexts/TaskManipulatorContext";
+import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 
 const ContainerStyle = styled.div`
   margin-top: 10px;
@@ -43,7 +43,7 @@ const ButtonStyle = {
 function Column({ column, tasks, miles }) {
   // console.log("Rendering Column...");
 
-  const taskManipulatorContext = useContext(TaskManipulatorContext);
+  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const [deleteTask, setDeleteTask] = useState(false);
 
   const toggleDeleteTask = () => {
@@ -57,7 +57,7 @@ function Column({ column, tasks, miles }) {
           <button
             style={ButtonStyle}
             onClick={() =>
-              taskManipulatorContext.dispatch({
+              maintenanceTrackerContext.dispatch({
                 type: "addTask-botPanel",
                 value: {
                   miles,

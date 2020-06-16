@@ -1,15 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
-import { TaskManipulatorContext } from "../../Contexts/TaskManipulatorContext";
+import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 
 export default function AddTask() {
   const [task, setTask] = useState("");
 
-  const taskManipulatorContext = useContext(TaskManipulatorContext);
+  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   useEffect(() => {
     const listener = (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
-        taskManipulatorContext.dispatch({
+        maintenanceTrackerContext.dispatch({
           type: "addTask-submitTask",
           value: task,
         });
@@ -19,7 +19,7 @@ export default function AddTask() {
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  }, [task, taskManipulatorContext]);
+  }, [task, maintenanceTrackerContext]);
 
   return (
     <div>
@@ -34,7 +34,7 @@ export default function AddTask() {
       <button
         type="submit"
         onClick={() => {
-          taskManipulatorContext.dispatch({
+          maintenanceTrackerContext.dispatch({
             type: "addTask-submitTask",
             value: task,
           });

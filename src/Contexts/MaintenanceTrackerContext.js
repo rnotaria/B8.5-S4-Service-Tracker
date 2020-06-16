@@ -1,9 +1,9 @@
 import React, { useReducer } from "react";
 import AddTask from "../Components/dnd_components/AddTask";
 
-export const TaskManipulatorContext = React.createContext();
+export const MaintenanceTrackerContext = React.createContext();
 
-const taskManipulatorInitialState = {
+const maintenanceTrackerInitialState = {
   panelData: {
     height: 50,
     open: false,
@@ -15,7 +15,7 @@ const taskManipulatorInitialState = {
   taskContainer: null,
 };
 
-const taskManipulatorReducer = (state, action) => {
+const maintenanceTrackerReducer = (state, action) => {
   switch (action.type) {
     case "addTask-botPanel":
       // Brings up bottom panel to add new task
@@ -63,26 +63,26 @@ const taskManipulatorReducer = (state, action) => {
 
     case "reset":
       // Reset back to initial state
-      return taskManipulatorInitialState;
+      return maintenanceTrackerInitialState;
     default:
-      return taskManipulatorInitialState;
+      return maintenanceTrackerInitialState;
   }
 };
 
-export const TaskManipulatorContextProvider = ({ children }) => {
+export const MaintenanceTrackerContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(
-    taskManipulatorReducer,
-    taskManipulatorInitialState
+    maintenanceTrackerReducer,
+    maintenanceTrackerInitialState
   );
 
   return (
-    <TaskManipulatorContext.Provider
+    <MaintenanceTrackerContext.Provider
       value={{
         state,
         dispatch,
       }}
     >
       {children}
-    </TaskManipulatorContext.Provider>
+    </MaintenanceTrackerContext.Provider>
   );
 };

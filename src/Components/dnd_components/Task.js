@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import { FaTrash, FaTools } from "react-icons/fa";
 import { GoInfo } from "react-icons/go";
-import { TaskManipulatorContext } from "../../Contexts/TaskManipulatorContext";
+import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 
 const MainContainer = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ const iconStyle = {
 
 function Task({ task, index, column, columnId, deleteTask, miles }) {
   const [bgColor, setBgColor] = useState("#A9A9A9");
-  const taskManipulatorContext = useContext(TaskManipulatorContext);
+  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   useEffect(
     (bgColor) => {
@@ -69,7 +69,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
         <FaTrash
           style={TrashStyle}
           onClick={() =>
-            taskManipulatorContext.dispatch({
+            maintenanceTrackerContext.dispatch({
               type: "deleteTask",
               value: {
                 miles,

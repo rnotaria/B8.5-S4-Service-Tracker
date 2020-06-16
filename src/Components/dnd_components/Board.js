@@ -3,7 +3,7 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import Column from "./Column";
-import { TaskManipulatorContext } from "../../Contexts/TaskManipulatorContext";
+import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 
 const Container = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const Container = styled.div`
 function Board({ prop_data, miles }) {
   // console.log("rendering Board");
 
-  const taskManipulatorContext = useContext(TaskManipulatorContext);
+  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   const [data, setData] = useState(prop_data);
 
@@ -22,8 +22,8 @@ function Board({ prop_data, miles }) {
   // Render new task if any
   useEffect(() => {
     if (
-      taskManipulatorContext.state.newTask === true &&
-      taskManipulatorContext.state.taskContainer.miles === miles
+      maintenanceTrackerContext.state.newTask === true &&
+      maintenanceTrackerContext.state.taskContainer.miles === miles
     ) {
       newTaskId.current = newTaskId.current + 1;
 
@@ -33,53 +33,55 @@ function Board({ prop_data, miles }) {
           ...prevData.tasks,
           ["newTask" + newTaskId.current]: {
             id: "newTask" + newTaskId.current,
-            content: taskManipulatorContext.state.taskContainer.newTask,
+            content: maintenanceTrackerContext.state.taskContainer.newTask,
           },
         },
         columns: {
           ...prevData.columns,
-          [taskManipulatorContext.state.taskContainer.column.id]: {
+          [maintenanceTrackerContext.state.taskContainer.column.id]: {
             ...prevData.columns[
-              taskManipulatorContext.state.taskContainer.column.id
+              maintenanceTrackerContext.state.taskContainer.column.id
             ],
             taskIds: ["newTask" + newTaskId.current].concat(
               prevData.columns[
-                taskManipulatorContext.state.taskContainer.column.id
+                maintenanceTrackerContext.state.taskContainer.column.id
               ].taskIds
             ),
           },
         },
       }));
     }
-  }, [taskManipulatorContext, miles]);
+  }, [maintenanceTrackerContext, miles]);
 
   // Delete task if any
   useEffect(() => {
     if (
-      taskManipulatorContext.state.deleteTask === true &&
-      taskManipulatorContext.state.taskContainer.miles === miles
+      maintenanceTrackerContext.state.deleteTask === true &&
+      maintenanceTrackerContext.state.taskContainer.miles === miles
     ) {
       console.log(miles);
       var newData = JSON.parse(JSON.stringify(data));
 
-      delete newData.tasks[taskManipulatorContext.state.taskContainer.taskId];
+      delete newData.tasks[
+        maintenanceTrackerContext.state.taskContainer.taskId
+      ];
 
       var newTaskIdsArray =
-        newData.columns[taskManipulatorContext.state.taskContainer.columnId]
+        newData.columns[maintenanceTrackerContext.state.taskContainer.columnId]
           .taskIds;
 
       newTaskIdsArray.splice(
         newTaskIdsArray.indexOf(
-          taskManipulatorContext.state.taskContainer.taskId
+          maintenanceTrackerContext.state.taskContainer.taskId
         ),
         1
       );
 
-      taskManipulatorContext.dispatch({ type: "reset" });
+      maintenanceTrackerContext.dispatch({ type: "reset" });
 
       setData(newData);
     }
-  }, [taskManipulatorContext, miles, data]);
+  }, [maintenanceTrackerContext, miles, data]);
 
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";
