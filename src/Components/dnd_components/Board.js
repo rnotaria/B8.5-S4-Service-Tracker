@@ -21,8 +21,8 @@ function Board({ prop_data, miles }) {
   // Render new task if any
   useEffect(() => {
     if (
-      maintenanceTrackerContext.state.newTask === true &&
-      maintenanceTrackerContext.state.taskContainer.miles === miles
+      maintenanceTrackerContext.state.status === "addTask" &&
+      maintenanceTrackerContext.state.container.miles === miles
     ) {
       newTaskId.current = newTaskId.current + 1;
 
@@ -32,18 +32,18 @@ function Board({ prop_data, miles }) {
           ...prevData.tasks,
           ["newTask" + newTaskId.current]: {
             id: "newTask" + newTaskId.current,
-            content: maintenanceTrackerContext.state.taskContainer.newTask,
+            content: maintenanceTrackerContext.state.container.newTask,
           },
         },
         columns: {
           ...prevData.columns,
-          [maintenanceTrackerContext.state.taskContainer.column.id]: {
+          [maintenanceTrackerContext.state.container.column.id]: {
             ...prevData.columns[
-              maintenanceTrackerContext.state.taskContainer.column.id
+              maintenanceTrackerContext.state.container.column.id
             ],
             taskIds: ["newTask" + newTaskId.current].concat(
               prevData.columns[
-                maintenanceTrackerContext.state.taskContainer.column.id
+                maintenanceTrackerContext.state.container.column.id
               ].taskIds
             ),
           },
@@ -55,23 +55,20 @@ function Board({ prop_data, miles }) {
   // Delete task if any
   useEffect(() => {
     if (
-      maintenanceTrackerContext.state.deleteTask === true &&
-      maintenanceTrackerContext.state.taskContainer.miles === miles
+      maintenanceTrackerContext.state.status === "deleteTask" &&
+      maintenanceTrackerContext.state.container.miles === miles
     ) {
-      console.log(miles);
       var newData = JSON.parse(JSON.stringify(data));
 
-      delete newData.tasks[
-        maintenanceTrackerContext.state.taskContainer.taskId
-      ];
+      delete newData.tasks[maintenanceTrackerContext.state.container.taskId];
 
       var newTaskIdsArray =
-        newData.columns[maintenanceTrackerContext.state.taskContainer.columnId]
+        newData.columns[maintenanceTrackerContext.state.container.columnId]
           .taskIds;
 
       newTaskIdsArray.splice(
         newTaskIdsArray.indexOf(
-          maintenanceTrackerContext.state.taskContainer.taskId
+          maintenanceTrackerContext.state.container.taskId
         ),
         1
       );

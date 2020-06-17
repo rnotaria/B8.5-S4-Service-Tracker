@@ -7,14 +7,13 @@ export const MaintenanceTrackerContext = React.createContext();
 const maintenanceTrackerInitialState = {
   panelData: {
     height: 50,
-    isOpen: "opened",
-    open: true,
+    isOpen: "closed",
+    open: false,
     title: "OPTIONS",
     content: DefaultPanelOptions(),
   },
-  newTask: false,
-  deleteTask: false,
-  taskContainer: null,
+  status: null,
+  container: null,
 };
 
 const maintenanceTrackerReducer = (state, action) => {
@@ -30,8 +29,8 @@ const maintenanceTrackerReducer = (state, action) => {
           title: "Add Task",
           content: <AddTask />,
         },
-        taskContainer: {
-          ...state.taskContainer,
+        container: {
+          ...state.container,
           ...action.value,
         },
       };
@@ -40,13 +39,13 @@ const maintenanceTrackerReducer = (state, action) => {
       // Submits task and adds it to list
       return {
         ...state,
+        status: "addTask",
         panelData: {
           ...state.panelData,
           isOpen: "closing",
         },
-        newTask: true,
-        taskContainer: {
-          ...state.taskContainer,
+        container: {
+          ...state.container,
           newTask: action.value,
         },
       };
@@ -54,15 +53,33 @@ const maintenanceTrackerReducer = (state, action) => {
     case "deleteTask":
       return {
         ...state,
-        deleteTask: true,
-        taskContainer: {
-          ...state.taskContainer,
+        status: "deleteTask",
+        container: {
+          ...state.container,
           miles: action.value.miles,
           columnId: action.value.columnId,
           taskId: action.value.taskId,
         },
       };
 
+    case "addInterval":
+      return {
+        ...state,
+        status: "addInterval",
+        panelData: {
+          ...state.panelData,
+          isOpen: "open",
+        },
+        container: { interval: action.value.interval },
+      };
+    case "closing":
+      return {
+        ...maintenanceTrackerInitialState,
+        panelData: {
+          ...state.panelData,
+          isOpen: "closing",
+        },
+      };
     case "reset":
       // Reset back to initial state
       return maintenanceTrackerInitialState;

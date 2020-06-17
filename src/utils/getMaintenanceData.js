@@ -72,6 +72,25 @@ const majorService = {
   columnOrder: ["column1", "column2"],
 };
 
+const emptyService = {
+  tasks: {},
+
+  columns: {
+    column1: {
+      id: "column1",
+      title: "To Do",
+      taskIds: [],
+    },
+    column2: {
+      id: "column2",
+      title: "Complete",
+      taskIds: [],
+    },
+  },
+
+  columnOrder: ["column1", "column2"],
+};
+
 // Returns an array of maintenance mile invervals
 export const getMilesArray = (currentMiles) => {
   const milesArray = [5000];
@@ -87,14 +106,16 @@ export const getMilesArray = (currentMiles) => {
 };
 
 // Returns object of maintenance tasks
-export const getServiceData = (milesArray) => {
-  var serviceData = [];
+export const getServiceDataArray = (milesArray) => {
+  var serviceDataArray = [];
   milesArray.map((miles) => {
     if (miles - 5000 === 0 || (miles - 5000) % 20000 === 0) {
-      return serviceData.push(standardService);
+      return serviceDataArray.push(standardService);
+    } else if ((miles - 5000) % 10000 === 0) {
+      return serviceDataArray.push(majorService);
     } else {
-      return serviceData.push(majorService);
+      return serviceDataArray.push(emptyService);
     }
   });
-  return serviceData;
+  return serviceDataArray;
 };

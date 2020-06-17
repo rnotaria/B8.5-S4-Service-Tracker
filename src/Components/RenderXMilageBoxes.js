@@ -1,21 +1,37 @@
 // This file will render x number of <MilageBox/>  passing it the appropriate props
 
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import MilageBox from "./MilageBox";
-import { getMilesArray, getServiceData } from "../utils/getMaintenanceData";
+import {
+  getMilesArray,
+  getServiceDataArray,
+} from "../utils/getMaintenanceData";
+import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 
-function RenderXMilageBoxes({ currentMiles, numFutureServices }) {
+function RenderXMilageBoxes({ currentMiles }) {
   // console.log("RenderXMilageBoxes");
 
   // Get Data
-  const milesArray = getMilesArray(currentMiles, numFutureServices);
-  var serviceData = getServiceData(milesArray);
+  const [milesArray, setMilesArray] = useState(getMilesArray(currentMiles));
+  const [serviceDataArray, setServiceDataArray] = useState(
+    getServiceDataArray(milesArray)
+  );
+  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   // State that determines which collapsible Milage Box is open
-  // milesArray.forEach;
   const [openBox, setOpenBox] = useState(
     milesArray[milesArray.findIndex((miles) => miles > currentMiles)]
   );
+
+  useEffect(() => {
+    if (maintenanceTrackerContext.state.status === "addInterval") {
+      const newMilesArray = [...milesArray];
+      newMilesArray.push(maintenanceTrackerContext.state.container.interval);
+      setMilesArray(newMilesArray);
+      setServiceDataArray(getServiceDataArray(newMilesArray));
+      maintenanceTrackerContext.dispatch({ type: "closing" });
+    }
+  }, [maintenanceTrackerContext, milesArray]);
 
   // // If previous service, set tasks to complete
   // if (milesArray[0] < currentMiles) {
@@ -48,7 +64,7 @@ function RenderXMilageBoxes({ currentMiles, numFutureServices }) {
         <MilageBox
           key={miles}
           miles={miles}
-          serviceData={serviceData[index]}
+          serviceData={serviceDataArray[index]}
           open={miles === openBox ? true : false}
           handleSetOpenBox={handleSetOpenBox}
         />
