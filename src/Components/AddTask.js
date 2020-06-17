@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
+import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 
 export default function AddTask() {
   const [task, setTask] = useState("");

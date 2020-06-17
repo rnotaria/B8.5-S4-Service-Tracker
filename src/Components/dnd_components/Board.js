@@ -32,7 +32,7 @@ function Board({ prop_data, miles }) {
           ...prevData.tasks,
           ["newTask" + newTaskId.current]: {
             id: "newTask" + newTaskId.current,
-            content: maintenanceTrackerContext.state.container.newTask,
+            title: maintenanceTrackerContext.state.container.newTask,
           },
         },
         columns: {

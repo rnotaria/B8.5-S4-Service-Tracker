@@ -97,7 +97,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
             <div>
               <FaTools style={iconStyle} />
             </div>
-            <Ellipsis>{task.content}</Ellipsis>
+            <Ellipsis>{task.title}</Ellipsis>
             <div>
               <GoInfo style={iconStyle} />
             </div>

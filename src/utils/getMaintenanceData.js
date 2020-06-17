@@ -1,23 +1,43 @@
 // This file contains helper functions that provide or alter maintenanceList data
 
+const emptyService = {
+  tasks: {},
+
+  columns: {
+    column1: {
+      id: "column1",
+      title: "To Do",
+      taskIds: [],
+    },
+    column2: {
+      id: "column2",
+      title: "Complete",
+      taskIds: [],
+    },
+  },
+
+  columnOrder: ["column1", "column2"],
+};
+
 const standardService = {
   tasks: {
     task1: {
       id: "task1",
-      content:
+      title:
         "Brake system - Check for damage and leaks, thickness of pads, and brake fluid level",
+      info: "hi",
     },
     task2: {
       id: "task2",
-      content: "Engine oil / Oil filter - Change oil and replace filter",
+      title: "Engine oil / Oil filter - Change oil and replace filter",
     },
     task3: {
       id: "task3",
-      content: "Engine compartment - Check for leaks",
+      title: "Engine compartment - Check for leaks",
     },
     task4: {
       id: "task4",
-      content:
+      title:
         "Tires and spare wheel - Check for wear and damage. Check tire pressure. Reset Tire Pressure Monitoring System (TPMS)",
     },
   },
@@ -42,17 +62,17 @@ const majorService = {
   tasks: {
     task1: {
       id: "task1",
-      content:
+      title:
         "Battery - Check for clean terminals (no corrosion), properly mounted housing and no damage; replace if necessary.",
     },
     task2: {
       id: "task2",
-      content:
+      title:
         "Cooling system - Check coolant level and add coolant if necessary",
     },
     task3: {
       id: "task3",
-      content: "Dust and pollen filter - Replace filter",
+      title: "Dust and pollen filter - Replace filter",
     },
   },
 
@@ -61,25 +81,6 @@ const majorService = {
       id: "column1",
       title: "To Do",
       taskIds: ["task1", "task2", "task3"],
-    },
-    column2: {
-      id: "column2",
-      title: "Complete",
-      taskIds: [],
-    },
-  },
-
-  columnOrder: ["column1", "column2"],
-};
-
-const emptyService = {
-  tasks: {},
-
-  columns: {
-    column1: {
-      id: "column1",
-      title: "To Do",
-      taskIds: [],
     },
     column2: {
       id: "column2",

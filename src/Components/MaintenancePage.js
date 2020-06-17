@@ -8,7 +8,7 @@ export default function MaintenancePage() {
 
   return (
     <div>
-      <RenderXMilageBoxes currentMiles={56000} />
+      <RenderXMilageBoxes currentMiles={60000} />
       <BottomPanel panelData={maintenanceTrackerContext.state.panelData} />
     </div>
   );
