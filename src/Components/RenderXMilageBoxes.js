@@ -25,11 +25,15 @@ function RenderXMilageBoxes({ currentMiles }) {
 
   useEffect(() => {
     if (maintenanceTrackerContext.state.status === "addInterval") {
-      const newMilesArray = [...milesArray];
-      newMilesArray.push(maintenanceTrackerContext.state.container.interval);
-      newMilesArray.sort((a, b) => a - b);
-      setMilesArray(newMilesArray);
-      setServiceDataArray(getServiceDataArray(newMilesArray));
+      if (
+        !milesArray.includes(maintenanceTrackerContext.state.container.interval)
+      ) {
+        const newMilesArray = [...milesArray];
+        newMilesArray.push(maintenanceTrackerContext.state.container.interval);
+        newMilesArray.sort((a, b) => a - b);
+        setMilesArray(newMilesArray);
+        setServiceDataArray(getServiceDataArray(newMilesArray));
+      }
       setOpenBox(maintenanceTrackerContext.state.container.interval);
       maintenanceTrackerContext.dispatch({ type: "closing" });
     }
