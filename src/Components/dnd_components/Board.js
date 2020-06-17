@@ -33,6 +33,13 @@ function Board({ prop_data, miles }) {
           ["newTask" + newTaskId.current]: {
             id: "newTask" + newTaskId.current,
             title: maintenanceTrackerContext.state.container.newTask,
+            info: {
+              subtitle: null,
+              instructions: null,
+              links: null,
+              videos: null,
+              notes: null,
+            },
           },
         },
         columns: {

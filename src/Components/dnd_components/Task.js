@@ -50,6 +50,12 @@ const iconStyle = {
   paddingRight: "16px",
 };
 
+const infoStyle = {
+  paddingLeft: "16px",
+  paddingRight: "16px",
+  cursor: "pointer",
+};
+
 function Task({ task, index, column, columnId, deleteTask, miles }) {
   const [bgColor, setBgColor] = useState("#A9A9A9");
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
@@ -99,7 +105,15 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
             </div>
             <Ellipsis>{task.title}</Ellipsis>
             <div>
-              <GoInfo style={iconStyle} />
+              <GoInfo
+                style={infoStyle}
+                onClick={() =>
+                  maintenanceTrackerContext.dispatch({
+                    type: "info",
+                    value: task,
+                  })
+                }
+              />
             </div>
           </TaskContainer>
         )}

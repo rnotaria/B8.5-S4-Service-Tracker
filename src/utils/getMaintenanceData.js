@@ -25,7 +25,13 @@ const standardService = {
       id: "task1",
       title:
         "Brake system - Check for damage and leaks, thickness of pads, and brake fluid level",
-      info: "hi",
+      info: {
+        subtitle: "subtitle",
+        instructions: "instructions",
+        links: "links",
+        videos: "videos",
+        notes: "notes",
+      },
     },
     task2: {
       id: "task2",

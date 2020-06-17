@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import AddTask from "../Components/AddTask";
 import DefaultPanelOptions from "../Components/DefaultPanelOptions";
+import InfoBox from "../Components/InfoBox";
 
 export const MaintenanceTrackerContext = React.createContext();
 
@@ -72,6 +73,21 @@ const maintenanceTrackerReducer = (state, action) => {
         },
         container: { interval: action.value.interval },
       };
+
+    case "info":
+      return {
+        ...state,
+        status: "info",
+        panelData: {
+          ...state.panelData,
+          height: 50,
+          isOpen: "opening",
+          content: (
+            <InfoBox title={action.value.title} {...action.value.info} />
+          ),
+        },
+      };
+
     case "closing":
       return {
         ...maintenanceTrackerInitialState,
