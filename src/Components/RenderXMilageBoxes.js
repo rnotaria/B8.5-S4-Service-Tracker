@@ -27,8 +27,10 @@ function RenderXMilageBoxes({ currentMiles }) {
     if (maintenanceTrackerContext.state.status === "addInterval") {
       const newMilesArray = [...milesArray];
       newMilesArray.push(maintenanceTrackerContext.state.container.interval);
+      newMilesArray.sort((a, b) => a - b);
       setMilesArray(newMilesArray);
       setServiceDataArray(getServiceDataArray(newMilesArray));
+      setOpenBox(maintenanceTrackerContext.state.container.interval);
       maintenanceTrackerContext.dispatch({ type: "closing" });
     }
   }, [maintenanceTrackerContext, milesArray]);

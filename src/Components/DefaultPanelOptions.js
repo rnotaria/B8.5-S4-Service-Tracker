@@ -7,12 +7,16 @@ function AddServiceInterval() {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   const handleSubmit = useCallback(() => {
-    maintenanceTrackerContext.dispatch({
-      type: "addInterval",
-      value: {
-        interval: parseInt(interval),
-      },
-    });
+    if (!Number.isInteger(parseInt(interval)) || parseInt(interval) < 0) {
+      alert("Please enter a positive number.");
+    } else {
+      maintenanceTrackerContext.dispatch({
+        type: "addInterval",
+        value: {
+          interval: parseInt(interval),
+        },
+      });
+    }
   }, [maintenanceTrackerContext, interval]);
 
   useEffect(() => {
