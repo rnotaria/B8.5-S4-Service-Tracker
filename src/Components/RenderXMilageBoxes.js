@@ -2,37 +2,38 @@
 
 import React, { useState } from "react";
 import MilageBox from "./MilageBox";
-import { getMilesArray, getServiceData } from "../utils/getMaintenanceInfo";
+import { getMilesArray, getServiceData } from "../utils/getMaintenanceData";
 
 function RenderXMilageBoxes({ currentMiles, numFutureServices }) {
-  // console.log("RenderXMilageBoxes")
+  // console.log("RenderXMilageBoxes");
 
   // Get Data
   const milesArray = getMilesArray(currentMiles, numFutureServices);
   var serviceData = getServiceData(milesArray);
 
   // State that determines which collapsible Milage Box is open
+  // milesArray.forEach;
   const [openBox, setOpenBox] = useState(
-    milesArray[0] < currentMiles ? milesArray[1] : milesArray[0]
+    milesArray[milesArray.findIndex((miles) => miles > currentMiles)]
   );
 
-  // If previous service, set tasks to complete
-  if (milesArray[0] < currentMiles) {
-    serviceData[0] = {
-      ...serviceData[0],
-      columns: {
-        ...serviceData[0].columns,
-        column1: {
-          ...serviceData[0].columns.column1,
-          taskIds: [],
-        },
-        column2: {
-          ...serviceData[0].columns.column2,
-          taskIds: serviceData[0].columns.column1.taskIds,
-        },
-      },
-    };
-  }
+  // // If previous service, set tasks to complete
+  // if (milesArray[0] < currentMiles) {
+  //   serviceData[0] = {
+  //     ...serviceData[0],
+  //     columns: {
+  //       ...serviceData[0].columns,
+  //       column1: {
+  //         ...serviceData[0].columns.column1,
+  //         taskIds: [],
+  //       },
+  //       column2: {
+  //         ...serviceData[0].columns.column2,
+  //         taskIds: serviceData[0].columns.column1.taskIds,
+  //       },
+  //     },
+  //   };
+  // }
 
   const handleSetOpenBox = (miles) => {
     setOpenBox(miles);

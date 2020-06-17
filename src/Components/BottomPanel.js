@@ -77,11 +77,11 @@ const arrowStyle = {
   paddingTop: "0px",
   paddingBottom: "0px",
 
-  background: "rgba(230,230,230,1)",
+  background: "rgba(200,200,200,0.8)",
   color: "rgb(255,0,0)",
-  borderLeft: "2px solid grey",
-  borderRight: "2px solid grey",
-  borderTop: "2px solid grey",
+  borderLeft: "2px solid white",
+  borderRight: "2px solid white",
+  borderTop: "2px solid white",
 
   cursor: "pointer",
 };
@@ -91,7 +91,7 @@ const arrowStyle = {
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 const initialState = {
   opened: false,
-  closed: true,
+  closed: false,
   opening: false,
   closing: false,
 };
@@ -116,10 +116,13 @@ const reducer = (state, action) => {
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export default function BottomPanel({
   delay = 0.5,
-  panelData = { height: 10, open: false, title: "", content: "" },
+  panelData = { height: 10, isOpened: "closed", title: "", content: "" },
 }) {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
-  const [isOpen, dispatch] = useReducer(reducer, initialState);
+  const [isOpen, dispatch] = useReducer(reducer, {
+    ...initialState,
+    [panelData.isOpen]: true,
+  });
 
   // Condition render button to follow pane on open/close
   const renderButton = () => {
@@ -198,13 +201,8 @@ export default function BottomPanel({
   }, [isOpen, delay, maintenanceTrackerContext]);
 
   useEffect(() => {
-    if (panelData.open === true) {
-      dispatch("opening");
-    }
-    if (panelData.closing === true) {
-      dispatch("closing");
-    }
-  }, [panelData.open, panelData.closing]);
+    dispatch(panelData.isOpen);
+  }, [panelData.isOpen]);
 
   /* * * * * * * * * * * * * * * * * * * *
    * * * * * * * * RENDER  * * * * * * * *

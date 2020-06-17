@@ -12,12 +12,11 @@ const Container = styled.div`
 
 function Board({ prop_data, miles }) {
   // console.log("rendering Board");
+  const newTaskId = useRef(0);
 
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   const [data, setData] = useState(prop_data);
-
-  const newTaskId = useRef(0);
 
   // Render new task if any
   useEffect(() => {

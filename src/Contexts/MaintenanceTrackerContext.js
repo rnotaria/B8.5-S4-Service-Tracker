@@ -1,14 +1,16 @@
 import React, { useReducer } from "react";
 import AddTask from "../Components/dnd_components/AddTask";
+import DefaultPanelOptions from "../Components/DefaultPanelOptions";
 
 export const MaintenanceTrackerContext = React.createContext();
 
 const maintenanceTrackerInitialState = {
   panelData: {
     height: 50,
-    open: false,
-    title: "title",
-    content: "content",
+    isOpen: "opened",
+    open: true,
+    title: "OPTIONS",
+    content: DefaultPanelOptions(),
   },
   newTask: false,
   deleteTask: false,
@@ -24,7 +26,7 @@ const maintenanceTrackerReducer = (state, action) => {
         panelData: {
           ...state.panelData,
           height: 20,
-          open: true,
+          isOpen: "opening",
           title: "Add Task",
           content: <AddTask />,
         },
@@ -40,7 +42,7 @@ const maintenanceTrackerReducer = (state, action) => {
         ...state,
         panelData: {
           ...state.panelData,
-          closing: true,
+          isOpen: "closing",
         },
         newTask: true,
         taskContainer: {

@@ -1,26 +1,4 @@
-const defaultService = {
-  tasks: {
-    task1: {
-      id: "task1",
-      content: "",
-    },
-  },
-
-  columns: {
-    column1: {
-      id: "column1",
-      title: "To Do",
-      taskIds: ["task1"],
-    },
-    column2: {
-      id: "column2",
-      title: "Complete",
-      taskIds: [],
-    },
-  },
-
-  columnOrder: ["column1", "column2"],
-};
+// This file contains helper functions that provide or alter maintenanceList data
 
 const standardService = {
   tasks: {
@@ -94,12 +72,29 @@ const majorService = {
   columnOrder: ["column1", "column2"],
 };
 
-export default function maintenanceList(serviceType) {
-  if (serviceType === "standard") {
-    return standardService;
-  } else if (serviceType === "major") {
-    return majorService;
+// Returns an array of maintenance mile invervals
+export const getMilesArray = (currentMiles) => {
+  const milesArray = [5000];
+  currentMiles -= 5000;
+
+  // append next 5 intervals
+  while (currentMiles + 40000 > 0) {
+    milesArray.push(milesArray[milesArray.length - 1] + 10000);
+    currentMiles -= 10000;
   }
 
-  return defaultService;
-}
+  return milesArray;
+};
+
+// Returns object of maintenance tasks
+export const getServiceData = (milesArray) => {
+  var serviceData = [];
+  milesArray.map((miles) => {
+    if (miles - 5000 === 0 || (miles - 5000) % 20000 === 0) {
+      return serviceData.push(standardService);
+    } else {
+      return serviceData.push(majorService);
+    }
+  });
+  return serviceData;
+};
