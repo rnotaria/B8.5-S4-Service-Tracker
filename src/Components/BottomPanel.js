@@ -116,7 +116,13 @@ const reducer = (state, action) => {
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 export default function BottomPanel({
   delay = 0.5,
-  panelData = { height: 10, isOpened: "closed", title: "", content: "" },
+  panelData = {
+    height: 10,
+    isOpened: "closed",
+    title: "",
+    subtitle: "",
+    content: "",
+  },
 }) {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const [isOpen, dispatch] = useReducer(reducer, {
@@ -212,6 +218,7 @@ export default function BottomPanel({
       {renderButton()}
       <SlidingPane
         title={panelData.title}
+        subtitle={panelData.subtitle}
         from="bottom"
         className="some-custom-class"
         overlayClassName="some-custom-overlay-class"

@@ -54,7 +54,7 @@
   background-color: rgba(0, 0, 0, 0);
 }
 .slide-pane__overlay.ReactModal__Overlay--after-open {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   transition: background-color 0.5s;
 }
 .slide-pane__overlay.ReactModal__Overlay--before-close {
@@ -102,6 +102,6 @@
   flex: 1 1 auto;
 }
 .slide-pane__subtitle {
-  font-size: 12px;
+  font-size: 16px;
   margin-top: 2px;
 }

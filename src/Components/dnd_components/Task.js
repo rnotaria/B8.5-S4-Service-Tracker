@@ -31,6 +31,7 @@ const TaskContainer = styled.div`
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Ellipsis = styled.div`
@@ -46,13 +47,13 @@ const TrashStyle = {
 };
 
 const iconStyle = {
-  paddingLeft: "16px",
-  paddingRight: "16px",
+  paddingLeft: "12px",
+  paddingRight: "12px",
 };
 
 const infoStyle = {
-  paddingLeft: "16px",
-  paddingRight: "16px",
+  paddingLeft: "12px",
+  paddingRight: "12px",
   cursor: "pointer",
 };
 
@@ -110,7 +111,10 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
                 onClick={() =>
                   maintenanceTrackerContext.dispatch({
                     type: "info",
-                    value: task,
+                    value: {
+                      ...task,
+                      miles: miles,
+                    },
                   })
                 }
               />

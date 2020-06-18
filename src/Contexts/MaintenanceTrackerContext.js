@@ -75,15 +75,32 @@ const maintenanceTrackerReducer = (state, action) => {
       };
 
     case "info":
+      const PanelSubtitle = () => {
+        return (
+          <div>
+            {action.value.info.subtitle}
+            <button style={{ position: "absolute", right: "30px" }}>
+              Edit
+            </button>
+          </div>
+        );
+      };
+
       return {
         ...state,
         status: "info",
         panelData: {
           ...state.panelData,
+          title: <b>{action.value.title}</b>,
+          subtitle: <PanelSubtitle />,
           height: 50,
           isOpen: "opening",
           content: (
-            <InfoBox title={action.value.title} {...action.value.info} />
+            <InfoBox
+              title={action.value.title}
+              miles={action.value.title}
+              {...action.value.info}
+            />
           ),
         },
       };

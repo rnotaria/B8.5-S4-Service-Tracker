@@ -86,6 +86,15 @@ function Board({ prop_data, miles }) {
     }
   }, [maintenanceTrackerContext, miles, data]);
 
+  // Edit task if any
+  useEffect(() => {
+    if (
+      maintenanceTrackerContext.state.status === "editTask" &&
+      maintenanceTrackerContext.state.container.miles === miles
+    ) {
+    }
+  });
+
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";
     document.body.style.backgroundColor = "inherit";
