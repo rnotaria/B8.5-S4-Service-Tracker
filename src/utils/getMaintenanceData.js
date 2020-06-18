@@ -1,6 +1,6 @@
 // This file contains helper functions that provide or alter maintenanceList data
 
-const emptyService = {
+export const emptyService = {
   tasks: {},
 
   columns: {

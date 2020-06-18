@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import styled from "styled-components";
 import "../index.css";
 import Collapsible from "react-collapsible";
 import Board from "./dnd_components/Board";
+import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 
 const MilageBoxContainer = styled.div`
   // background-color: black;
@@ -33,6 +34,86 @@ const MilageBarContainer = styled.div`
 
 function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
   // console.log("Rendering milagebox");
+  const newTaskId = useRef(0);
+  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
+  const [data, setData] = useState({ ...serviceData });
+
+  // Render new task if any
+  useEffect(() => {
+    if (
+      maintenanceTrackerContext.state.status === "addTask" &&
+      maintenanceTrackerContext.state.container.miles === miles
+    ) {
+      newTaskId.current = newTaskId.current + 1;
+
+      setData((prevData) => ({
+        ...prevData,
+        tasks: {
+          ...prevData.tasks,
+          ["newTask" + newTaskId.current]: {
+            id: "newTask" + newTaskId.current,
+            title: maintenanceTrackerContext.state.container.newTask,
+            info: {
+              subtitle: null,
+              instructions: null,
+              links: null,
+              videos: null,
+              notes: null,
+            },
+          },
+        },
+        columns: {
+          ...prevData.columns,
+          [maintenanceTrackerContext.state.container.column.id]: {
+            ...prevData.columns[
+              maintenanceTrackerContext.state.container.column.id
+            ],
+            taskIds: ["newTask" + newTaskId.current].concat(
+              prevData.columns[
+                maintenanceTrackerContext.state.container.column.id
+              ].taskIds
+            ),
+          },
+        },
+      }));
+    }
+  }, [maintenanceTrackerContext, miles]);
+
+  // Delete task if any
+  useEffect(() => {
+    if (
+      maintenanceTrackerContext.state.status === "deleteTask" &&
+      maintenanceTrackerContext.state.container.miles === miles
+    ) {
+      var newData = JSON.parse(JSON.stringify(data));
+
+      delete newData.tasks[maintenanceTrackerContext.state.container.taskId];
+
+      var newTaskIdsArray =
+        newData.columns[maintenanceTrackerContext.state.container.columnId]
+          .taskIds;
+
+      newTaskIdsArray.splice(
+        newTaskIdsArray.indexOf(
+          maintenanceTrackerContext.state.container.taskId
+        ),
+        1
+      );
+
+      maintenanceTrackerContext.dispatch({ type: "reset" });
+
+      setData(newData);
+    }
+  }, [maintenanceTrackerContext, miles, data]);
+
+  // Edit task if any
+  useEffect(() => {
+    if (
+      maintenanceTrackerContext.state.status === "editTask" &&
+      maintenanceTrackerContext.state.container.miles === miles
+    ) {
+    }
+  });
 
   return (
     <MilageBoxContainer>
@@ -48,7 +129,7 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
         triggerDisabled={open}
         triggerStyle={!open ? { cursor: "pointer" } : null}
       >
-        <Board prop_data={serviceData} miles={miles} />
+        <Board prop_data={data} miles={miles} />
       </Collapsible>
     </MilageBoxContainer>
   );

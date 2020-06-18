@@ -1,9 +1,8 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 // import "@atlaskit/css-reset";  Do I need this??
 import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
 import Column from "./Column";
-import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 
 const Container = styled.div`
   display: flex;
@@ -12,88 +11,11 @@ const Container = styled.div`
 
 function Board({ prop_data, miles }) {
   // console.log("rendering Board");
-  const newTaskId = useRef(0);
-
-  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
-
   const [data, setData] = useState(prop_data);
 
-  // Render new task if any
   useEffect(() => {
-    if (
-      maintenanceTrackerContext.state.status === "addTask" &&
-      maintenanceTrackerContext.state.container.miles === miles
-    ) {
-      newTaskId.current = newTaskId.current + 1;
-
-      setData((prevData) => ({
-        ...prevData,
-        tasks: {
-          ...prevData.tasks,
-          ["newTask" + newTaskId.current]: {
-            id: "newTask" + newTaskId.current,
-            title: maintenanceTrackerContext.state.container.newTask,
-            info: {
-              subtitle: null,
-              instructions: null,
-              links: null,
-              videos: null,
-              notes: null,
-            },
-          },
-        },
-        columns: {
-          ...prevData.columns,
-          [maintenanceTrackerContext.state.container.column.id]: {
-            ...prevData.columns[
-              maintenanceTrackerContext.state.container.column.id
-            ],
-            taskIds: ["newTask" + newTaskId.current].concat(
-              prevData.columns[
-                maintenanceTrackerContext.state.container.column.id
-              ].taskIds
-            ),
-          },
-        },
-      }));
-    }
-  }, [maintenanceTrackerContext, miles]);
-
-  // Delete task if any
-  useEffect(() => {
-    if (
-      maintenanceTrackerContext.state.status === "deleteTask" &&
-      maintenanceTrackerContext.state.container.miles === miles
-    ) {
-      var newData = JSON.parse(JSON.stringify(data));
-
-      delete newData.tasks[maintenanceTrackerContext.state.container.taskId];
-
-      var newTaskIdsArray =
-        newData.columns[maintenanceTrackerContext.state.container.columnId]
-          .taskIds;
-
-      newTaskIdsArray.splice(
-        newTaskIdsArray.indexOf(
-          maintenanceTrackerContext.state.container.taskId
-        ),
-        1
-      );
-
-      maintenanceTrackerContext.dispatch({ type: "reset" });
-
-      setData(newData);
-    }
-  }, [maintenanceTrackerContext, miles, data]);
-
-  // Edit task if any
-  useEffect(() => {
-    if (
-      maintenanceTrackerContext.state.status === "editTask" &&
-      maintenanceTrackerContext.state.container.miles === miles
-    ) {
-    }
-  });
+    setData(prop_data);
+  }, [prop_data]);
 
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";

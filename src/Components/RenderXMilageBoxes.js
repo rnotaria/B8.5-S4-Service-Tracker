@@ -11,18 +11,20 @@ import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext
 function RenderXMilageBoxes({ currentMiles }) {
   // console.log("RenderXMilageBoxes");
 
+  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
+
   // Get Data
   const [milesArray, setMilesArray] = useState(getMilesArray(currentMiles));
   const [serviceDataArray, setServiceDataArray] = useState(
     getServiceDataArray(milesArray)
   );
-  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   // State that determines which collapsible Milage Box is open
   const [openBox, setOpenBox] = useState(
     milesArray[milesArray.findIndex((miles) => miles > currentMiles)]
   );
 
+  // Add service mile interval
   useEffect(() => {
     if (maintenanceTrackerContext.state.status === "addInterval") {
       if (
