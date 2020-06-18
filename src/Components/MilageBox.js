@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  useCallback,
+} from "react";
 import styled from "styled-components";
 import "../index.css";
 import Collapsible from "react-collapsible";
@@ -115,6 +121,11 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
     }
   });
 
+  // Update data state when task is moved between columns
+  const updateData = useCallback((data) => {
+    setData(data);
+  }, []);
+
   return (
     <MilageBoxContainer>
       <Collapsible
@@ -129,7 +140,7 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
         triggerDisabled={open}
         triggerStyle={!open ? { cursor: "pointer" } : null}
       >
-        <Board prop_data={data} miles={miles} />
+        <Board prop_data={data} miles={miles} updateData={updateData} />
       </Collapsible>
     </MilageBoxContainer>
   );

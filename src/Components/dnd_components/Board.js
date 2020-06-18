@@ -9,13 +9,19 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-function Board({ prop_data, miles }) {
+function Board({ prop_data, miles, updateData }) {
   // console.log("rendering Board");
   const [data, setData] = useState(prop_data);
 
+  // Update state when prop_data changes
   useEffect(() => {
     setData(prop_data);
   }, [prop_data]);
+
+  // Callback to update state in previous component based on current data state.
+  useEffect(() => {
+    updateData(data);
+  }, [updateData, data]);
 
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";
