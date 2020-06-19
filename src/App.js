@@ -1,13 +1,16 @@
 import React from "react";
 // import "./index.css";
 import { MaintenanceTrackerContextProvider } from "./Contexts/MaintenanceTrackerContext";
+import { DataContextProvider } from "./Contexts/DataContext";
 import MaintenancePage from "./Components/MaintenancePage";
 
 export default function App() {
   return (
     <div>
       <MaintenanceTrackerContextProvider>
-        <MaintenancePage />
+        <DataContextProvider>
+          <MaintenancePage />
+        </DataContextProvider>
       </MaintenanceTrackerContextProvider>
     </div>
   );

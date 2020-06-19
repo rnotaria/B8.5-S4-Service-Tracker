@@ -10,6 +10,7 @@ import "../index.css";
 import Collapsible from "react-collapsible";
 import Board from "./dnd_components/Board";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
+import { DataContext } from "../Contexts/DataContext";
 
 const MilageBoxContainer = styled.div`
   // background-color: black;
@@ -42,6 +43,7 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
   // console.log("Rendering milagebox");
   const newTaskId = useRef(0);
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
+  const dataContext = useContext(DataContext);
   const [data, setData] = useState({ ...serviceData });
 
   // Render new task if any
@@ -125,6 +127,17 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
   const updateData = useCallback((data) => {
     setData(data);
   }, []);
+
+  // console.log(Object.is(newObj, dataContext.state[miles]));
+  // console.log(newObj);
+  // console.log(dataContext.state[miles]);
+
+  useEffect(() => {
+    dataContext.dispatch({
+      type: "update",
+      value: { miles, ...data },
+    });
+  }, [data, miles]);
 
   return (
     <MilageBoxContainer>

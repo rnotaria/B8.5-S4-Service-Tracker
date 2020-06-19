@@ -4,12 +4,15 @@ export const DataContext = React.createContext();
 
 const dataContextInitialState = {};
 
-const dataContextReducer = (state, (action) => {
+const dataContextReducer = (state, action) => {
   switch (action.type) {
-    case ""
-  }
+    case "update":
+      return { ...state, [action.value.miles]: { ...action.value } };
 
-});
+    default:
+      return dataContextInitialState;
+  }
+};
 
 export const DataContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(
@@ -18,13 +21,13 @@ export const DataContextProvider = ({ children }) => {
   );
 
   return (
-    <dataContext.Provider
+    <DataContext.Provider
       value={{
         state,
         dispatch,
       }}
     >
       {children}
-    </dataContext.Provider>
+    </DataContext.Provider>
   );
 };
