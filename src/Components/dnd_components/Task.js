@@ -61,6 +61,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
   const [bgColor, setBgColor] = useState("#A9A9A9");
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
+  // Side Effect on Task Complete
   useEffect(() => {
     const delay = 500;
     var id = null;
@@ -78,7 +79,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
     return () => {
       clearTimeout(id);
     };
-  }, [column]); //ignore dependency warning for now
+  }, [column, task.id, miles]); //ignore dependency warning for now
 
   return (
     <MainContainer>

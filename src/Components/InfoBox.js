@@ -53,9 +53,9 @@ function Notes() {
 }
 
 export default function InfoBox({ miles, completionInfo, info, title }) {
-  console.log(miles);
-  console.log(completionInfo);
-  console.log(info.instructions);
+  // console.log(miles);
+  // console.log(completionInfo);
+  // console.log(info.instructions);
 
   return (
     <div>
