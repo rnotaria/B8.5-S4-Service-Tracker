@@ -78,7 +78,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
     return () => {
       clearTimeout(id);
     };
-  }, [column]); //ignore dependency warnign for now
+  }, [column]); //ignore dependency warning for now
 
   return (
     <MainContainer>

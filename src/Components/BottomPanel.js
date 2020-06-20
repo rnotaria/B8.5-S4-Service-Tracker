@@ -197,6 +197,20 @@ export default function BottomPanel({
       }, delay * 1000);
     } else if (isOpen.closing === true) {
       id = window.setTimeout(() => {
+        // If Completion Info panel was prematurely closed, autofill values before resetting context
+        if (
+          maintenanceTrackerContext.state.status === "completionInfo-addInfo"
+        ) {
+          maintenanceTrackerContext.dispatch({
+            type: "completionInfo-submitInfo",
+            value: {
+              date: "",
+              miles: maintenanceTrackerContext.state.container.miles,
+              notes: "",
+              taskId: maintenanceTrackerContext.state.container.taskId,
+            },
+          });
+        }
         dispatch("closed");
         maintenanceTrackerContext.dispatch({ type: "reset" });
       }, delay * 1000);

@@ -68,6 +68,12 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
               videos: null,
               notes: null,
             },
+            completionInfo: {
+              complete: false,
+              date: "",
+              miles: "",
+              notes: "",
+            },
           },
         },
         columns: {
@@ -114,12 +120,13 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
     }
   }, [maintenanceTrackerContext, miles, data]);
 
-  // Edit task if any
+  // Edit task properties if any
   useEffect(() => {
     if (
       maintenanceTrackerContext.state.status === "completionInfo-submitInfo" &&
       maintenanceTrackerContext.state.container.miles === miles
     ) {
+      const complete = maintenanceTrackerContext.state.container.complete;
       const taskId = maintenanceTrackerContext.state.container.taskId;
       const date = maintenanceTrackerContext.state.container.date;
       const miles = maintenanceTrackerContext.state.container.miles;
@@ -133,6 +140,7 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
             ...prevData.tasks[taskId],
             completionInfo: {
               ...prevData.tasks[taskId].completionInfo,
+              complete,
               date,
               miles,
               notes,
@@ -141,7 +149,7 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
         },
       }));
     }
-  }, [maintenanceTrackerContext.state]);
+  }, [maintenanceTrackerContext.state, miles]);
 
   // Update data state when task is moved between columns
   const updateData = useCallback((data) => {

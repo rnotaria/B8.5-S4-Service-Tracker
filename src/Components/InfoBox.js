@@ -52,13 +52,26 @@ function Notes() {
   );
 }
 
-export default function InfoBox({ instructions, videos, links, notes }) {
+export default function InfoBox({ miles, completionInfo, info, title }) {
+  console.log(miles);
+  console.log(completionInfo);
+  console.log(info.instructions);
+
   return (
     <div>
-      <Intructions instructions={instructions} />
-      <Videos videos={videos} />
-      <Links links={links} />
-      <Notes notes={notes} />
+      {completionInfo.complete === true ? (
+        <div>
+          {"Completed on " +
+            completionInfo.date +
+            " at " +
+            completionInfo.miles +
+            "miles"}
+        </div>
+      ) : null}
+      <Intructions instructions={info.instructions} />
+      <Videos videos={info.videos} />
+      <Links links={info.links} />
+      <Notes notes={info.notes} />
     </div>
   );
 }

@@ -32,20 +32,64 @@ const standardService = {
         videos: "videos",
         notes: "notes",
       },
-      completionInfo: {},
+      completionInfo: {
+        complete: false,
+        date: "",
+        miles: "",
+        notes: "",
+      },
     },
     task2: {
       id: "task2",
       title: "Engine oil / Oil filter - Change oil and replace filter",
+      info: {
+        subtitle: "subtitle",
+        instructions: "instructions",
+        links: "links",
+        videos: "videos",
+        notes: "notes",
+      },
+      completionInfo: {
+        complete: false,
+        date: "",
+        miles: "",
+        notes: "",
+      },
     },
     task3: {
       id: "task3",
       title: "Engine compartment - Check for leaks",
+      info: {
+        subtitle: "subtitle",
+        instructions: "instructions",
+        links: "links",
+        videos: "videos",
+        notes: "notes",
+      },
+      completionInfo: {
+        complete: false,
+        date: "",
+        miles: "",
+        notes: "",
+      },
     },
     task4: {
       id: "task4",
       title:
         "Tires and spare wheel - Check for wear and damage. Check tire pressure. Reset Tire Pressure Monitoring System (TPMS)",
+      info: {
+        subtitle: "subtitle",
+        instructions: "instructions",
+        links: "links",
+        videos: "videos",
+        notes: "notes",
+      },
+      completionInfo: {
+        complete: false,
+        date: "",
+        miles: "",
+        notes: "",
+      },
     },
   },
 
@@ -71,15 +115,54 @@ const majorService = {
       id: "task1",
       title:
         "Battery - Check for clean terminals (no corrosion), properly mounted housing and no damage; replace if necessary.",
+      info: {
+        subtitle: "subtitle",
+        instructions: "instructions",
+        links: "links",
+        videos: "videos",
+        notes: "notes",
+      },
+      completionInfo: {
+        complete: false,
+        date: "",
+        miles: "",
+        notes: "",
+      },
     },
     task2: {
       id: "task2",
       title:
         "Cooling system - Check coolant level and add coolant if necessary",
+      info: {
+        subtitle: "subtitle",
+        instructions: "instructions",
+        links: "links",
+        videos: "videos",
+        notes: "notes",
+      },
+      completionInfo: {
+        complete: false,
+        date: "",
+        miles: "",
+        notes: "",
+      },
     },
     task3: {
       id: "task3",
       title: "Dust and pollen filter - Replace filter",
+      info: {
+        subtitle: "subtitle",
+        instructions: "instructions",
+        links: "links",
+        videos: "videos",
+        notes: "notes",
+      },
+      completionInfo: {
+        complete: false,
+        date: "",
+        miles: "",
+        notes: "",
+      },
     },
   },
 
