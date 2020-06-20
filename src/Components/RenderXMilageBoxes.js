@@ -41,6 +41,23 @@ function RenderXMilageBoxes({ currentMiles }) {
     }
   }, [maintenanceTrackerContext, milesArray]);
 
+  // Delete service mile interval
+  // useEffect(() => {
+  //   if (maintenanceTrackerContext.state.status === "deleteInterval") {
+  //     if (
+  //       !milesArray.includes(maintenanceTrackerContext.state.container.interval)
+  //     ) {
+  //       const newMilesArray = [...milesArray];
+  //       newMilesArray.push(maintenanceTrackerContext.state.container.interval);
+  //       newMilesArray.sort((a, b) => a - b);
+  //       setMilesArray(newMilesArray);
+  //       setServiceDataArray(getServiceDataArray(newMilesArray));
+  //     }
+  //     setOpenBox(maintenanceTrackerContext.state.container.interval);
+  //     maintenanceTrackerContext.dispatch({ type: "closing" });
+  //   }
+  // }, [maintenanceTrackerContext, milesArray]);
+
   // // If previous service, set tasks to complete
   // if (milesArray[0] < currentMiles) {
   //   serviceData[0] = {

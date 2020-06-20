@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import AddTask from "../Components/AddTask";
-import DefaultPanelOptions from "../Components/DefaultPanelOptions";
+import DefaultPanelOptions from "../Components/BasePanelComponents/DefaultPanelOptions";
 import InfoBox from "../Components/InfoBox";
 
 export const MaintenanceTrackerContext = React.createContext();

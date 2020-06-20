@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
-import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
+import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 
-function AddServiceInterval() {
+export default function AddServiceInterval() {
   const [renderInputField, setRenderInputField] = useState(false);
   const [interval, setInterval] = useState(0);
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
@@ -52,8 +52,4 @@ function AddServiceInterval() {
       <button onClick={handleSubmit}>Add</button>
     </div>
   );
-}
-
-export default function DefaultPanelOptions() {
-  return <AddServiceInterval />;
 }

@@ -46,6 +46,8 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
   const dataContext = useContext(DataContext);
   const [data, setData] = useState({ ...serviceData });
 
+  console.log(maintenanceTrackerContext.state.status);
+
   // Render new task if any
   useEffect(() => {
     if (
@@ -128,10 +130,7 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
     setData(data);
   }, []);
 
-  // console.log(Object.is(newObj, dataContext.state[miles]));
-  // console.log(newObj);
-  // console.log(dataContext.state[miles]);
-
+  // Update overall data
   useEffect(() => {
     dataContext.dispatch({
       type: "update",
