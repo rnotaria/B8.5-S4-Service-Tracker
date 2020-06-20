@@ -38,7 +38,7 @@ function RenderXMilageBoxes({ currentMiles }) {
         setServiceDataArray(getServiceDataArray(newMilesArray));
       }
       setOpenBox(maintenanceTrackerContext.state.container.interval);
-      dataContext.dispatch({ type: "closing" });
+      maintenanceTrackerContext.dispatch({ type: "closing" });
     }
   }, [maintenanceTrackerContext, milesArray]);
 
@@ -55,6 +55,7 @@ function RenderXMilageBoxes({ currentMiles }) {
         setServiceDataArray(serviceDataArrayClone);
         maintenanceTrackerContext.dispatch({ type: "setStatus" });
         dataContext.dispatch({ type: "deleteInterval", value: openBox });
+
         setOpenBox(null);
       } else {
         alert("Please select a service interval you want to delete.");

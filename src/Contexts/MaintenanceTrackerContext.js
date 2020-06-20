@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import AddTask from "../Components/AddTask";
 import DefaultPanelOptions from "../Components/BasePanelComponents/DefaultPanelOptions";
 import InfoBox from "../Components/InfoBox";
+import CompletionInfo from "../Components/CompletionInfo";
 
 export const MaintenanceTrackerContext = React.createContext();
 
@@ -10,7 +11,6 @@ const maintenanceTrackerInitialState = {
   panelData: {
     height: 15,
     isOpen: "closed",
-    open: false,
     title: "OPTIONS",
     content: DefaultPanelOptions(),
   },
@@ -113,6 +113,36 @@ const maintenanceTrackerReducer = (state, action) => {
               {...action.value.info}
             />
           ),
+        },
+      };
+
+    case "completionInfo-addInfo":
+      return {
+        ...state,
+        status: "completionInfo-addInfo",
+        panelData: {
+          ...state.panelData,
+          height: 40,
+          title: "Completion Details",
+          isOpen: "opening",
+          content: <CompletionInfo />,
+        },
+        container: { taskId: action.value.taskId, miles: action.value.miles },
+      };
+
+    case "completionInfo-submitInfo":
+      return {
+        ...state,
+        status: "completionInfo-submitInfo",
+        panelData: {
+          ...state.panelData,
+          isOpen: "closing",
+        },
+        container: {
+          taskId: action.value.taskId,
+          date: action.value.date,
+          miles: action.value.miles,
+          notes: action.value.notes,
         },
       };
 

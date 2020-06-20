@@ -61,14 +61,24 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
   const [bgColor, setBgColor] = useState("#A9A9A9");
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
-  useEffect(
-    (bgColor) => {
-      if (column === "Complete") {
-        setBgColor("green");
-      }
-    },
-    [column, bgColor]
-  );
+  useEffect(() => {
+    const delay = 500;
+    var id = null;
+    if (column === "Complete") {
+      setBgColor("green");
+      id = window.setTimeout(
+        () =>
+          maintenanceTrackerContext.dispatch({
+            type: "completionInfo-addInfo",
+            value: { taskId: task.id, miles },
+          }),
+        delay
+      );
+    }
+    return () => {
+      clearTimeout(id);
+    };
+  }, [column]); //ignore dependency warnign for now
 
   return (
     <MainContainer>

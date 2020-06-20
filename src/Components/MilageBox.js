@@ -114,14 +114,34 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
     }
   }, [maintenanceTrackerContext, miles, data]);
 
-  // Edit task if any (TO DO)
+  // Edit task if any
   useEffect(() => {
     if (
-      maintenanceTrackerContext.state.status === "editTask" &&
+      maintenanceTrackerContext.state.status === "completionInfo-submitInfo" &&
       maintenanceTrackerContext.state.container.miles === miles
     ) {
+      const taskId = maintenanceTrackerContext.state.container.taskId;
+      const date = maintenanceTrackerContext.state.container.date;
+      const miles = maintenanceTrackerContext.state.container.miles;
+      const notes = maintenanceTrackerContext.state.container.notes;
+
+      setData((prevData) => ({
+        ...prevData,
+        tasks: {
+          ...prevData.tasks,
+          [taskId]: {
+            ...prevData.tasks[taskId],
+            completionInfo: {
+              ...prevData.tasks[taskId].completionInfo,
+              date,
+              miles,
+              notes,
+            },
+          },
+        },
+      }));
     }
-  });
+  }, [maintenanceTrackerContext.state]);
 
   // Update data state when task is moved between columns
   const updateData = useCallback((data) => {

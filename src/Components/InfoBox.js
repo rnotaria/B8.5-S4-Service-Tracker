@@ -52,14 +52,7 @@ function Notes() {
   );
 }
 
-export default function InfoBox({
-  title,
-  subtitle,
-  instructions,
-  videos,
-  links,
-  notes,
-}) {
+export default function InfoBox({ instructions, videos, links, notes }) {
   return (
     <div>
       <Intructions instructions={instructions} />

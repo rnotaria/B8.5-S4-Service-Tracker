@@ -32,6 +32,7 @@ const standardService = {
         videos: "videos",
         notes: "notes",
       },
+      completionInfo: {},
     },
     task2: {
       id: "task2",
