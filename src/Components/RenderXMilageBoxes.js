@@ -13,7 +13,6 @@ function RenderXMilageBoxes({ currentMiles }) {
 
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
-  // Get Data
   const [milesArray, setMilesArray] = useState(getMilesArray(currentMiles));
   const [serviceDataArray, setServiceDataArray] = useState(
     getServiceDataArray(milesArray)
@@ -42,39 +41,23 @@ function RenderXMilageBoxes({ currentMiles }) {
   }, [maintenanceTrackerContext, milesArray]);
 
   // Delete service mile interval
-  // useEffect(() => {
-  //   if (maintenanceTrackerContext.state.status === "deleteInterval") {
-  //     if (
-  //       !milesArray.includes(maintenanceTrackerContext.state.container.interval)
-  //     ) {
-  //       const newMilesArray = [...milesArray];
-  //       newMilesArray.push(maintenanceTrackerContext.state.container.interval);
-  //       newMilesArray.sort((a, b) => a - b);
-  //       setMilesArray(newMilesArray);
-  //       setServiceDataArray(getServiceDataArray(newMilesArray));
-  //     }
-  //     setOpenBox(maintenanceTrackerContext.state.container.interval);
-  //     maintenanceTrackerContext.dispatch({ type: "closing" });
-  //   }
-  // }, [maintenanceTrackerContext, milesArray]);
-
-  // // If previous service, set tasks to complete
-  // if (milesArray[0] < currentMiles) {
-  //   serviceData[0] = {
-  //     ...serviceData[0],
-  //     columns: {
-  //       ...serviceData[0].columns,
-  //       column1: {
-  //         ...serviceData[0].columns.column1,
-  //         taskIds: [],
-  //       },
-  //       column2: {
-  //         ...serviceData[0].columns.column2,
-  //         taskIds: serviceData[0].columns.column1.taskIds,
-  //       },
-  //     },
-  //   };
-  // }
+  useEffect(() => {
+    if (maintenanceTrackerContext.state.status === "deleteInterval") {
+      if (openBox != null) {
+        const index = milesArray.indexOf(openBox);
+        const milesArrayClone = [...milesArray];
+        const serviceDataArrayClone = [...serviceDataArray];
+        milesArrayClone.splice(index, 1);
+        serviceDataArrayClone.splice(index, 1);
+        setMilesArray(milesArrayClone);
+        setServiceDataArray(serviceDataArrayClone);
+        setOpenBox(null);
+        maintenanceTrackerContext.dispatch({ type: "setStatus" });
+      } else {
+        alert("Please select a service interval you want to delete.");
+      }
+    }
+  }, [maintenanceTrackerContext, milesArray, serviceDataArray, openBox]);
 
   const handleSetOpenBox = (miles) => {
     setOpenBox(miles);

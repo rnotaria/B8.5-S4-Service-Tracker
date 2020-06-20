@@ -6,6 +6,7 @@ import InfoBox from "../Components/InfoBox";
 export const MaintenanceTrackerContext = React.createContext();
 
 const maintenanceTrackerInitialState = {
+  // openInterval: null,
   panelData: {
     height: 15,
     isOpen: "closed",
@@ -74,6 +75,16 @@ const maintenanceTrackerReducer = (state, action) => {
         container: { interval: action.value.interval },
       };
 
+    case "deleteInterval":
+      return {
+        ...state,
+        status: "deleteInterval",
+        panelData: {
+          ...state.panelData,
+          isOpen: "closing",
+        },
+      };
+
     case "info":
       const PanelSubtitle = () => {
         return (
@@ -113,9 +124,16 @@ const maintenanceTrackerReducer = (state, action) => {
           isOpen: "closing",
         },
       };
+
+    case "setStatus":
+      return {
+        ...state,
+        status: null,
+      };
+
     case "reset":
-      // Reset back to initial state
       return maintenanceTrackerInitialState;
+
     default:
       return maintenanceTrackerInitialState;
   }

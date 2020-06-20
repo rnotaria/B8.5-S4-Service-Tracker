@@ -46,8 +46,6 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
   const dataContext = useContext(DataContext);
   const [data, setData] = useState({ ...serviceData });
 
-  console.log(maintenanceTrackerContext.state.status);
-
   // Render new task if any
   useEffect(() => {
     if (
@@ -116,7 +114,7 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
     }
   }, [maintenanceTrackerContext, miles, data]);
 
-  // Edit task if any
+  // Edit task if any (TO DO)
   useEffect(() => {
     if (
       maintenanceTrackerContext.state.status === "editTask" &&
