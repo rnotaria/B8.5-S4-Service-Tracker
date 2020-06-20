@@ -7,11 +7,13 @@ import {
   getServiceDataArray,
 } from "../utils/getMaintenanceData";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
+import { DataContext } from "../Contexts/DataContext";
 
 function RenderXMilageBoxes({ currentMiles }) {
   // console.log("RenderXMilageBoxes");
 
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
+  const dataContext = useContext(DataContext);
 
   const [milesArray, setMilesArray] = useState(getMilesArray(currentMiles));
   const [serviceDataArray, setServiceDataArray] = useState(
@@ -36,7 +38,7 @@ function RenderXMilageBoxes({ currentMiles }) {
         setServiceDataArray(getServiceDataArray(newMilesArray));
       }
       setOpenBox(maintenanceTrackerContext.state.container.interval);
-      maintenanceTrackerContext.dispatch({ type: "closing" });
+      dataContext.dispatch({ type: "closing" });
     }
   }, [maintenanceTrackerContext, milesArray]);
 
@@ -51,13 +53,20 @@ function RenderXMilageBoxes({ currentMiles }) {
         serviceDataArrayClone.splice(index, 1);
         setMilesArray(milesArrayClone);
         setServiceDataArray(serviceDataArrayClone);
-        setOpenBox(null);
         maintenanceTrackerContext.dispatch({ type: "setStatus" });
+        dataContext.dispatch({ type: "deleteInterval", value: openBox });
+        setOpenBox(null);
       } else {
         alert("Please select a service interval you want to delete.");
       }
     }
-  }, [maintenanceTrackerContext, milesArray, serviceDataArray, openBox]);
+  }, [
+    maintenanceTrackerContext,
+    dataContext,
+    milesArray,
+    serviceDataArray,
+    openBox,
+  ]);
 
   const handleSetOpenBox = (miles) => {
     setOpenBox(miles);

@@ -9,8 +9,12 @@ const dataContextReducer = (state, action) => {
     case "update":
       return { ...state, [action.value.miles]: { ...action.value } };
 
+    case "deleteInterval":
+      delete state[action.value];
+      return state;
+
     default:
-      return dataContextInitialState;
+      return state;
   }
 };
 
