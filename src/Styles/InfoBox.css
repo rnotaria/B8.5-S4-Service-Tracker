@@ -1,0 +1,44 @@
+.section-divider {
+  margin-bottom: 50px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background-color: chartreuse;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 10px;
+}
+
+.column1 {
+  width: 80px;
+}
+
+.column2 {
+  width: 100%;
+  height: 100%;
+}
+
+.notes {
+  text-align: justify;
+}
+
+.edit-btn {
+  /* background-color: chocolate; */
+  padding-left: 10px;
+  padding-bottom: 2px;
+  cursor: pointer;
+}

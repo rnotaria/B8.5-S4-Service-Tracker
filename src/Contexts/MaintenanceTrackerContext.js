@@ -129,6 +129,13 @@ const maintenanceTrackerReducer = (state, action) => {
         },
       };
 
+    case "editTask":
+      return {
+        ...state,
+        status: "editTask",
+        container: { ...action.value },
+      };
+
     case "closing":
       return {
         ...maintenanceTrackerInitialState,

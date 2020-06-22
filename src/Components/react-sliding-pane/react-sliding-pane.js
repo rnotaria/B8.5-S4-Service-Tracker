@@ -17,75 +17,81 @@ function ReactSlidingPane(_ref) {
     // closeIcon = _ref.closeIcon,
     _ref$from = _ref.from,
     from = _ref$from === void 0 ? "right" : _ref$from,
-    width = _ref.width,
     height = _ref.height,
     // marginTop = _ref.marginTop,
     shouldCloseOnEsc = _ref.shouldCloseOnEsc;
   var directionClass = "slide-pane_from_".concat(from);
-  return /*#__PURE__*/ React.createElement(
-    Modal,
-    {
-      ariaHideApp: false,
-      className: "slide-pane "
-        .concat(directionClass, " ")
-        .concat(className || ""),
-      style: {
-        content: {
-          width: width || "100%",
-          height: height || "auto",
-          position: "absolute",
-          bottom: "0px",
-        },
-      },
-      overlayClassName: "slide-pane__overlay ".concat(overlayClassName || ""),
-      closeTimeoutMS: CLOSE_TIMEOUT,
-      isOpen: isOpen,
-      shouldCloseOnEsc: shouldCloseOnEsc,
-      onAfterOpen: onAfterOpen,
-      onRequestClose: onRequestClose,
-      contentLabel: 'Modal "'.concat(title || "", '"'),
-    },
-    /*#__PURE__*/ React.createElement(
-      "div",
+  return (
+    <div className="center">
       {
-        className: "slide-pane__header",
-      },
-      // /*#__PURE__*/ React.createElement(
-      //   "div",
-      //   {
-      //     className: "slide-pane__close",
-      //     onClick: onRequestClose,
-      //   },
-      //   closeIcon || /*#__PURE__*/ React.createElement(IconClose, null)
-      // ),
-      /*#__PURE__*/ React.createElement(
-        "div",
-        {
-          className: "slide-pane__title-wrapper",
-        },
         /*#__PURE__*/ React.createElement(
-          "h2",
+          Modal,
           {
-            className: "slide-pane__title",
+            ariaHideApp: false,
+            className: "slide-pane "
+              .concat(directionClass, " ")
+              .concat(className || ""),
+            style: {
+              content: {
+                height: height || "auto",
+                position: "absolute",
+                bottom: "0px",
+              },
+            },
+            overlayClassName: "slide-pane__overlay ".concat(
+              overlayClassName || ""
+            ),
+            closeTimeoutMS: CLOSE_TIMEOUT,
+            isOpen: isOpen,
+            shouldCloseOnEsc: shouldCloseOnEsc,
+            onAfterOpen: onAfterOpen,
+            onRequestClose: onRequestClose,
+            contentLabel: 'Modal "'.concat(title || "", '"'),
           },
-          title
-        ),
-        /*#__PURE__*/ React.createElement(
-          "div",
-          {
-            className: "slide-pane__subtitle",
-          },
-          subtitle
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              className: "slide-pane__header",
+            },
+            // /*#__PURE__*/ React.createElement(
+            //   "div",
+            //   {
+            //     className: "slide-pane__close",
+            //     onClick: onRequestClose,
+            //   },
+            //   closeIcon || /*#__PURE__*/ React.createElement(IconClose, null)
+            // ),
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                className: "slide-pane__title-wrapper",
+              },
+              /*#__PURE__*/ React.createElement(
+                "h2",
+                {
+                  className: "slide-pane__title",
+                },
+                title
+              ),
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  className: "slide-pane__subtitle",
+                },
+                subtitle
+              )
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              className: "slide-pane__content",
+            },
+            children
+          )
         )
-      )
-    ),
-    /*#__PURE__*/ React.createElement(
-      "div",
-      {
-        className: "slide-pane__content",
-      },
-      children
-    )
+      }
+    </div>
   );
 }
 ReactSlidingPane.propTypes = {

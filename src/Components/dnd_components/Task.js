@@ -63,7 +63,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
 
   // Side Effect on Task Complete
   useEffect(() => {
-    const delay = 500;
+    const delay = 0;
     var id = null;
     if (column === "Complete") {
       setBgColor("green");

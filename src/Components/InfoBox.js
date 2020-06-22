@@ -1,54 +1,103 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { FaRegEdit } from "react-icons/fa";
+import "../Styles/InfoBox.css";
 
-const SectionHeader = styled.div`
-  display: flex;
-  justify-content: center;
+function Section({ title, children }) {
+  const [edit, setEdit] = useState(false);
+  console.log(edit);
 
-  font-weight: bold;
-`;
+  const handleEdit = () => {};
 
-const SectionDivider = styled.div`
-  margin-bottom: 50px;
-`;
-
-function Intructions() {
   return (
-    <SectionDivider>
-      <SectionHeader>INSTRUCTIONS</SectionHeader>
-
+    <div className="section-divider">
+      <div className="section-header">
+        {title}
+        <FaRegEdit
+          className="edit-btn"
+          onClick={(e) => {
+            setEdit(!edit);
+          }}
+        />
+      </div>
       <hr />
-    </SectionDivider>
+      {children}
+    </div>
   );
+}
+
+function CompletionDetails({ info, edit = false }) {
+  if (edit === true) {
+    return (
+      <Section title="COMPLETION">
+        <div className="main">
+          <div className="row">
+            <div className="column1">Date:</div>
+            <div className="column2">{info.date}</div>
+          </div>
+          <div className="row">
+            <div className="column1">Miles:</div>
+            <div className="column2">{info.miles}</div>
+          </div>
+          <div className="row">
+            <div className="column1">Notes:</div>
+            <div className="notes">{info.notes}</div>
+          </div>
+        </div>
+      </Section>
+    );
+  }
+
+  return (
+    <Section title="COMPLETION">
+      <div className="main">
+        <div className="row">
+          <div className="column1">Date:</div>
+          <div className="column2">{info.date}</div>
+        </div>
+        <div className="row">
+          <div className="column1">Miles:</div>
+          <div className="column2">{info.miles}</div>
+        </div>
+        <div className="row">
+          <div className="column1">Notes:</div>
+          <div className="notes">{info.notes}</div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+function Intructions({ instructions, edit = false }) {
+  return <Section title="INSTRUCTIONS">blah</Section>;
 }
 
 function Videos() {
   return (
-    <SectionDivider>
-      <SectionHeader>VIDEOS</SectionHeader>
+    <div className="section-divider">
+      <div className="section-header">VIDEOS</div>
 
       <hr />
-    </SectionDivider>
+    </div>
   );
 }
 
 function Links() {
   return (
-    <SectionDivider>
-      <SectionHeader>LINKS</SectionHeader>
+    <div className="section-divider">
+      <div className="section-header">LINKS</div>
 
       <hr />
-    </SectionDivider>
+    </div>
   );
 }
 
 function Notes() {
   return (
-    <SectionDivider>
-      <SectionHeader>NOTES</SectionHeader>
+    <div className="section-divider">
+      <div className="section-header">NOTES</div>
 
       <hr />
-    </SectionDivider>
+    </div>
   );
 }
 
@@ -60,13 +109,7 @@ export default function InfoBox({ miles, completionInfo, info, title }) {
   return (
     <div>
       {completionInfo.complete === true ? (
-        <div>
-          {"Completed on " +
-            completionInfo.date +
-            " at " +
-            completionInfo.miles +
-            "miles"}
-        </div>
+        <CompletionDetails info={completionInfo} />
       ) : null}
       <Intructions instructions={info.instructions} />
       <Videos videos={info.videos} />

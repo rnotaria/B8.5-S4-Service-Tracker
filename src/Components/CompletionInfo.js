@@ -1,14 +1,7 @@
 import React, { useState, useContext } from "react";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
-
-const getDate = () => {
-  const today = new Date();
-  const dd = today.getDate();
-  const mm = today.getMonth();
-  const yyyy = today.getFullYear();
-  const date = mm + "/" + dd + "/" + yyyy;
-  return date;
-};
+import "../Styles/CompletionInfo.css";
+import getDate from "../utils/getDate";
 
 export default function CompletionInfo() {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
@@ -27,37 +20,46 @@ export default function CompletionInfo() {
   };
 
   return (
-    <div>
-      <div>
-        {"Date: "}
-        <input
-          value={date}
-          onChange={(e) => {
-            setDate(e.target.value);
-          }}
-        />
+    <div className="main">
+      <div className="row">
+        <div className="column1">Date:</div>
+        <div className="column2">
+          <input
+            value={date}
+            onChange={(e) => {
+              setDate(e.target.value);
+            }}
+          />
+        </div>
       </div>
-      <div>
-        {"Miles: "}
-        <input
-          value={miles}
-          onChange={(e) => {
-            setMiles(e.target.value);
-          }}
-        />
+      <div className="row">
+        <div className="column1">Miles:</div>
+        <div className="column2">
+          <input
+            value={miles}
+            onChange={(e) => {
+              setMiles(e.target.value);
+            }}
+          />
+        </div>
       </div>
-      <div>
-        {"Notes: "}
-        <textarea
-          value={notes}
-          onChange={(e) => {
-            setNotes(e.target.value);
-          }}
-          placeholder="Enter relevant completion notes such as cost, material used, etc."
-        />
+
+      <div className="row notes">
+        <div className="column1">Notes:</div>
+        <div className="column2">
+          <textarea
+            value={notes}
+            onChange={(e) => {
+              setNotes(e.target.value);
+            }}
+            placeholder="Enter relevant completion notes such as cost, material used, etc."
+          />
+        </div>
       </div>
-      <div>
-        <button onClick={handleSubmit}>Submit</button>
+      <div className="btn-container">
+        <button className="btn" onClick={handleSubmit}>
+          Submit
+        </button>
       </div>
     </div>
   );

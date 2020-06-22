@@ -4,10 +4,19 @@ import styled, { keyframes } from "styled-components";
 import "../Components/react-sliding-pane/react-sliding-pane.css";
 import { FaChevronUp } from "react-icons/fa";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
+import getDate from "../utils/getDate";
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * STYLES  * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+// const Center = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   width: 100%;
+// `;
+
 // Translate Up Styled Component
 const translateUp = (height) => keyframes`
 from {
@@ -204,7 +213,7 @@ export default function BottomPanel({
           maintenanceTrackerContext.dispatch({
             type: "completionInfo-submitInfo",
             value: {
-              date: "",
+              date: getDate(),
               miles: maintenanceTrackerContext.state.container.miles,
               notes: "",
               taskId: maintenanceTrackerContext.state.container.taskId,
@@ -240,7 +249,6 @@ export default function BottomPanel({
         onRequestClose={() => {
           dispatch("closing");
         }}
-        width="100%"
         height={panelData.height + "vh"}
       >
         {panelData.content}
