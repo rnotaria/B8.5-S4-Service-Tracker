@@ -120,7 +120,7 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
     }
   }, [maintenanceTrackerContext, miles, data]);
 
-  // Edit task properties if any
+  // Edit completion properties if any
   useEffect(() => {
     if (
       maintenanceTrackerContext.state.status === "completionInfo-submitInfo" &&
@@ -150,6 +150,8 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
       }));
     }
   }, [maintenanceTrackerContext.state, miles]);
+
+  useEffect(() => {});
 
   // Update data state when task is moved between columns
   const updateData = useCallback((data) => {

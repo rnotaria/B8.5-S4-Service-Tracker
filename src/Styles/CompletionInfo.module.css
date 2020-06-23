@@ -13,6 +13,7 @@
 
 .column1 {
   width: 80px;
+  background-color: chocolate;
 }
 
 .column2 {
@@ -21,7 +22,7 @@
 }
 
 .column2 input {
-  width: 100px;
+  width: 75px;
 }
 
 .notes {
@@ -36,7 +37,7 @@
   resize: none;
 }
 
-.btn-container {
+.btn_container {
   display: flex;
   flex-direction: row;
   justify-content: center;

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
-import "../Styles/CompletionInfo.css";
+import styles from "../Styles/CompletionInfo.module.css";
 import getDate from "../utils/getDate";
 
 export default function CompletionInfo() {
@@ -20,10 +20,10 @@ export default function CompletionInfo() {
   };
 
   return (
-    <div className="main">
-      <div className="row">
-        <div className="column1">Date:</div>
-        <div className="column2">
+    <div className={styles.main}>
+      <div className={styles.row}>
+        <div className={styles.column1}>Date:</div>
+        <div className={styles.column2}>
           <input
             value={date}
             onChange={(e) => {
@@ -32,9 +32,9 @@ export default function CompletionInfo() {
           />
         </div>
       </div>
-      <div className="row">
-        <div className="column1">Miles:</div>
-        <div className="column2">
+      <div className={styles.row}>
+        <div className={styles.column1}>Miles:</div>
+        <div className={styles.column2}>
           <input
             value={miles}
             onChange={(e) => {
@@ -44,9 +44,9 @@ export default function CompletionInfo() {
         </div>
       </div>
 
-      <div className="row notes">
-        <div className="column1">Notes:</div>
-        <div className="column2">
+      <div className={`${styles.row} ${styles.notes}`}>
+        <div className={styles.column1}>Notes:</div>
+        <div className={styles.column2}>
           <textarea
             value={notes}
             onChange={(e) => {
@@ -56,8 +56,8 @@ export default function CompletionInfo() {
           />
         </div>
       </div>
-      <div className="btn-container">
-        <button className="btn" onClick={handleSubmit}>
+      <div className={styles.btn_container}>
+        <button className={styles.btn} onClick={handleSubmit}>
           Submit
         </button>
       </div>

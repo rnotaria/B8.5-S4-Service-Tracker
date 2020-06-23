@@ -1,23 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FaRegEdit } from "react-icons/fa";
-import "../Styles/InfoBox.css";
+import styles from "../Styles/InfoBox.module.css";
+import useInput from "../hooks/useInput";
+import useTextArea from "../hooks/useTextArea";
+import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 
-function Section({ title, children }) {
-  const [edit, setEdit] = useState(false);
-  console.log(edit);
-
-  const handleEdit = () => {};
-
+function Section({ title, handleEdit, children }) {
   return (
-    <div className="section-divider">
-      <div className="section-header">
+    <div className={styles.section_divider}>
+      <div className={styles.section_header}>
         {title}
-        <FaRegEdit
-          className="edit-btn"
-          onClick={(e) => {
-            setEdit(!edit);
-          }}
-        />
+        <FaRegEdit className={styles.edit_btn} onClick={() => handleEdit()} />
       </div>
       <hr />
       {children}
@@ -25,22 +18,38 @@ function Section({ title, children }) {
   );
 }
 
-function CompletionDetails({ info, edit = false }) {
+function CompletionDetails({ id, info }) {
+  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
+  const [date, dateInput] = useInput(info.date);
+  const [miles, milesInput] = useInput(info.miles);
+  const [notes, notesInput] = useTextArea(info.notes);
+
+  const [edit, setEdit] = useState(false);
+  const handleEdit = () => {
+    if (edit === true) {
+      maintenanceTrackerContext.dispatch({
+        type: "editTask",
+        value: { id, completionInfo: { date, miles, notes } },
+      });
+    }
+    setEdit(!edit);
+  };
+
   if (edit === true) {
     return (
-      <Section title="COMPLETION">
-        <div className="main">
-          <div className="row">
-            <div className="column1">Date:</div>
-            <div className="column2">{info.date}</div>
+      <Section title="COMPLETION" handleEdit={handleEdit}>
+        <div className={styles.main}>
+          <div className={styles.row}>
+            <div className={styles.column1}>Date:</div>
+            <div className={styles.column2}>{dateInput}</div>
           </div>
-          <div className="row">
-            <div className="column1">Miles:</div>
-            <div className="column2">{info.miles}</div>
+          <div className={styles.row}>
+            <div className={styles.column1}>Miles:</div>
+            <div className={styles.column2}>{milesInput}</div>
           </div>
-          <div className="row">
-            <div className="column1">Notes:</div>
-            <div className="notes">{info.notes}</div>
+          <div className={styles.row}>
+            <div className={styles.column1}>Notes:</div>
+            <div className={styles.notes}>{notesInput}</div>
           </div>
         </div>
       </Section>
@@ -48,19 +57,19 @@ function CompletionDetails({ info, edit = false }) {
   }
 
   return (
-    <Section title="COMPLETION">
-      <div className="main">
-        <div className="row">
-          <div className="column1">Date:</div>
-          <div className="column2">{info.date}</div>
+    <Section title="COMPLETION" handleEdit={handleEdit}>
+      <div className={styles.main}>
+        <div className={styles.row}>
+          <div className={styles.column1}>Date:</div>
+          <div className={styles.column2}>{date}</div>
         </div>
-        <div className="row">
-          <div className="column1">Miles:</div>
-          <div className="column2">{info.miles}</div>
+        <div className={styles.row}>
+          <div className={styles.column1}>Miles:</div>
+          <div className={styles.column2}>{miles}</div>
         </div>
-        <div className="row">
-          <div className="column1">Notes:</div>
-          <div className="notes">{info.notes}</div>
+        <div className={styles.row}>
+          <div className={styles.column1}>Notes:</div>
+          <div className={styles.notes}>{notes}</div>
         </div>
       </div>
     </Section>
@@ -73,8 +82,8 @@ function Intructions({ instructions, edit = false }) {
 
 function Videos() {
   return (
-    <div className="section-divider">
-      <div className="section-header">VIDEOS</div>
+    <div className={styles.section_divider}>
+      <div className={styles.section_header}>VIDEOS</div>
 
       <hr />
     </div>
@@ -83,8 +92,8 @@ function Videos() {
 
 function Links() {
   return (
-    <div className="section-divider">
-      <div className="section-header">LINKS</div>
+    <div className={styles.section_divider}>
+      <div className={styles.section_header}>LINKS</div>
 
       <hr />
     </div>
@@ -93,23 +102,19 @@ function Links() {
 
 function Notes() {
   return (
-    <div className="section-divider">
-      <div className="section-header">NOTES</div>
+    <div className={styles.section_divider}>
+      <div className={styles.section_header}>NOTES</div>
 
       <hr />
     </div>
   );
 }
 
-export default function InfoBox({ miles, completionInfo, info, title }) {
-  // console.log(miles);
-  // console.log(completionInfo);
-  // console.log(info.instructions);
-
+export default function InfoBox({ id, miles, title, completionInfo, info }) {
   return (
     <div>
       {completionInfo.complete === true ? (
-        <CompletionDetails info={completionInfo} />
+        <CompletionDetails id={{ id, miles }} info={completionInfo} />
       ) : null}
       <Intructions instructions={info.instructions} />
       <Videos videos={info.videos} />
