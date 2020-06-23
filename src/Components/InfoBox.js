@@ -110,11 +110,12 @@ function Notes() {
   );
 }
 
-export default function InfoBox({ id, miles, title, completionInfo, info }) {
+export default function InfoBox({ id, miles, title, info }) {
+  console.log(info);
   return (
     <div>
-      {completionInfo.complete === true ? (
-        <CompletionDetails id={{ id, miles }} info={completionInfo} />
+      {info.completionInfo.complete === true ? (
+        <CompletionDetails id={{ id, miles }} info={info.completionInfo} />
       ) : null}
       <Intructions instructions={info.instructions} />
       <Videos videos={info.videos} />
