@@ -5,10 +5,14 @@ import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext
 
 export default function MaintenanceTracker() {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
+  const currentMiles = 60000;
 
   return (
     <div>
-      <IntervalList currentMiles={60000} />
+      <h1 style={{ color: "red", textAlign: "center" }}>
+        Current Miles: {currentMiles}
+      </h1>
+      <IntervalList currentMiles={currentMiles} />
       <BottomPanel panelData={maintenanceTrackerContext.state.panelData} />
     </div>
   );

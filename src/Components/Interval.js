@@ -39,7 +39,7 @@ const MilageBarContainer = styled.div`
   user-select: none;
 `;
 
-function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
+function Interval({ miles, serviceData, open, handleSetOpenBox }) {
   // console.log("Rendering milagebox");
   const newTaskId = useRef(0);
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
@@ -201,7 +201,7 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
       <Collapsible
         trigger={
           <MilageBarContainer>
-            <h2 className="MilageBarText">{miles + " Miles"}</h2>
+            <h2>{miles + " Miles"}</h2>
           </MilageBarContainer>
         }
         transitionTime={250}
@@ -216,4 +216,4 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
   );
 }
 
-export default React.memo(MilageBox);
+export default React.memo(Interval);

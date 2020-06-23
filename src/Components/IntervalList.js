@@ -1,7 +1,5 @@
-// This file will render x number of <MilageBox/>  passing it the appropriate props
-
 import React, { useState, useContext, useEffect } from "react";
-import MilageBox from "./MilageBox";
+import Interval from "./Interval";
 import {
   getMilesArray,
   getServiceDataArray,
@@ -22,6 +20,9 @@ function IntervalList({ currentMiles }) {
   const [openBox, setOpenBox] = useState(
     milesArray[milesArray.findIndex((miles) => miles > currentMiles)]
   );
+  const handleSetOpenBox = (miles) => {
+    setOpenBox(miles);
+  };
 
   // Add service mile interval
   useEffect(() => {
@@ -67,17 +68,10 @@ function IntervalList({ currentMiles }) {
     openBox,
   ]);
 
-  const handleSetOpenBox = (miles) => {
-    setOpenBox(miles);
-  };
-
   return (
     <div>
-      <h1 style={{ color: "red", textAlign: "center" }}>
-        Current Miles: {currentMiles}
-      </h1>
       {milesArray.map((miles, index) => (
-        <MilageBox
+        <Interval
           key={miles}
           miles={miles}
           serviceData={serviceDataArray[index]}

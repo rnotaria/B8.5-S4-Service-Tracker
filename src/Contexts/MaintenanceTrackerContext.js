@@ -7,12 +7,11 @@ import CompletionInfo from "../Components/CompletionInfo";
 export const MaintenanceTrackerContext = React.createContext();
 
 const maintenanceTrackerInitialState = {
-  // openInterval: null,
   panelData: {
     height: 15,
     isOpen: "closed",
     title: "OPTIONS",
-    content: DefaultPanelOptions(),
+    content: <DefaultPanelOptions />,
   },
   status: null,
   container: null,
