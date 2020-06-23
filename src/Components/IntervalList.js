@@ -9,9 +9,7 @@ import {
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../Contexts/DataContext";
 
-function RenderXMilageBoxes({ currentMiles }) {
-  // console.log("RenderXMilageBoxes");
-
+function IntervalList({ currentMiles }) {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const dataContext = useContext(DataContext);
 
@@ -91,4 +89,4 @@ function RenderXMilageBoxes({ currentMiles }) {
   );
 }
 
-export default React.memo(RenderXMilageBoxes);
+export default React.memo(IntervalList);
