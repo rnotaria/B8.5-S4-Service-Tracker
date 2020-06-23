@@ -67,12 +67,12 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
               links: null,
               videos: null,
               notes: null,
-            },
-            completionInfo: {
-              complete: false,
-              date: "",
-              miles: "",
-              notes: "",
+              completionInfo: {
+                complete: false,
+                date: "",
+                miles: "",
+                notes: "",
+              },
             },
           },
         },
@@ -138,12 +138,15 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
           ...prevData.tasks,
           [taskId]: {
             ...prevData.tasks[taskId],
-            completionInfo: {
-              ...prevData.tasks[taskId].completionInfo,
-              complete,
-              date,
-              miles,
-              notes,
+            info: {
+              ...prevData.tasks[taskId].info,
+              completionInfo: {
+                ...prevData.tasks[taskId].completionInfo,
+                complete,
+                date,
+                miles,
+                notes,
+              },
             },
           },
         },

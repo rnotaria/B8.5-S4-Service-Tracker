@@ -31,12 +31,12 @@ const standardService = {
         links: "links",
         videos: "videos",
         notes: "notes",
-      },
-      completionInfo: {
-        complete: false,
-        date: "",
-        miles: "",
-        notes: "",
+        completionInfo: {
+          complete: false,
+          date: "",
+          miles: "",
+          notes: "",
+        },
       },
     },
     task2: {
@@ -48,12 +48,12 @@ const standardService = {
         links: "links",
         videos: "videos",
         notes: "notes",
-      },
-      completionInfo: {
-        complete: false,
-        date: "",
-        miles: "",
-        notes: "",
+        completionInfo: {
+          complete: false,
+          date: "",
+          miles: "",
+          notes: "",
+        },
       },
     },
     task3: {
@@ -65,12 +65,12 @@ const standardService = {
         links: "links",
         videos: "videos",
         notes: "notes",
-      },
-      completionInfo: {
-        complete: false,
-        date: "",
-        miles: "",
-        notes: "",
+        completionInfo: {
+          complete: false,
+          date: "",
+          miles: "",
+          notes: "",
+        },
       },
     },
     task4: {
@@ -83,12 +83,12 @@ const standardService = {
         links: "links",
         videos: "videos",
         notes: "notes",
-      },
-      completionInfo: {
-        complete: false,
-        date: "",
-        miles: "",
-        notes: "",
+        completionInfo: {
+          complete: false,
+          date: "",
+          miles: "",
+          notes: "",
+        },
       },
     },
   },
@@ -121,12 +121,12 @@ const majorService = {
         links: "links",
         videos: "videos",
         notes: "notes",
-      },
-      completionInfo: {
-        complete: false,
-        date: "",
-        miles: "",
-        notes: "",
+        completionInfo: {
+          complete: false,
+          date: "",
+          miles: "",
+          notes: "",
+        },
       },
     },
     task2: {
@@ -139,12 +139,12 @@ const majorService = {
         links: "links",
         videos: "videos",
         notes: "notes",
-      },
-      completionInfo: {
-        complete: false,
-        date: "",
-        miles: "",
-        notes: "",
+        completionInfo: {
+          complete: false,
+          date: "",
+          miles: "",
+          notes: "",
+        },
       },
     },
     task3: {
@@ -156,12 +156,12 @@ const majorService = {
         links: "links",
         videos: "videos",
         notes: "notes",
-      },
-      completionInfo: {
-        complete: false,
-        date: "",
-        miles: "",
-        notes: "",
+        completionInfo: {
+          complete: false,
+          date: "",
+          miles: "",
+          notes: "",
+        },
       },
     },
   },
