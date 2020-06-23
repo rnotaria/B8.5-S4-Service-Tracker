@@ -6,7 +6,6 @@ import React, {
   useCallback,
 } from "react";
 import styled from "styled-components";
-import "../index.css";
 import Collapsible from "react-collapsible";
 import Board from "./dnd_components/Board";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
