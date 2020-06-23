@@ -29,7 +29,10 @@ function CompletionDetails({ id, info }) {
     if (edit === true) {
       maintenanceTrackerContext.dispatch({
         type: "editTask",
-        value: { id, completionInfo: { date, miles, notes } },
+        value: {
+          id,
+          info: { completionInfo: { complete: true, date, miles, notes } },
+        },
       });
     }
     setEdit(!edit);
@@ -111,7 +114,6 @@ function Notes() {
 }
 
 export default function InfoBox({ id, miles, title, info }) {
-  console.log(info);
   return (
     <div>
       {info.completionInfo.complete === true ? (

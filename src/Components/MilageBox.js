@@ -154,7 +154,34 @@ function MilageBox({ miles, serviceData, open, handleSetOpenBox }) {
     }
   }, [maintenanceTrackerContext.state, miles]);
 
-  useEffect(() => {});
+  // Edit task properties if any
+  useEffect(() => {
+    if (
+      maintenanceTrackerContext.state.status === "editTask" &&
+      maintenanceTrackerContext.state.container.id.miles === miles
+    ) {
+      console.log(data);
+
+      const taskId = maintenanceTrackerContext.state.container.id.id;
+      const newInfo = JSON.parse(
+        JSON.stringify(maintenanceTrackerContext.state.container.info)
+      );
+
+      setData((prevData) => ({
+        ...prevData,
+        tasks: {
+          ...prevData.tasks,
+          [taskId]: {
+            ...prevData.tasks[taskId],
+            info: {
+              ...prevData.tasks[taskId].info,
+              ...newInfo,
+            },
+          },
+        },
+      }));
+    }
+  }, [maintenanceTrackerContext.state, miles]);
 
   // Update data state when task is moved between columns
   const updateData = useCallback((data) => {

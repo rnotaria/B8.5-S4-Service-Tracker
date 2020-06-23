@@ -130,7 +130,6 @@ const maintenanceTrackerReducer = (state, action) => {
       };
 
     case "editTask":
-      console.log(action.value);
       return {
         ...state,
         status: "editTask",

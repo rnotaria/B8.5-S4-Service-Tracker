@@ -10,13 +10,6 @@ import getDate from "../utils/getDate";
  * * * * * * * * * * * * * * STYLES  * * * * * * * * * * * * * *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-// const Center = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   width: 100%;
-// `;
-
 // Translate Up Styled Component
 const translateUp = (height) => keyframes`
 from {
@@ -139,6 +132,7 @@ export default function BottomPanel({
     [panelData.isOpen]: true,
   });
 
+  // **** SPLIT THIS INTO INDIVIDUAL COMPONENT ***
   // Condition render button to follow pane on open/close
   const renderButton = () => {
     var buttonJSX;
