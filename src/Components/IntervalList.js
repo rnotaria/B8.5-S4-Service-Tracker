@@ -16,7 +16,7 @@ function IntervalList({ currentMiles }) {
     getServiceDataArray(milesArray)
   );
 
-  // State that determines which collapsible Milage Box is open
+  // State that determines which collapsable Interval is open
   const [openBox, setOpenBox] = useState(
     milesArray[milesArray.findIndex((miles) => miles > currentMiles)]
   );

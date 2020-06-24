@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SlidingPane from "./react-sliding-pane/react-sliding-pane";
 import "./react-sliding-pane/react-sliding-pane.css";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";

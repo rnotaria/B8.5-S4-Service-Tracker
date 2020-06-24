@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
+import styles from "../../Styles/Task.module.css";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import { FaTrash, FaTools } from "react-icons/fa";
 import { GoInfo } from "react-icons/go";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
-
-const MainContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
 
 const TaskContainer = styled.div`
   border: ${(props) =>
@@ -32,12 +28,6 @@ const TaskContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const Ellipsis = styled.div`
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 `;
 
 const TrashStyle = {
@@ -82,7 +72,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
   }, [column, task.id, miles]); //ignore dependency warning for now
 
   return (
-    <MainContainer>
+    <div className={styles.mainContainer}>
       {deleteTask === true ? (
         <FaTrash
           style={TrashStyle}
@@ -115,7 +105,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
             <div>
               <FaTools style={iconStyle} />
             </div>
-            <Ellipsis>{task.title}</Ellipsis>
+            <div className={styles.ellipsis}>{task.title}</div>
             <div>
               <GoInfo
                 style={infoStyle}
@@ -133,7 +123,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
           </TaskContainer>
         )}
       </Draggable>
-    </MainContainer>
+    </div>
   );
 }
 

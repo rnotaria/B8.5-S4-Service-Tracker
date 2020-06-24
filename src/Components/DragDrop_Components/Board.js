@@ -1,27 +1,11 @@
 import React, { useState, useEffect } from "react";
-// import "@atlaskit/css-reset";  Do I need this??
-import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
+import styles from "../../Styles/Board.module.css";
 import Column from "./Column";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-`;
 
 function Board({ prop_data, miles, updateData }) {
   // console.log("rendering Board");
   const [data, setData] = useState(prop_data);
-
-  // Update state when prop_data changes
-  useEffect(() => {
-    setData(prop_data);
-  }, [prop_data]);
-
-  // Callback to update state in previous component based on current data state.
-  useEffect(() => {
-    updateData(data);
-  }, [updateData, data]);
 
   const onDragEnd = (result) => {
     document.body.style.color = "inherit";
@@ -92,9 +76,19 @@ function Board({ prop_data, miles, updateData }) {
     }
   };
 
+  // Update state when prop_data changes
+  useEffect(() => {
+    setData(prop_data);
+  }, [prop_data]);
+
+  // Callback to update state in previous component based on current data state.
+  useEffect(() => {
+    updateData(data);
+  }, [updateData, data]);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Container>
+      <div className={styles.container}>
         {data.columnOrder.map((columnId) => {
           const column = data.columns[columnId];
           const tasks = column.taskIds.map((taskId) => data.tasks[taskId]);
@@ -107,7 +101,7 @@ function Board({ prop_data, miles, updateData }) {
             />
           );
         })}
-      </Container>
+      </div>
     </DragDropContext>
   );
 }

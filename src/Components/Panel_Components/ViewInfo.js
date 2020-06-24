@@ -40,7 +40,7 @@ function CompletionDetails({ id, info }) {
 
   if (edit === true) {
     return (
-      <Section title="COMPLETION" handleEdit={handleEdit}>
+      <Section title="COMPLETION DETAILS" handleEdit={handleEdit}>
         <div className={styles.main}>
           <div className={styles.row}>
             <div className={styles.column1}>Date:</div>
@@ -60,7 +60,7 @@ function CompletionDetails({ id, info }) {
   }
 
   return (
-    <Section title="COMPLETION" handleEdit={handleEdit}>
+    <Section title="COMPLETION DETAILS" handleEdit={handleEdit}>
       <div className={styles.main}>
         <div className={styles.row}>
           <div className={styles.column1}>Date:</div>

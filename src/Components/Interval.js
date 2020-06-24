@@ -5,38 +5,11 @@ import React, {
   useRef,
   useCallback,
 } from "react";
-import styled from "styled-components";
+import styles from "../Styles/Interval.module.css";
 import Collapsible from "react-collapsible";
 import Board from "./DragDrop_Components/Board";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../Contexts/DataContext";
-
-const MilageBoxContainer = styled.div`
-  // background-color: black;
-  // border: 1px solid lightgrey;
-  // border-radius: 10px;
-  padding: 10px;
-
-  // margin-top: 10px;
-  margin-left: 50px;
-  margin-right: 50px;
-  // margin-bot: 10px;
-`;
-
-const MilageBarContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  line-height: 0;
-
-  background-color: grey;
-  border: 2px solid lightgrey;
-  border-radius: 10px;
-
-  overflow: hidden;
-  user-select: none;
-`;
 
 function Interval({ miles, serviceData, open, handleSetOpenBox }) {
   // console.log("Rendering milagebox");
@@ -182,11 +155,6 @@ function Interval({ miles, serviceData, open, handleSetOpenBox }) {
     }
   }, [maintenanceTrackerContext.state, miles]);
 
-  // Update data state when task is moved between columns
-  const updateData = useCallback((data) => {
-    setData(data);
-  }, []);
-
   // Update overall data
   useEffect(() => {
     dataContext.dispatch({
@@ -195,13 +163,18 @@ function Interval({ miles, serviceData, open, handleSetOpenBox }) {
     });
   }, [data, miles]);
 
+  // Update data state when task is moved between columns. Passed as prop to <Board/>
+  const updateData = useCallback((data) => {
+    setData(data);
+  }, []);
+
   return (
-    <MilageBoxContainer>
+    <div className={styles.container}>
       <Collapsible
         trigger={
-          <MilageBarContainer>
+          <div className={styles.title}>
             <h2>{miles + " Miles"}</h2>
-          </MilageBarContainer>
+          </div>
         }
         transitionTime={250}
         onOpening={() => handleSetOpenBox(miles)}
@@ -211,7 +184,7 @@ function Interval({ miles, serviceData, open, handleSetOpenBox }) {
       >
         <Board prop_data={data} miles={miles} updateData={updateData} />
       </Collapsible>
-    </MilageBoxContainer>
+    </div>
   );
 }
 

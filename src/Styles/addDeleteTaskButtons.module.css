@@ -1,0 +1,41 @@
+.delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.delete button {
+  width: 30px;
+  cursor: pointer;
+  background-color: darkslateblue;
+  color: white;
+}
+
+.delete_active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.delete_active button {
+  width: 30px;
+  cursor: pointer;
+  background-color: darkred;
+  color: white;
+}
+
+.add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.add button {
+  width: 30px;
+  cursor: pointer;
+  background-color: darkslateblue;
+  color: white;
+}
