@@ -58,7 +58,7 @@ function Column({ column, tasks, miles }) {
             style={ButtonStyle}
             onClick={() =>
               maintenanceTrackerContext.dispatch({
-                type: "addTask-botPanel",
+                type: "addTask.1",
                 value: {
                   miles,
                   tasks,

@@ -70,7 +70,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
       id = window.setTimeout(
         () =>
           maintenanceTrackerContext.dispatch({
-            type: "completionInfo-addInfo",
+            type: "addCompletionInfo.1",
             value: { taskId: task.id, miles },
           }),
         delay
@@ -121,7 +121,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
                 style={infoStyle}
                 onClick={() =>
                   maintenanceTrackerContext.dispatch({
-                    type: "info",
+                    type: "viewInfo",
                     value: {
                       ...task,
                       miles: miles,

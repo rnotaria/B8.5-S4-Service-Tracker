@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import styled from "styled-components";
 import Collapsible from "react-collapsible";
-import Board from "./dnd_components/Board";
+import Board from "./DragDrop_Components/Board";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../Contexts/DataContext";
 
@@ -122,7 +122,7 @@ function Interval({ miles, serviceData, open, handleSetOpenBox }) {
   // Edit completion properties if any
   useEffect(() => {
     if (
-      maintenanceTrackerContext.state.status === "completionInfo-submitInfo" &&
+      maintenanceTrackerContext.state.status === "addCompletionInfo.2" &&
       maintenanceTrackerContext.state.container.miles === miles
     ) {
       const complete = maintenanceTrackerContext.state.container.complete;
@@ -156,7 +156,7 @@ function Interval({ miles, serviceData, open, handleSetOpenBox }) {
   // Edit task properties if any
   useEffect(() => {
     if (
-      maintenanceTrackerContext.state.status === "editTask" &&
+      maintenanceTrackerContext.state.status === "editInfo" &&
       maintenanceTrackerContext.state.container.id.miles === miles
     ) {
       console.log(data);

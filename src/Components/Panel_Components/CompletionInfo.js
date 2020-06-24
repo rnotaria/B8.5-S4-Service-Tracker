@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
-import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
-import styles from "../Styles/CompletionInfo.module.css";
-import getDate from "../utils/getDate";
+import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
+import styles from "../../Styles/CompletionInfo.module.css";
+import getDate from "../../utils/getDate";
 
 export default function CompletionInfo() {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
@@ -14,7 +14,7 @@ export default function CompletionInfo() {
 
   const handleSubmit = () => {
     maintenanceTrackerContext.dispatch({
-      type: "completionInfo-submitInfo",
+      type: "addCompletionInfo.2",
       value: { date, miles, notes, taskId },
     });
   };

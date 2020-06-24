@@ -2,7 +2,7 @@ import React from "react";
 import AddServiceInterval from "./AddServiceInterval";
 import DeleteServiceInterval from "./DeleteServiceInterval";
 
-export default function DefaultPanelOptions() {
+export default function DefaultPanelContent() {
   return (
     <div>
       <AddServiceInterval />

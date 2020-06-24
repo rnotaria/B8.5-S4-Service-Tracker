@@ -6,19 +6,23 @@ import {
   Rotate,
   closedButtonPosition,
   openedButtonPosition,
-} from "../Styles/PanelButtonStyles";
-import styles from "../Styles/PanelButton.module.css";
+} from "../../Styles/PanelButtonStyles";
+import styles from "../../Styles/PanelButton.module.css";
 
-export default function PanelButton({ isOpen, dispatch, panelData, delay }) {
-  if (isOpen.closed === true) {
+export default function PanelButton({ buttonStatus, handleStatus, panelData }) {
+  const delay = 0.5;
+  if (buttonStatus === "closed") {
     return (
-      <div style={closedButtonPosition()} onClick={() => dispatch("opening")}>
+      <div
+        style={closedButtonPosition()}
+        onClick={() => handleStatus("opening")}
+      >
         <div className={styles.arrow}>
           <FaChevronUp size={20} />
         </div>
       </div>
     );
-  } else if (isOpen.opening === true) {
+  } else if (buttonStatus === "opening") {
     return (
       <div style={closedButtonPosition()}>
         <TranslateUp delay={delay} height={panelData.height + "vh"}>
@@ -30,12 +34,12 @@ export default function PanelButton({ isOpen, dispatch, panelData, delay }) {
         </TranslateUp>
       </div>
     );
-  } else if (isOpen.opened === true) {
+  } else if (buttonStatus === "opened") {
     return (
       <div
         style={openedButtonPosition(panelData.height + "vh")}
         onClick={() => {
-          dispatch("closing");
+          handleStatus("closing");
         }}
       >
         <div className={styles.arrow}>
@@ -45,7 +49,7 @@ export default function PanelButton({ isOpen, dispatch, panelData, delay }) {
         </div>
       </div>
     );
-  } else if (isOpen.closing === true) {
+  } else if (buttonStatus === "closing") {
     return (
       <div style={closedButtonPosition()}>
         <TranslateDown delay={delay} height={panelData.height + "vh"}>

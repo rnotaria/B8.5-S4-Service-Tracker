@@ -1,17 +1,17 @@
 import React, { useReducer } from "react";
-import AddTask from "../Components/AddTask";
-import DefaultPanelOptions from "../Components/BasePanelComponents/DefaultPanelOptions";
-import InfoBox from "../Components/InfoBox";
-import CompletionInfo from "../Components/CompletionInfo";
+import AddTask from "../Components/Panel_Components/AddTask";
+import DefaultPanelContent from "../Components/Panel_Components/DefaultPanelContent";
+import InfoBox from "../Components/Panel_Components/InfoBox";
+import CompletionInfo from "../Components/Panel_Components/CompletionInfo";
 
 export const MaintenanceTrackerContext = React.createContext();
 
 const maintenanceTrackerInitialState = {
   panelData: {
     height: 15,
-    isOpen: "closed",
+    status: "closed",
     title: "OPTIONS",
-    content: <DefaultPanelOptions />,
+    content: <DefaultPanelContent />,
   },
   status: null,
   container: null,
@@ -19,14 +19,14 @@ const maintenanceTrackerInitialState = {
 
 const maintenanceTrackerReducer = (state, action) => {
   switch (action.type) {
-    case "addTask-botPanel":
+    case "addTask.1":
       // Brings up bottom panel to add new task
       return {
         ...state,
         panelData: {
           ...state.panelData,
+          status: "opening",
           height: 20,
-          isOpen: "opening",
           title: "Add Task",
           content: <AddTask />,
         },
@@ -36,14 +36,14 @@ const maintenanceTrackerReducer = (state, action) => {
         },
       };
 
-    case "addTask-submitTask":
+    case "addTask.2":
       // Submits task and adds it to list
       return {
         ...state,
         status: "addTask",
         panelData: {
           ...state.panelData,
-          isOpen: "closing",
+          status: "closing",
         },
         container: {
           ...state.container,
@@ -69,7 +69,7 @@ const maintenanceTrackerReducer = (state, action) => {
         status: "addInterval",
         panelData: {
           ...state.panelData,
-          isOpen: "open",
+          status: "closing",
         },
         container: { interval: action.value.interval },
       };
@@ -80,44 +80,46 @@ const maintenanceTrackerReducer = (state, action) => {
         status: "deleteInterval",
         panelData: {
           ...state.panelData,
-          isOpen: "closing",
+          status: "closing",
         },
       };
 
-    case "info":
+    case "viewInfo":
       return {
         ...state,
-        status: "info",
+        status: "viewInfo",
         panelData: {
           ...state.panelData,
           title: <b>{action.value.title}</b>,
           height: 50,
-          isOpen: "opening",
+          status: "opening",
           content: <InfoBox {...action.value} />,
         },
       };
 
-    case "completionInfo-addInfo":
+    case "addCompletionInfo.1":
+      // Brings up panel to add info
       return {
         ...state,
-        status: "completionInfo-addInfo",
+        status: "addCompletionInfo.1",
         panelData: {
           ...state.panelData,
           height: 40,
           title: "Completion Details",
-          isOpen: "opening",
+          status: "opening",
           content: <CompletionInfo />,
         },
         container: { taskId: action.value.taskId, miles: action.value.miles },
       };
 
-    case "completionInfo-submitInfo":
+    case "addCompletionInfo.2":
+      // Submits info
       return {
         ...state,
-        status: "completionInfo-submitInfo",
+        status: "addCompletionInfo.2",
         panelData: {
           ...state.panelData,
-          isOpen: "closing",
+          status: "closing",
         },
         container: {
           complete: true,
@@ -128,20 +130,11 @@ const maintenanceTrackerReducer = (state, action) => {
         },
       };
 
-    case "editTask":
+    case "editInfo":
       return {
         ...state,
-        status: "editTask",
+        status: "editInfo",
         container: { ...action.value },
-      };
-
-    case "closing":
-      return {
-        ...maintenanceTrackerInitialState,
-        panelData: {
-          ...state.panelData,
-          isOpen: "closing",
-        },
       };
 
     case "setStatus":

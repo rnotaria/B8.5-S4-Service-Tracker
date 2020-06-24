@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { FaRegEdit } from "react-icons/fa";
-import styles from "../Styles/InfoBox.module.css";
-import useInput from "../hooks/useInput";
-import useTextArea from "../hooks/useTextArea";
-import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
+import styles from "../../Styles/InfoBox.module.css";
+import useInput from "../../hooks/useInput";
+import useTextArea from "../../hooks/useTextArea";
+import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 
 function Section({ title, handleEdit, children }) {
   return (
@@ -28,7 +28,7 @@ function CompletionDetails({ id, info }) {
   const handleEdit = () => {
     if (edit === true) {
       maintenanceTrackerContext.dispatch({
-        type: "editTask",
+        type: "editInfo",
         value: {
           id,
           info: { completionInfo: { complete: true, date, miles, notes } },

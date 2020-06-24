@@ -37,7 +37,6 @@ function IntervalList({ currentMiles }) {
         setServiceDataArray(getServiceDataArray(newMilesArray));
       }
       setOpenBox(maintenanceTrackerContext.state.container.interval);
-      maintenanceTrackerContext.dispatch({ type: "closing" });
     }
   }, [maintenanceTrackerContext, milesArray]);
 
