@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { FaRegEdit } from "react-icons/fa";
-import styles from "../../Styles/InfoBox.module.css";
+import styles from "../../Styles/ViewInfo.module.css";
 import useInput from "../../hooks/useInput";
 import useTextArea from "../../hooks/useTextArea";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
@@ -113,7 +113,7 @@ function Notes() {
   );
 }
 
-export default function InfoBox({ id, miles, title, info }) {
+export default function ViewInfo({ id, miles, title, info }) {
   return (
     <div>
       {info.completionInfo.complete === true ? (

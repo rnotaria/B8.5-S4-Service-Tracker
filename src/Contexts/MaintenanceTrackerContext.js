@@ -1,8 +1,8 @@
 import React, { useReducer } from "react";
 import AddTask from "../Components/Panel_Components/AddTask";
 import DefaultPanelContent from "../Components/Panel_Components/DefaultPanelContent";
-import InfoBox from "../Components/Panel_Components/InfoBox";
-import CompletionInfo from "../Components/Panel_Components/CompletionInfo";
+import ViewInfo from "../Components/Panel_Components/ViewInfo";
+import AddCompletionInfo from "../Components/Panel_Components/AddCompletionInfo";
 
 export const MaintenanceTrackerContext = React.createContext();
 
@@ -93,7 +93,7 @@ const maintenanceTrackerReducer = (state, action) => {
           title: <b>{action.value.title}</b>,
           height: 50,
           status: "opening",
-          content: <InfoBox {...action.value} />,
+          content: <ViewInfo {...action.value} />,
         },
       };
 
@@ -107,7 +107,7 @@ const maintenanceTrackerReducer = (state, action) => {
           height: 40,
           title: "Completion Details",
           status: "opening",
-          content: <CompletionInfo />,
+          content: <AddCompletionInfo />,
         },
         container: { taskId: action.value.taskId, miles: action.value.miles },
       };

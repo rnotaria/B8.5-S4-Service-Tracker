@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import IntervalList from "./IntervalList";
-import BottomPanel from "./Panel_Components/BottomPanel";
+import Panel from "./Panel_Components/Panel";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 
 export default function MaintenanceTracker() {
@@ -13,7 +13,7 @@ export default function MaintenanceTracker() {
         Current Miles: {currentMiles}
       </h1>
       <IntervalList currentMiles={currentMiles} />
-      <BottomPanel panelData={maintenanceTrackerContext.state.panelData} />
+      <Panel panelData={maintenanceTrackerContext.state.panelData} />
     </div>
   );
 }

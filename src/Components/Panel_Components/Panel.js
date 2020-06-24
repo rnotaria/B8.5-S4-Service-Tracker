@@ -5,7 +5,7 @@ import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerCont
 // import getDate from "../utils/getDate";
 import PanelButton from "./PanelButton";
 
-export default function BottomPanel({
+export default function Panel({
   panelData = {
     height: 10,
     status: "closed",
