@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-export default function useTextArea(inputValue = "") {
-  const [value, setValue] = useState(inputValue);
+export default function useTextArea(setState = "") {
+  const [value, setValue] = useState(setState);
   const textarea = (
     <textarea
       value={value}

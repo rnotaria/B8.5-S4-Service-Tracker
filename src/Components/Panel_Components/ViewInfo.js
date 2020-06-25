@@ -25,6 +25,7 @@ function CompletionDetails({ id, info }) {
   const [notes, notesInput] = useTextArea(info.notes);
 
   const [edit, setEdit] = useState(false);
+  console.log();
   const handleEdit = () => {
     if (edit === true) {
       maintenanceTrackerContext.dispatch({

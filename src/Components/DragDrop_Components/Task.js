@@ -48,28 +48,28 @@ const infoStyle = {
 };
 
 function Task({ task, index, column, columnId, deleteTask, miles }) {
+  // console.log(task);
+
   const [bgColor, setBgColor] = useState("#A9A9A9");
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   // Side Effect on Task Complete
   useEffect(() => {
-    const delay = 0;
-    var id = null;
     if (column === "Complete") {
       setBgColor("green");
-      id = window.setTimeout(
-        () =>
-          maintenanceTrackerContext.dispatch({
-            type: "addCompletionInfo.1",
-            value: { taskId: task.id, miles },
-          }),
-        delay
-      );
+
+      maintenanceTrackerContext.dispatch({
+        type: "addCompletionInfo.1",
+        value: { taskId: task.id, miles },
+      });
     }
-    return () => {
-      clearTimeout(id);
-    };
   }, [column, task.id, miles]); //ignore dependency warning for now
+
+  // useEffect(() => {
+  //   if (column === "Complete" && task.info.completionInfo.complete === false) {
+
+  //   }
+  // }, [maintenanceTrackerContext, task, miles]);
 
   return (
     <div className={styles.mainContainer}>

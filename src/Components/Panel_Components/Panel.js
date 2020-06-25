@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import SlidingPane from "./react-sliding-pane/react-sliding-pane";
 import "./react-sliding-pane/react-sliding-pane.css";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
-// import getDate from "../utils/getDate";
 import PanelButton from "./PanelButton";
 
 export default function Panel({
@@ -32,21 +31,6 @@ export default function Panel({
       }, delay * 1000);
     } else if (panelStatus === "closing") {
       id = window.setTimeout(() => {
-        // If Completion Info panel was prematurely closed, autofill values before resetting context
-        // FIND A WAY TO BETTER IMPLEMENT THIS!!!!!
-        // if (
-        //   maintenanceTrackerContext.state.status === "addCompletionInfo.1"
-        // ) {
-        //   maintenanceTrackerContext.dispatch({
-        //     type: "addCompletionInfo.2",
-        //     value: {
-        //       date: getDate(),
-        //       miles: maintenanceTrackerContext.state.container.miles,
-        //       notes: "",
-        //       taskId: maintenanceTrackerContext.state.container.taskId,
-        //     },
-        //   });
-        // }
         setPanelStatus("closed");
         maintenanceTrackerContext.dispatch({ type: "reset" });
       }, delay * 1000);

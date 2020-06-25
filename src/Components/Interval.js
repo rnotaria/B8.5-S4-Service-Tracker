@@ -92,11 +92,38 @@ function Interval({ miles, serviceData, open, handleSetOpenBox }) {
     }
   }, [maintenanceTrackerContext, miles, data]);
 
+  // Edit task properties if any
+  useEffect(() => {
+    if (
+      maintenanceTrackerContext.state.status === "editInfo" &&
+      maintenanceTrackerContext.state.container.id.miles === miles
+    ) {
+      const taskId = maintenanceTrackerContext.state.container.id.id;
+      const newInfo = JSON.parse(
+        JSON.stringify(maintenanceTrackerContext.state.container.info)
+      );
+
+      setData((prevData) => ({
+        ...prevData,
+        tasks: {
+          ...prevData.tasks,
+          [taskId]: {
+            ...prevData.tasks[taskId],
+            info: {
+              ...prevData.tasks[taskId].info,
+              ...newInfo,
+            },
+          },
+        },
+      }));
+    }
+  }, [maintenanceTrackerContext.state, miles]);
+
   // Edit completion properties if any
   useEffect(() => {
     if (
       maintenanceTrackerContext.state.status === "addCompletionInfo.2" &&
-      maintenanceTrackerContext.state.container.miles === miles
+      maintenanceTrackerContext.state.container.intervalMiles === miles
     ) {
       const complete = maintenanceTrackerContext.state.container.complete;
       const taskId = maintenanceTrackerContext.state.container.taskId;
@@ -119,35 +146,6 @@ function Interval({ miles, serviceData, open, handleSetOpenBox }) {
                 miles,
                 notes,
               },
-            },
-          },
-        },
-      }));
-    }
-  }, [maintenanceTrackerContext.state, miles]);
-
-  // Edit task properties if any
-  useEffect(() => {
-    if (
-      maintenanceTrackerContext.state.status === "editInfo" &&
-      maintenanceTrackerContext.state.container.id.miles === miles
-    ) {
-      console.log(data);
-
-      const taskId = maintenanceTrackerContext.state.container.id.id;
-      const newInfo = JSON.parse(
-        JSON.stringify(maintenanceTrackerContext.state.container.info)
-      );
-
-      setData((prevData) => ({
-        ...prevData,
-        tasks: {
-          ...prevData.tasks,
-          [taskId]: {
-            ...prevData.tasks[taskId],
-            info: {
-              ...prevData.tasks[taskId].info,
-              ...newInfo,
             },
           },
         },

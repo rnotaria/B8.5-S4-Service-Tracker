@@ -99,6 +99,8 @@ const maintenanceTrackerReducer = (state, action) => {
 
     case "addCompletionInfo.1":
       // Brings up panel to add info
+      const taskId = action.value.taskId;
+      const intervalMiles = action.value.miles;
       return {
         ...state,
         status: "addCompletionInfo.1",
@@ -107,9 +109,11 @@ const maintenanceTrackerReducer = (state, action) => {
           height: 40,
           title: "Completion Details",
           status: "opening",
-          content: <AddCompletionInfo />,
+          content: (
+            <AddCompletionInfo taskId={taskId} intervalMiles={intervalMiles} />
+          ),
         },
-        container: { taskId: action.value.taskId, miles: action.value.miles },
+        container: { taskId, intervalMiles },
       };
 
     case "addCompletionInfo.2":
@@ -124,6 +128,7 @@ const maintenanceTrackerReducer = (state, action) => {
         container: {
           complete: true,
           taskId: action.value.taskId,
+          intervalMiles: action.value.intervalMiles,
           date: action.value.date,
           miles: action.value.miles,
           notes: action.value.notes,
