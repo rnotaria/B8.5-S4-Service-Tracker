@@ -91,7 +91,7 @@ const maintenanceTrackerReducer = (state, action) => {
         panelData: {
           ...state.panelData,
           title: <b>{action.value.title}</b>,
-          height: 50,
+          height: 80,
           status: "opening",
           content: <ViewInfo {...action.value} />,
         },

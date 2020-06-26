@@ -3,8 +3,8 @@
 .slide-pane {
   display: flex;
   flex-direction: column;
-  background: #fff;
-  opacity: 0.8;
+  background: rgba(238, 238, 238, 0.8);
+  /* opacity: 0.9; */
   width: 100%;
   max-width: 1200px;
   height: 100%;
@@ -65,9 +65,10 @@
   display: flex;
   flex: 0 0 64px;
   align-items: center;
-  background: #ebebeb;
+  background: rgba(170, 170, 170, 0.9);
   height: 64px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid white;
 }
 .slide-pane__title-wrapper {
   display: flex;
@@ -89,7 +90,7 @@
 .slide-pane__close {
   margin-left: 24px;
   padding: 16px;
-  opacity: 0.7;
+  /* opacity: 0.7; */
   cursor: pointer;
 }
 .slide-pane__close svg {

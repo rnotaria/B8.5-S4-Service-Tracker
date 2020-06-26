@@ -49,7 +49,6 @@ const infoStyle = {
 
 function Task({ task, index, column, columnId, deleteTask, miles }) {
   // console.log(task);
-
   const [bgColor, setBgColor] = useState("#A9A9A9");
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
@@ -64,12 +63,6 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
       });
     }
   }, [column, task.id, miles]); //ignore dependency warning for now
-
-  // useEffect(() => {
-  //   if (column === "Complete" && task.info.completionInfo.complete === false) {
-
-  //   }
-  // }, [maintenanceTrackerContext, task, miles]);
 
   return (
     <div className={styles.mainContainer}>

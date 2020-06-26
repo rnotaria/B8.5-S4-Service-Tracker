@@ -5,7 +5,7 @@ import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext
 
 export default function MaintenanceTracker() {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
-  const currentMiles = 60000;
+  const currentMiles = 57000;
 
   return (
     <div>

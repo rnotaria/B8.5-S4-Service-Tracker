@@ -1,9 +1,14 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "../../Styles/ViewInfo.module.css";
 import useInput from "../../hooks/useInput";
 import useTextArea from "../../hooks/useTextArea";
-import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
+import useEdit from "../../hooks/useEdit";
+
+import ReactQuill from "react-quill";
+// import "react-quill/dist/quill.snow.css";
+import "../../Styles/react-quill/quill.snow.css";
+import modules from "../../Styles/react-quill/modules";
 
 function Section({ title, handleEdit, children }) {
   return (
@@ -19,25 +24,16 @@ function Section({ title, handleEdit, children }) {
 }
 
 function CompletionDetails({ id, info }) {
-  const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const [date, dateInput] = useInput(info.date);
   const [miles, milesInput] = useInput(info.miles);
-  const [notes, notesInput] = useTextArea(info.notes);
+  const [notes, notesInput] = useTextArea(
+    info.notes,
+    "Enter relevant completion notes such as cost, material used, etc."
+  );
 
-  const [edit, setEdit] = useState(false);
-  console.log();
-  const handleEdit = () => {
-    if (edit === true) {
-      maintenanceTrackerContext.dispatch({
-        type: "editInfo",
-        value: {
-          id,
-          info: { completionInfo: { complete: true, date, miles, notes } },
-        },
-      });
-    }
-    setEdit(!edit);
-  };
+  const [edit, handleEdit] = useEdit(id, {
+    completionInfo: { complete: true, date, miles, notes },
+  });
 
   if (edit === true) {
     return (
@@ -53,7 +49,7 @@ function CompletionDetails({ id, info }) {
           </div>
           <div className={styles.row}>
             <div className={styles.column1}>Notes:</div>
-            <div className={styles.notes}>{notesInput}</div>
+            <div className={styles.notesEdit}>{notesInput}</div>
           </div>
         </div>
       </Section>
@@ -80,8 +76,28 @@ function CompletionDetails({ id, info }) {
   );
 }
 
-function Intructions({ instructions, edit = false }) {
-  return <Section title="INSTRUCTIONS">blah</Section>;
+function Intructions({ id, info }) {
+  const [instructions, instructionsInput] = useTextArea(
+    info,
+    "Add instructions..."
+  );
+  const [edit, handleEdit] = useEdit(id, { instructions });
+
+  if (edit === false) {
+    return (
+      <Section title="INSTRUCTIONS" handleEdit={handleEdit}>
+        <div className={styles.quill}>
+          <ReactQuill modules={modules} theme="snow" />
+        </div>
+      </Section>
+    );
+  }
+
+  return (
+    <Section title="INSTRUCTIONS" handleEdit={handleEdit}>
+      <div className={styles.instructions}>{instructions}</div>
+    </Section>
+  );
 }
 
 function Videos() {
@@ -120,7 +136,7 @@ export default function ViewInfo({ id, miles, title, info }) {
       {info.completionInfo.complete === true ? (
         <CompletionDetails id={{ id, miles }} info={info.completionInfo} />
       ) : null}
-      <Intructions instructions={info.instructions} />
+      <Intructions id={{ id, miles }} info={info.instructions} />
       <Videos videos={info.videos} />
       <Links links={info.links} />
       <Notes notes={info.notes} />

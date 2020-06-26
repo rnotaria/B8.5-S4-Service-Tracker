@@ -10,7 +10,10 @@ export default function CompletionInfo({ taskId, intervalMiles }) {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const [date, dateInput] = useInput(getDate());
   const [miles, milesInput] = useInput(intervalMiles);
-  const [notes, notesInput] = useTextArea();
+  const [notes, notesInput] = useTextArea(
+    "",
+    "Enter relevant completion notes such as cost, material used, etc."
+  );
 
   const handleSubmit = () => {
     maintenanceTrackerContext.dispatch({
