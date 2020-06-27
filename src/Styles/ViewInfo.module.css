@@ -1,3 +1,7 @@
+.main_main {
+  overflow-y: scroll;
+}
+
 .main {
   width: 100%;
 }

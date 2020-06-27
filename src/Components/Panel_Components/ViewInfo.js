@@ -154,7 +154,7 @@ function Notes({ id, info }) {
 
 export default function ViewInfo({ id, miles, title, info }) {
   return (
-    <div>
+    <div className={styles.main_main}>
       {info.completionInfo.complete === true ? (
         <CompletionDetails id={{ id, miles }} info={info.completionInfo} />
       ) : null}
