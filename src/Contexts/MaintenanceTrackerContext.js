@@ -8,7 +8,7 @@ export const MaintenanceTrackerContext = React.createContext();
 
 const maintenanceTrackerInitialState = {
   panelData: {
-    height: 15,
+    height: 200,
     status: "closed",
     title: "OPTIONS",
     content: <DefaultPanelContent />,
@@ -26,7 +26,7 @@ const maintenanceTrackerReducer = (state, action) => {
         panelData: {
           ...state.panelData,
           status: "opening",
-          height: 20,
+          height: 200,
           title: "Add Task",
           content: <AddTask />,
         },
@@ -91,7 +91,7 @@ const maintenanceTrackerReducer = (state, action) => {
         panelData: {
           ...state.panelData,
           title: <b>{action.value.title}</b>,
-          height: 80,
+          height: 1000,
           status: "opening",
           content: <ViewInfo {...action.value} />,
         },
@@ -106,7 +106,7 @@ const maintenanceTrackerReducer = (state, action) => {
         status: "addCompletionInfo.1",
         panelData: {
           ...state.panelData,
-          height: 50,
+          height: 680,
           title: "Completion Details",
           status: "opening",
           content: (

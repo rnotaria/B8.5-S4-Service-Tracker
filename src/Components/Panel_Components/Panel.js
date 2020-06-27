@@ -6,7 +6,7 @@ import PanelButton from "./PanelButton";
 
 export default function Panel({
   panelData = {
-    height: 10,
+    height: 500,
     status: "closed",
     title: "",
     subtitle: "",
@@ -15,8 +15,15 @@ export default function Panel({
 }) {
   const delay = 0.5;
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
-
   const [panelStatus, setPanelStatus] = useState(panelData.status);
+  var height = 0;
+
+  // Adjust height property for smaller screens
+  if (window.innerHeight >= panelData.height) {
+    height = panelData.height + "px";
+  } else {
+    height = window.innerHeight * 0.9 + "px";
+  }
 
   const handleStatus = (action) => {
     setPanelStatus(action);
@@ -48,9 +55,9 @@ export default function Panel({
   return (
     <div>
       <PanelButton
+        height={height}
         buttonStatus={panelStatus}
         handleStatus={handleStatus}
-        panelData={panelData}
       />
       <SlidingPane
         title={panelData.title}
@@ -62,7 +69,7 @@ export default function Panel({
         onRequestClose={() => {
           setPanelStatus("closing");
         }}
-        height={panelData.height + "vh"}
+        height={height}
       >
         {panelData.content}
       </SlidingPane>
