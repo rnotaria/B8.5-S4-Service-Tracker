@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "../../Styles/ViewInfo.module.css";
 import useInput from "../../hooks/useInput";
-import useTextArea from "../../hooks/useTextArea";
 import useEdit from "../../hooks/useEdit";
 
 import ReactQuill from "react-quill";

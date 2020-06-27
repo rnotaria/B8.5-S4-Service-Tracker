@@ -106,7 +106,7 @@ const maintenanceTrackerReducer = (state, action) => {
         status: "addCompletionInfo.1",
         panelData: {
           ...state.panelData,
-          height: 40,
+          height: 50,
           title: "Completion Details",
           status: "opening",
           content: (

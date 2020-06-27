@@ -1,19 +1,20 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 import styles from "../../Styles/AddCompletionInfo.module.css";
 import getDate from "../../utils/getDate";
 import useInput from "../../hooks/useInput";
-import useTextArea from "../../hooks/useTextArea";
+
+import ReactQuill from "react-quill";
+import "../../Styles/react-quill/quill.snow.css";
+import "../../Styles/react-quill/quill.bubble.css";
+import modules from "../../Styles/react-quill/modules";
 
 export default function CompletionInfo({ taskId, intervalMiles }) {
   const didMount = useRef(false);
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const [date, dateInput] = useInput(getDate());
   const [miles, milesInput] = useInput(intervalMiles);
-  const [notes, notesInput] = useTextArea(
-    "",
-    "Enter relevant completion notes such as cost, material used, etc."
-  );
+  const [notes, setNotes] = useState("");
 
   const handleSubmit = () => {
     maintenanceTrackerContext.dispatch({
@@ -53,9 +54,16 @@ export default function CompletionInfo({ taskId, intervalMiles }) {
         <div className={styles.column1}>Miles:</div>
         <div className={styles.column2}>{milesInput}</div>
       </div>
-      <div className={`${styles.row} ${styles.notes}`}>
+      <div className={styles.row}>
         <div className={styles.column1}>Notes:</div>
-        <div className={styles.column2}>{notesInput}</div>
+        <div className={styles.notes_edit}>
+          <ReactQuill
+            modules={modules}
+            theme="snow"
+            value={notes}
+            onChange={setNotes}
+          />
+        </div>
       </div>
       <div className={styles.btn_container}>
         <button className={styles.btn} onClick={handleSubmit}>
