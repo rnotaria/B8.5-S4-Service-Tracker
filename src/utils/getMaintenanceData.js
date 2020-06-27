@@ -183,14 +183,14 @@ const majorService = {
 };
 
 // Returns an array of maintenance mile invervals
-export const getMilesArray = (currentMiles) => {
+export const getMilesArray = (initialMiles) => {
   const milesArray = [5000];
-  currentMiles -= 5000;
+  initialMiles -= 5000;
 
   // append next 5 intervals
-  while (currentMiles + 40000 > 0) {
+  while (initialMiles + 40000 > 0) {
     milesArray.push(milesArray[milesArray.length - 1] + 10000);
-    currentMiles -= 10000;
+    initialMiles -= 10000;
   }
 
   return milesArray;

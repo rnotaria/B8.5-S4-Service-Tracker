@@ -18,6 +18,8 @@ function Interval({ miles, serviceData, open, handleSetOpenBox }) {
   const dataContext = useContext(DataContext);
   const [data, setData] = useState({ ...serviceData });
 
+  // console.log(JSON.stringify(dataContext, null, 2));
+
   // Render new task if any
   useEffect(() => {
     if (

@@ -7,9 +7,10 @@ import {
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../Contexts/DataContext";
 
-function IntervalList({ currentMiles }) {
+function IntervalList({ initialMiles }) {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const dataContext = useContext(DataContext);
+  const [currentMiles, setCurrentMiles] = useState(initialMiles);
 
   const [milesArray, setMilesArray] = useState(getMilesArray(currentMiles));
   const [serviceDataArray, setServiceDataArray] = useState(
@@ -66,6 +67,29 @@ function IntervalList({ currentMiles }) {
     serviceDataArray,
     openBox,
   ]);
+
+  // Check if CurrentMiles was updated
+  useEffect(() => {
+    if (dataContext.state.container.currentMiles !== currentMiles) {
+      setCurrentMiles(dataContext.state.container.currentMiles);
+    }
+    if (dataContext.state.container.currentMiles > currentMiles) {
+      var tempMilesArray = getMilesArray(
+        dataContext.state.container.currentMiles
+      );
+      const index = tempMilesArray.findIndex((number) => {
+        return number > milesArray[milesArray.length - 1];
+      });
+
+      if (index > -1) {
+        const newArray = [...milesArray].concat(
+          tempMilesArray.slice(index, tempMilesArray.length)
+        );
+        setMilesArray(newArray);
+        setServiceDataArray(getServiceDataArray(newArray));
+      }
+    }
+  }, [dataContext.state.container.currentMiles, currentMiles, milesArray]);
 
   return (
     <div>

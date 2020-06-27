@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 
 export default function AddServiceInterval() {
@@ -19,17 +19,17 @@ export default function AddServiceInterval() {
     }
   }, [maintenanceTrackerContext, interval]);
 
-  useEffect(() => {
-    const listener = (event) => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        handleSubmit();
-      }
-    };
-    document.addEventListener("keydown", listener);
-    return () => {
-      document.removeEventListener("keydown", listener);
-    };
-  }, [handleSubmit]);
+  // useEffect(() => {
+  //   const listener = (event) => {
+  //     if (event.code === "Enter" || event.code === "NumpadEnter") {
+  //       handleSubmit();
+  //     }
+  //   };
+  //   document.addEventListener("keydown", listener);
+  //   return () => {
+  //     document.removeEventListener("keydown", listener);
+  //   };
+  // }, [handleSubmit]);
 
   if (renderInputField === false) {
     return (
