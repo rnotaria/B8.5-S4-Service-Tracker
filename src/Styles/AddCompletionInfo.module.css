@@ -22,6 +22,7 @@
 
 .column2 input {
   width: 75px;
+  background-color: inherit;
 }
 
 .notes {
@@ -32,6 +33,7 @@
 .column2 textarea {
   width: calc(100% - 80px);
   height: 80%;
+  background-color: inherit;
 
   resize: none;
 }

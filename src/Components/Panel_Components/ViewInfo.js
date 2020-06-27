@@ -123,33 +123,33 @@ function Intructions({ id, info }) {
   );
 }
 
-function Videos() {
+function Notes({ id, info }) {
+  const [notes, setNotes] = useState(info);
+  const [edit, handleEdit] = useEdit(id, { notes });
+
+  if (edit === false) {
+    return (
+      <Section title="NOTES" handleEdit={handleEdit}>
+        <ReactQuill
+          modules={modules}
+          theme="bubble"
+          value={notes}
+          onChange={setNotes}
+          readOnly={true}
+        />
+      </Section>
+    );
+  }
+
   return (
-    <div className={styles.section_divider}>
-      <div className={styles.section_header}>VIDEOS</div>
-
-      <hr />
-    </div>
-  );
-}
-
-function Links() {
-  return (
-    <div className={styles.section_divider}>
-      <div className={styles.section_header}>LINKS</div>
-
-      <hr />
-    </div>
-  );
-}
-
-function Notes() {
-  return (
-    <div className={styles.section_divider}>
-      <div className={styles.section_header}>NOTES</div>
-
-      <hr />
-    </div>
+    <Section title="NOTES" handleEdit={handleEdit}>
+      <ReactQuill
+        modules={modules}
+        theme="snow"
+        value={notes}
+        onChange={setNotes}
+      />
+    </Section>
   );
 }
 
@@ -160,9 +160,7 @@ export default function ViewInfo({ id, miles, title, info }) {
         <CompletionDetails id={{ id, miles }} info={info.completionInfo} />
       ) : null}
       <Intructions id={{ id, miles }} info={info.instructions} />
-      <Videos videos={info.videos} />
-      <Links links={info.links} />
-      <Notes notes={info.notes} />
+      <Notes id={{ id, miles }} info={info.notes} />
     </div>
   );
 }

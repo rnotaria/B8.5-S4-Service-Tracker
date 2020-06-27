@@ -1,6 +1,5 @@
 .main {
   width: 100%;
-  padding-left: calc(100vw - 100%);
 }
 
 .section_divider {
@@ -51,6 +50,7 @@
   max-width: calc(100% - 80px);
   margin-left: -36px;
   margin-right: -36px;
+  margin-top: -8px;
 }
 
 .notes_edit {
