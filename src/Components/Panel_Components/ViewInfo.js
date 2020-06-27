@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import styles from "../../Styles/ViewInfo.module.css";
 import useInput from "../../hooks/useInput";
@@ -6,8 +6,8 @@ import useTextArea from "../../hooks/useTextArea";
 import useEdit from "../../hooks/useEdit";
 
 import ReactQuill from "react-quill";
-// import "react-quill/dist/quill.snow.css";
 import "../../Styles/react-quill/quill.snow.css";
+import "../../Styles/react-quill/quill.bubble.css";
 import modules from "../../Styles/react-quill/modules";
 
 function Section({ title, handleEdit, children }) {
@@ -26,30 +26,40 @@ function Section({ title, handleEdit, children }) {
 function CompletionDetails({ id, info }) {
   const [date, dateInput] = useInput(info.date);
   const [miles, milesInput] = useInput(info.miles);
-  const [notes, notesInput] = useTextArea(
-    info.notes,
-    "Enter relevant completion notes such as cost, material used, etc."
-  );
+  const [notes, setNotes] = useState(info.notes);
+
+  // const [notes, notesInput] = useTextArea(
+  //   info.notes,
+  //   "Enter relevant completion notes such as cost, material used, etc."
+  // );
 
   const [edit, handleEdit] = useEdit(id, {
     completionInfo: { complete: true, date, miles, notes },
   });
 
-  if (edit === true) {
+  if (edit === false) {
     return (
       <Section title="COMPLETION DETAILS" handleEdit={handleEdit}>
         <div className={styles.main}>
           <div className={styles.row}>
             <div className={styles.column1}>Date:</div>
-            <div className={styles.column2}>{dateInput}</div>
+            <div className={styles.column2}>{date}</div>
           </div>
           <div className={styles.row}>
             <div className={styles.column1}>Miles:</div>
-            <div className={styles.column2}>{milesInput}</div>
+            <div className={styles.column2}>{miles}</div>
           </div>
           <div className={styles.row}>
             <div className={styles.column1}>Notes:</div>
-            <div className={styles.notesEdit}>{notesInput}</div>
+            <div className={styles.notes}>
+              <ReactQuill
+                modules={modules}
+                theme="bubble"
+                value={notes}
+                onChange={setNotes}
+                readOnly={true}
+              />
+            </div>
           </div>
         </div>
       </Section>
@@ -61,15 +71,22 @@ function CompletionDetails({ id, info }) {
       <div className={styles.main}>
         <div className={styles.row}>
           <div className={styles.column1}>Date:</div>
-          <div className={styles.column2}>{date}</div>
+          <div className={styles.column2}>{dateInput}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.column1}>Miles:</div>
-          <div className={styles.column2}>{miles}</div>
+          <div className={styles.column2}>{milesInput}</div>
         </div>
         <div className={styles.row}>
           <div className={styles.column1}>Notes:</div>
-          <div className={styles.notes}>{notes}</div>
+          <div className={styles.notes_edit}>
+            <ReactQuill
+              modules={modules}
+              theme="snow"
+              value={notes}
+              onChange={setNotes}
+            />
+          </div>
         </div>
       </div>
     </Section>
@@ -77,25 +94,31 @@ function CompletionDetails({ id, info }) {
 }
 
 function Intructions({ id, info }) {
-  const [instructions, instructionsInput] = useTextArea(
-    info,
-    "Add instructions..."
-  );
+  const [instructions, setInstructions] = useState(info);
   const [edit, handleEdit] = useEdit(id, { instructions });
 
   if (edit === false) {
     return (
       <Section title="INSTRUCTIONS" handleEdit={handleEdit}>
-        <div className={styles.quill}>
-          <ReactQuill modules={modules} theme="snow" />
-        </div>
+        <ReactQuill
+          modules={modules}
+          theme="bubble"
+          value={instructions}
+          onChange={setInstructions}
+          readOnly={true}
+        />
       </Section>
     );
   }
 
   return (
     <Section title="INSTRUCTIONS" handleEdit={handleEdit}>
-      <div className={styles.instructions}>{instructions}</div>
+      <ReactQuill
+        modules={modules}
+        theme="snow"
+        value={instructions}
+        onChange={setInstructions}
+      />
     </Section>
   );
 }
