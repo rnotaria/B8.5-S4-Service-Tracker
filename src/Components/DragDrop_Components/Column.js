@@ -17,7 +17,7 @@ function Column({ column, tasks, miles }) {
     <div className={styles.container}>
       <div className={styles.title}>
         <AddTaskButton miles={miles} tasks={tasks} column={column} />
-        <div>{column.title}</div>
+        {column.title}
         <DeleteTaskButton
           deleteTask={deleteTask}
           toggleDeleteTask={toggleDeleteTask}

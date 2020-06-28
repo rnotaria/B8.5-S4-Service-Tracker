@@ -148,6 +148,17 @@ const maintenanceTrackerReducer = (state, action) => {
         status: null,
       };
 
+    case "closePanel":
+      // Closes panel which then dispatches reset when its closed
+      return {
+        ...state,
+        status: "closePanel",
+        panelData: {
+          ...state.panelData,
+          status: "closing",
+        },
+      };
+
     case "reset":
       return maintenanceTrackerInitialState;
 
