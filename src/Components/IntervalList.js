@@ -92,7 +92,7 @@ function IntervalList({ initialMiles }) {
   }, [dataContext.state.container.currentMiles, currentMiles, milesArray]);
 
   return (
-    <div>
+    <div style={{ marginTop: "50px" }}>
       {milesArray.map((miles, index) => (
         <Interval
           key={miles}

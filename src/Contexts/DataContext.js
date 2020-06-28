@@ -6,6 +6,17 @@ const dataContextInitialState = { data: {}, container: { save: false } };
 
 const dataContextReducer = (state, action) => {
   switch (action.type) {
+    case "initialize": {
+      return {
+        ...state,
+        container: {
+          ...state.container,
+          currentMiles: action.value.currentMiles,
+          car: action.value.car,
+        },
+      };
+    }
+
     case "updateCurrentMiles": {
       return {
         ...state,

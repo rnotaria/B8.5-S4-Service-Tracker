@@ -1,0 +1,64 @@
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 1;
+  background-color: black;
+  border-bottom: 1px solid white;
+}
+
+.car {
+  color: white;
+  height: 100%;
+  width: 20%;
+  padding-left: 16px;
+
+  display: flex;
+  align-items: center;
+}
+
+.miles {
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.miles h3 {
+}
+
+.miles h5 {
+  padding-left: 4px;
+  padding-top: 8px;
+}
+
+.options {
+  color: white;
+  height: 100%;
+  width: 20%;
+  padding-right: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.logout {
+  padding-bottom: 2px;
+  padding-left: 4px;
+}
+
+.divider {
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+}
