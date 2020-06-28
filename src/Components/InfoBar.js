@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import styles from "../Styles/InfoBar.module.css";
 import { MdSettings } from "react-icons/md";
 import { IoMdHelp } from "react-icons/io";
-import { settings, help } from "../Styles/react-icons-styles";
 import { DataContext } from "../Contexts/DataContext";
 
 function InfoBar() {
@@ -18,9 +17,9 @@ function InfoBar() {
         <h5> mi</h5>
       </div>
       <div className={styles.options}>
-        <IoMdHelp style={help} />
+        <IoMdHelp className={styles.help} />
         <h5 className={styles.divider}>|</h5>
-        <MdSettings style={settings} />
+        <MdSettings className={styles.settings} />
         <h5 className={styles.divider}>|</h5>
         <h5 className={styles.logout}>Logout</h5>
       </div>

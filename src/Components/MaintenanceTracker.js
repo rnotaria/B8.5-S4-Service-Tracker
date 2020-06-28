@@ -2,6 +2,7 @@ import React, { useContext, useRef, useEffect } from "react";
 import IntervalList from "./IntervalList";
 import Panel from "./Panel_Components/Panel";
 import InfoBar from "./InfoBar";
+import LoginPage from "./LoginPage";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../Contexts/DataContext";
 
@@ -24,6 +25,7 @@ export default function MaintenanceTracker() {
 
   return (
     <div>
+      <LoginPage />
       <InfoBar />
       <IntervalList initialMiles={initialMiles} />
       <Panel panelData={maintenanceTrackerContext.state.panelData} />

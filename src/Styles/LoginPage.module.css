@@ -1,0 +1,65 @@
+.main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -200px;
+}
+
+.box {
+  width: 400px;
+  height: 200px;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  border: 1px solid white;
+  color: white;
+  background-color: black;
+}
+
+.title {
+  width: 100%;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-bottom: 1px solid white;
+}
+
+.title h3 {
+}
+
+.login_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login_info input {
+  width: 50%;
+  margin-top: 32px;
+  margin-bottom: -16px;
+  /* background-color: black; */
+}
+
+.options {
+  margin-top: 40px;
+  margin-left: 16px;
+  margin-right: 16px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.options button {
+  width: 120px;
+  background-color: slategray;
+  border: 1px solid grey;
+  /* border-radius: 0px; */
+  color: black;
+  cursor: pointer;
+}

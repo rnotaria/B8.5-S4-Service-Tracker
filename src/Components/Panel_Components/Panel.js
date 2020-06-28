@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import SlidingPane from "./react-sliding-pane/react-sliding-pane";
 import "./react-sliding-pane/react-sliding-pane.css";
+import styles from "../../Styles/Panel.module.css";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 import PanelButton from "./PanelButton";
 
@@ -71,7 +72,7 @@ export default function Panel({
         }}
         height={height}
       >
-        {panelData.content}
+        <div className={styles.component}>{panelData.content}</div>
       </SlidingPane>
     </div>
   );
