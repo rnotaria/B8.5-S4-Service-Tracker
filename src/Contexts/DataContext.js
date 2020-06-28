@@ -18,6 +18,7 @@ const dataContextReducer = (state, action) => {
     }
 
     case "updateCurrentMiles": {
+      // Update the current miles of the vehicle
       return {
         ...state,
         container: {
@@ -28,6 +29,7 @@ const dataContextReducer = (state, action) => {
     }
 
     case "update":
+      // Update task info in specific interval if it has been updated
       return {
         ...state,
         data: {

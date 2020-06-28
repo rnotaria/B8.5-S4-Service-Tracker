@@ -1,5 +1,3 @@
-// This file contains helper functions that provide or alter maintenanceList data
-
 export const emptyService = {
   tasks: {},
 
@@ -183,14 +181,14 @@ const majorService = {
 };
 
 // Returns an array of maintenance mile invervals
-export const getMilesArray = (initialMiles) => {
+export const getMilesArray = (miles) => {
   const milesArray = [5000];
-  initialMiles -= 5000;
+  miles -= 5000;
 
   // append next 5 intervals
-  while (initialMiles + 40000 > 0) {
+  while (miles + 40000 > 0) {
     milesArray.push(milesArray[milesArray.length - 1] + 10000);
-    initialMiles -= 10000;
+    miles -= 10000;
   }
 
   return milesArray;
@@ -210,3 +208,12 @@ export const getServiceDataArray = (milesArray) => {
   });
   return serviceDataArray;
 };
+
+// export const getData = (miles) => {
+//   const milesArray = getMilesArray(miles);
+//   const serviceDataArray = getServiceDataArray(milesArray);
+
+//   return [milesArray, serviceDataArray];
+// };
+
+export const getExistingData = () => {};

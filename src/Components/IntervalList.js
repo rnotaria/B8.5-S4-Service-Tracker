@@ -1,14 +1,16 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import Interval from "./Interval";
 import {
   getMilesArray,
   getServiceDataArray,
+  getExistingData,
 } from "../utils/getMaintenanceData";
 import styles from "../Styles/IntervalList.module.css";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../Contexts/DataContext";
 
 function IntervalList({ initialMiles }) {
+  const didMount = useRef(false);
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const dataContext = useContext(DataContext);
   const [currentMiles, setCurrentMiles] = useState(initialMiles);
@@ -17,6 +19,11 @@ function IntervalList({ initialMiles }) {
   const [serviceDataArray, setServiceDataArray] = useState(
     getServiceDataArray(milesArray)
   );
+
+  // If user data already exists, retreive it
+  // if(didMount.current === false &&  //file exists){
+  //   then...
+  // }
 
   // State that determines which collapsable Interval is open
   const [openBox, setOpenBox] = useState(

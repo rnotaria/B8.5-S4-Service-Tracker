@@ -13,15 +13,13 @@ export default function MaintenanceTracker() {
   const initialMiles = 150000;
 
   // initialize
-  useEffect(() => {
-    if (didMount.current === false) {
-      didMount.current = true;
-      dataContext.dispatch({
-        type: "initialize",
-        value: { currentMiles: initialMiles, car: "2016 Audi S4" },
-      });
-    }
-  });
+  if (didMount.current === false) {
+    didMount.current = true;
+    dataContext.dispatch({
+      type: "initialize",
+      value: { currentMiles: initialMiles, car: "2016 Audi S4" },
+    });
+  }
 
   return (
     <div>
