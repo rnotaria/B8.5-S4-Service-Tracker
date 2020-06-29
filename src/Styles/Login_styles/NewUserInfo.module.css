@@ -33,33 +33,53 @@
 .title h3 {
 }
 
-.login_info {
+.vehicle_info {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.login_info input {
-  width: 50%;
   margin-top: 32px;
-  margin-bottom: -16px;
-  /* background-color: black; */
 }
 
-.options {
-  margin-top: 40px;
-  margin-left: 16px;
-  margin-right: 16px;
+.vehicle_info input {
+  background-color: silver;
+}
 
+.vehicle {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
 }
 
-.options button {
-  width: 120px;
+.year {
+  width: 50px;
+  margin-right: 8px;
+}
+
+.make {
+  width: 100px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.model {
+  width: 100px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.miles {
+  margin-top: 8px;
+}
+
+.continue_btn {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.continue_btn button {
+  width: 150px;
   background-color: slategray;
   border: 1px solid grey;
-  /* border-radius: 0px; */
   color: black;
   cursor: pointer;
 }

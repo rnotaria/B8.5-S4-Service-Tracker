@@ -9,11 +9,13 @@ import styles from "../Styles/IntervalList.module.css";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../Contexts/DataContext";
 
-function IntervalList({ initialMiles }) {
+function IntervalList() {
   const didMount = useRef(false);
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const dataContext = useContext(DataContext);
-  const [currentMiles, setCurrentMiles] = useState(initialMiles);
+  const [currentMiles, setCurrentMiles] = useState(
+    dataContext.state.container.miles
+  );
 
   const [milesArray, setMilesArray] = useState(getMilesArray(currentMiles));
   const [serviceDataArray, setServiceDataArray] = useState(
@@ -78,13 +80,11 @@ function IntervalList({ initialMiles }) {
 
   // Check if CurrentMiles was updated
   useEffect(() => {
-    if (dataContext.state.container.currentMiles !== currentMiles) {
-      setCurrentMiles(dataContext.state.container.currentMiles);
+    if (dataContext.state.container.miles !== currentMiles) {
+      setCurrentMiles(dataContext.state.container.miles);
     }
-    if (dataContext.state.container.currentMiles > currentMiles) {
-      var tempMilesArray = getMilesArray(
-        dataContext.state.container.currentMiles
-      );
+    if (dataContext.state.container.miles > currentMiles) {
+      var tempMilesArray = getMilesArray(dataContext.state.container.miles);
       const index = tempMilesArray.findIndex((number) => {
         return number > milesArray[milesArray.length - 1];
       });
@@ -97,7 +97,7 @@ function IntervalList({ initialMiles }) {
         setServiceDataArray(getServiceDataArray(newArray));
       }
     }
-  }, [dataContext.state.container.currentMiles, currentMiles, milesArray]);
+  }, [dataContext.state.container.miles, currentMiles, milesArray]);
 
   return (
     <div className={styles.main}>

@@ -6,14 +6,20 @@ import { DataContext } from "../Contexts/DataContext";
 
 function InfoBar() {
   const dataContext = useContext(DataContext);
+  const vehicle =
+    dataContext.state.container.vehicle.year +
+    " " +
+    dataContext.state.container.vehicle.make +
+    " " +
+    dataContext.state.container.vehicle.model;
 
   return (
     <div className={styles.main}>
       <div className={styles.car}>
-        <h4>{dataContext.state.container.car}</h4>
+        <h4>{vehicle}</h4>
       </div>
       <div className={styles.miles}>
-        <h2>{dataContext.state.container.currentMiles}</h2>
+        <h2>{dataContext.state.container.miles}</h2>
         <h5> mi</h5>
       </div>
       <div className={styles.options}>

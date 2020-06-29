@@ -2,28 +2,48 @@ import React, { useReducer } from "react";
 
 export const DataContext = React.createContext();
 
-const dataContextInitialState = { data: {}, container: { save: false } };
+const dataContextInitialState = {
+  data: {},
+  container: {
+    user: null,
+    isNew: null,
+    vehicle: null,
+    miles: null,
+  },
+};
 
 const dataContextReducer = (state, action) => {
   switch (action.type) {
-    case "initialize": {
+    case "setLogin":
       return {
         ...state,
         container: {
           ...state.container,
-          currentMiles: action.value.currentMiles,
-          car: action.value.car,
+          user: action.value.user,
+          isNew: action.value.isNew,
         },
       };
-    }
 
+    case "setVehicleInfo":
+      return {
+        ...state,
+        container: {
+          ...state.container,
+          vehicle: {
+            year: action.value.year,
+            make: action.value.make,
+            model: action.value.model,
+          },
+          miles: action.value.miles,
+        },
+      };
     case "updateCurrentMiles": {
       // Update the current miles of the vehicle
       return {
         ...state,
         container: {
           ...state.container,
-          currentMiles: action.value.currentMiles,
+          miles: action.value.currentMiles,
         },
       };
     }

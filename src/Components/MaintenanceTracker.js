@@ -1,31 +1,28 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext } from "react";
 import IntervalList from "./IntervalList";
 import Panel from "./Panel_Components/Panel";
 import InfoBar from "./InfoBar";
-import LoginPage from "./LoginPage";
+import LoginPage from "./Login_Components/LoginPage";
+import NewUserInfo from "./Login_Components/NewUserInfo";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../Contexts/DataContext";
 
 export default function MaintenanceTracker() {
-  const didMount = useRef(false);
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const dataContext = useContext(DataContext);
-  const initialMiles = 150000;
 
-  // initialize
-  if (didMount.current === false) {
-    didMount.current = true;
-    dataContext.dispatch({
-      type: "initialize",
-      value: { currentMiles: initialMiles, car: "2016 Audi S4" },
-    });
+  if (dataContext.state.container.user === null) {
+    return <LoginPage />;
+  } else {
+    if (dataContext.state.container.miles === null) {
+      return <NewUserInfo />;
+    }
   }
 
   return (
     <div>
-      <LoginPage />
       <InfoBar />
-      <IntervalList initialMiles={initialMiles} />
+      <IntervalList />
       <Panel panelData={maintenanceTrackerContext.state.panelData} />
     </div>
   );
