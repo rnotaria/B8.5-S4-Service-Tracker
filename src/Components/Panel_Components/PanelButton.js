@@ -6,8 +6,8 @@ import {
   Rotate,
   closedButtonPosition,
   openedButtonPosition,
-} from "../../Styles/PanelButtonStyles";
-import styles from "../../Styles/PanelButton.module.css";
+} from "../../Styles/Panel_Styles/PanelButtonStyles";
+import styles from "../../Styles/Panel_Styles/PanelButton.module.css";
 
 export default function PanelButton({ height, buttonStatus, handleStatus }) {
   const delay = 0.5;

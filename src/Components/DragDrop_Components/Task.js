@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useContext } from "react";
-import styles from "../../Styles/Task.module.css";
+import styles from "../../Styles/DragDrop_Styles/Task.module.css";
 import { Draggable } from "react-beautiful-dnd";
 import { FaTools } from "react-icons/fa";
 import { GoInfo } from "react-icons/go";

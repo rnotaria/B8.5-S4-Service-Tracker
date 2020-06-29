@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styles from "../../Styles/Login_styles/LoginPage.module.css";
+import styles from "../../Styles/Login_Styles/LoginPage.module.css";
 import useInput from "../../hooks/useInput";
 import { DataContext } from "../../Contexts/DataContext";
 

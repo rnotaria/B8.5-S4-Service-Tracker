@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import styles from "../../Styles/Board.module.css";
+import styles from "../../Styles/DragDrop_Styles/Board.module.css";
 import Column from "./Column";
 
 function Board({ prop_data, miles, updateData }) {

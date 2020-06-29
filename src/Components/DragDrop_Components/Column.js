@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Task from "./Task";
-import styles from "../../Styles/Column.module.css";
+import styles from "../../Styles/DragDrop_Styles/Column.module.css";
 import { Droppable } from "react-beautiful-dnd";
 import AddTaskButton from "./AddTaskButton";
 import DeleteTaskButton from "./DeleteTaskButton";

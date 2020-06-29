@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
-import styles from "../../Styles/addDeleteTaskButtons.module.css";
+import styles from "../../Styles/DragDrop_Styles/addDeleteTaskButtons.module.css";
 
 export default function AddTaskButton({ miles, tasks, column }) {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);

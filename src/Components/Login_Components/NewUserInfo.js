@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import styles from "../../Styles/Login_styles/NewUserInfo.module.css";
+import styles from "../../Styles/Login_Styles/NewUserInfo.module.css";
 import useInput from "../../hooks/useInput";
 import { DataContext } from "../../Contexts/DataContext";
 
 export default function NewUserInfo() {
-  const [year, yearInput] = useInput("", "Year", styles.year);
-  const [make, makeInput] = useInput("", "Make", styles.make);
-  const [model, modelInput] = useInput("", "Model", styles.model);
-  const [miles, milesInput] = useInput("", "Miles", styles.miles);
+  const [year, yearInput] = useInput("2016", "Year", styles.year);
+  const [make, makeInput] = useInput("Audi", "Make", styles.make);
+  const [model, modelInput] = useInput("S4", "Model", styles.model);
+  const [miles, milesInput] = useInput("57000", "Miles", styles.miles);
   const dataContext = useContext(DataContext);
 
   const handleContinue = () => {

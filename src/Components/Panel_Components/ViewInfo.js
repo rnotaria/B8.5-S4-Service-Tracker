@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
-import styles from "../../Styles/ViewInfo.module.css";
+import styles from "../../Styles/Panel_Styles/ViewInfo.module.css";
 import useInput from "../../hooks/useInput";
 import useEdit from "../../hooks/useEdit";
 
