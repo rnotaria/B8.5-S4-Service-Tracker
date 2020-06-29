@@ -864,7 +864,7 @@
 }
 .ql-toolbar.ql-snow {
   background-color: #999;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   box-sizing: border-box;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   margin-left: 16px;
@@ -961,8 +961,9 @@
   color: #06c;
 }
 .ql-container.ql-snow {
-  border: 1px solid #000;
+  border: 1px solid #fff;
   height: 400px;
   margin-left: 16px;
   margin-right: 16px;
+  background-color: rgba(0, 0, 0, 0.2);
 }

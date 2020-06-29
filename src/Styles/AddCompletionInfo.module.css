@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
+  color: white;
 }
 
 .row {
@@ -22,7 +23,7 @@
 
 .column2 input {
   width: 80px;
-  background-color: inherit;
+  background-color: slategray;
 }
 
 .notes_edit {

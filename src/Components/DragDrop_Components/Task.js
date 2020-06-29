@@ -3,12 +3,6 @@ import styles from "../../Styles/Task.module.css";
 import { Draggable } from "react-beautiful-dnd";
 import { FaTrash, FaTools } from "react-icons/fa";
 import { GoInfo } from "react-icons/go";
-import {
-  TaskContainer,
-  TrashStyle,
-  iconStyle,
-  infoStyle,
-} from "../../Styles/TaskStyles";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 
 function Task({ task, index, column, columnId, deleteTask, miles }) {
@@ -34,7 +28,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
     <div className={styles.mainContainer}>
       {deleteTask === true ? (
         <FaTrash
-          style={TrashStyle}
+          className={styles.trash}
           onClick={() =>
             maintenanceTrackerContext.dispatch({
               type: "deleteTask",
@@ -53,21 +47,23 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
         isDragDisabled={deleteTask || column === "Complete"}
       >
         {(provided, snapshot) => (
-          <TaskContainer
+          <div
+            className={
+              columnId === "column1"
+                ? styles.taskContainer1
+                : styles.taskContainer2
+            }
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            isDragging={snapshot.isDragging}
-            column={column}
-            bgColor={bgColor}
           >
             <div>
-              <FaTools style={iconStyle} />
+              <FaTools className={styles.icon} />
             </div>
             <div className={styles.ellipsis}>{task.title}</div>
             <div>
               <GoInfo
-                style={infoStyle}
+                className={styles.info}
                 onClick={() =>
                   maintenanceTrackerContext.dispatch({
                     type: "viewInfo",
@@ -79,7 +75,7 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
                 }
               />
             </div>
-          </TaskContainer>
+          </div>
         )}
       </Draggable>
     </div>

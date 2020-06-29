@@ -5,8 +5,9 @@
   position: relative;
   line-height: 0;
 
-  background-color: grey;
-  border: 1px solid lightgrey;
+  /* background-color: rgb(110, 110, 110); */
+  background-image: linear-gradient(rgb(100, 100, 100), slategrey);
+  border: 1px solid black;
   border-radius: 10px;
 
   overflow: hidden;

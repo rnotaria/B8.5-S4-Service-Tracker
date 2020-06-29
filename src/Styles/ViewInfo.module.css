@@ -4,6 +4,7 @@
 
 .main {
   width: 100%;
+  color: white;
 }
 
 .section_divider {
@@ -11,6 +12,7 @@
 }
 
 .section_header {
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +36,7 @@
 
 .column2 input {
   width: 80px;
-  background-color: inherit;
+  background-color: slategray;
 }
 
 .edit_btn {

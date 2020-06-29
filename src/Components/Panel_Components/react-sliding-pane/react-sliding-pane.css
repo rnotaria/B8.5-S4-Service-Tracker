@@ -3,7 +3,11 @@
 .slide-pane {
   display: flex;
   flex-direction: column;
-  background: rgba(238, 238, 238, 0.8);
+  /* background: rgba(10, 10, 30, 0.8); */
+  background-image: linear-gradient(
+    rgba(10, 10, 30, 0.8),
+    rgba(10, 10, 50, 0.8)
+  );
   width: 100%;
   min-width: 800px;
   /* max-width: 1200px; */
@@ -66,9 +70,13 @@
   display: flex;
   flex: 0 0 64px;
   align-items: center;
-  background: rgba(170, 170, 170, 0.9);
+  /* background: rgba(220, 220, 220, 0.4); */
+  background-image: linear-gradient(
+    rgb(255, 255, 255, 0.5),
+    rgb(220, 220, 220, 0.5)
+  );
   height: 64px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid grey;
   border-top: 1px solid white;
 }
 .slide-pane__title-wrapper {
