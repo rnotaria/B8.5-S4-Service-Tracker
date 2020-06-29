@@ -1,22 +1,30 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import styles from "../../Styles/Task.module.css";
 import { Draggable } from "react-beautiful-dnd";
-import { FaTrash, FaTools } from "react-icons/fa";
+import { FaTools } from "react-icons/fa";
 import { GoInfo } from "react-icons/go";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 
-function Task({ task, index, column, columnId, deleteTask, miles }) {
+function Task({ task, index, column, columnId, activateDelete, miles }) {
   // console.log(task);
-  const [bgColor, setBgColor] = useState("#A9A9A9");
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const isComplete = useRef(false);
+
+  const handleDelete = () => {
+    maintenanceTrackerContext.dispatch({
+      type: "deleteTask",
+      value: {
+        miles,
+        taskId: task.id,
+        columnId,
+      },
+    });
+  };
 
   // Side Effect on Task Complete
   useEffect(() => {
     if (isComplete.current === false && column === "Complete") {
       isComplete.current = true;
-      setBgColor("green");
-
       maintenanceTrackerContext.dispatch({
         type: "addCompletionInfo.1",
         value: { taskId: task.id, miles },
@@ -26,36 +34,24 @@ function Task({ task, index, column, columnId, deleteTask, miles }) {
 
   return (
     <div className={styles.mainContainer}>
-      {deleteTask === true ? (
-        <FaTrash
-          className={styles.trash}
-          onClick={() =>
-            maintenanceTrackerContext.dispatch({
-              type: "deleteTask",
-              value: {
-                miles,
-                taskId: task.id,
-                columnId,
-              },
-            })
-          }
-        />
-      ) : null}
       <Draggable
         draggableId={task.id}
         index={index}
-        isDragDisabled={deleteTask || column === "Complete"}
+        isDragDisabled={activateDelete || column === "Complete"}
       >
         {(provided, snapshot) => (
           <div
-            className={
-              columnId === "column1"
-                ? styles.taskContainer1
-                : styles.taskContainer2
-            }
+            className={`
+              ${
+                columnId === "column1"
+                  ? styles.taskContainer1
+                  : styles.taskContainer2
+              } ${activateDelete === true ? styles.deleteActive : null}
+            `}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
+            onClick={activateDelete === true ? () => handleDelete() : null}
           >
             <div>
               <FaTools className={styles.icon} />

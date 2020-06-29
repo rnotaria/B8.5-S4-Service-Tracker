@@ -49,6 +49,10 @@
   align-items: center;
 }
 
+.deleteActive {
+  cursor: pointer;
+}
+
 .ellipsis {
   white-space: nowrap;
   text-overflow: ellipsis;

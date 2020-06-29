@@ -7,10 +7,10 @@ import DeleteTaskButton from "./DeleteTaskButton";
 
 function Column({ column, tasks, miles }) {
   // console.log("Rendering Column...");
-  const [deleteTask, setDeleteTask] = useState(false);
+  const [activateDelete, setActivateDelete] = useState(false);
 
-  const toggleDeleteTask = () => {
-    setDeleteTask(!deleteTask);
+  const toggleActivateDelete = () => {
+    setActivateDelete(!activateDelete);
   };
 
   return (
@@ -19,8 +19,8 @@ function Column({ column, tasks, miles }) {
         <AddTaskButton miles={miles} tasks={tasks} column={column} />
         {column.title}
         <DeleteTaskButton
-          deleteTask={deleteTask}
-          toggleDeleteTask={toggleDeleteTask}
+          activateDelete={activateDelete}
+          toggleActivateDelete={toggleActivateDelete}
         />
       </div>
       <Droppable droppableId={column.id}>
@@ -38,7 +38,7 @@ function Column({ column, tasks, miles }) {
                 column={column.title}
                 columnId={column.id}
                 miles={miles}
-                deleteTask={deleteTask}
+                activateDelete={activateDelete}
               />
             ))}
             {provided.placeholder}
