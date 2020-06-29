@@ -13,6 +13,10 @@ function InfoBar() {
     " " +
     dataContext.state.container.vehicle.model;
 
+  const handleLogout = () => {
+    dataContext.dispatch({ type: "logout" });
+  };
+
   return (
     <div className={styles.main}>
       <div className={styles.car}>
@@ -27,7 +31,9 @@ function InfoBar() {
         <h5 className={styles.divider}>|</h5>
         <MdSettings className={styles.settings} />
         <h5 className={styles.divider}>|</h5>
-        <h5 className={styles.logout}>Logout</h5>
+        <h5 className={styles.logout} onClick={() => handleLogout()}>
+          Logout
+        </h5>
       </div>
     </div>
   );

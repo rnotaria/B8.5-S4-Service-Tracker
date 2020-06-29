@@ -62,6 +62,9 @@ const dataContextReducer = (state, action) => {
       delete state.data[action.value];
       return state;
 
+    case "logout":
+      return dataContextInitialState;
+
     default:
       return state;
   }
