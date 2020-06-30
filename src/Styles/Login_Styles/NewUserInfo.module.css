@@ -1,0 +1,85 @@
+.main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -200px;
+}
+
+.box {
+  width: 400px;
+  height: 200px;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  border: 1px solid white;
+  color: white;
+  background-color: black;
+}
+
+.title {
+  width: 100%;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-bottom: 1px solid white;
+}
+
+.title h3 {
+}
+
+.vehicle_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.vehicle_info input {
+  background-color: silver;
+}
+
+.vehicle {
+  display: flex;
+  flex-direction: row;
+}
+
+.year {
+  width: 50px;
+  margin-right: 8px;
+}
+
+.make {
+  width: 100px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.model {
+  width: 100px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.miles {
+  margin-top: 8px;
+}
+
+.continue_btn {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.continue_btn button {
+  width: 150px;
+  background-color: slategray;
+  border: 1px solid grey;
+  color: black;
+  cursor: pointer;
+}
