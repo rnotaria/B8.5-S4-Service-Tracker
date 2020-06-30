@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useContext } from "react";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
+import styles from "../../Styles/Panel_Styles/DefaultPanelContent.module.css";
 
 export default function AddServiceInterval() {
   const [renderInputField, setRenderInputField] = useState(false);
@@ -33,14 +34,18 @@ export default function AddServiceInterval() {
 
   if (renderInputField === false) {
     return (
-      <button onClick={() => setRenderInputField(true)}>
-        Add Service Interval
-      </button>
+      <div
+        className={`${styles.componentContainer} ${styles.addInterval_input} `}
+      >
+        <button onClick={() => setRenderInputField(true)}>
+          Add Service Interval
+        </button>{" "}
+      </div>
     );
   }
 
   return (
-    <div>
+    <div className={`${styles.componentContainer} `}>
       <input
         autoFocus={true}
         type="text"

@@ -1,0 +1,22 @@
+.main {
+  display: flex;
+  justify-content: space-around;
+}
+
+.componentContainer {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.componentContainer button {
+  background: silver;
+  width: 200px;
+
+  cursor: pointer;
+}
+
+.componentContainer input {
+  background-color: lightgrey;
+  margin-right: 8px;
+}

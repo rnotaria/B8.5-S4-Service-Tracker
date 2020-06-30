@@ -77,7 +77,7 @@
   );
   height: 64px;
   border-bottom: 1px solid grey;
-  border-top: 1px solid white;
+  border-top: 1px solid grey;
 }
 .slide-pane__title-wrapper {
   display: flex;
@@ -88,7 +88,7 @@
 }
 .slide-pane .slide-pane__title {
   font-size: 18px;
-  font-weight: normal;
+  font-weight: bold;
   max-width: 80%;
   white-space: nowrap;
   overflow: hidden;
