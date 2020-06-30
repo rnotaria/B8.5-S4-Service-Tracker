@@ -1,0 +1,168 @@
+/* * * * * * * * * * * * * * * * * * * * *
+ * * * Styles for Board.js Component * * *
+ * * * * * * * * * * * * * * * * * * * * */
+.board_container {
+  display: flex;
+  justify-content: center;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * *
+ * * * Styles for Column.js Component  * * *
+ * * * * * * * * * * * * * * * * * * * * * */
+.column_container {
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(rgb(100, 100, 100), rgb(40, 40, 40));
+  border: 1px solid black;
+  border-radius: 5px;
+
+  overflow: hidden;
+  user-select: none;
+}
+
+.column_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 0px;
+  padding: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  background-image: linear-gradient(rgb(150, 30, 40), #600000);
+
+  color: rgb(240, 240, 240);
+  border-bottom: 1px solid black;
+}
+
+.column_taskList {
+  padding: 8px;
+  flex-grow: 1;
+  min-height: 100px;
+}
+
+/* * * * * * * * * * * * * * * * * * * * *
+ * * * Styles for Task.js Component  * * *
+ * * * * * * * * * * * * * * * * * * * * */
+.task_mainContainer {
+  display: flex;
+  align-items: center;
+}
+
+.task_container {
+  border: 1px solid black;
+  border-radius: 100px;
+  overflow: hidden;
+  transition: background-image 1s ease-in-out;
+
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin: 5px;
+
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+
+  user-select: none;
+  flex: 1;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task_incomplete {
+  background-image: linear-gradient(darkgrey, silver);
+}
+
+.task_complete {
+  background-image: linear-gradient(green, lightgreen);
+}
+
+.task_deleteActive {
+  cursor: pointer;
+}
+
+.task_useEllipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.task_icon {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.task_info {
+  padding-left: 12px;
+  padding-right: 12px;
+  cursor: pointer;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * *
+ * * * Styles for AddTaskButton.js Component * * *
+ * * * * * * * * * * * * AND * * * * * * * * * * *
+ * * Styles for DeleteTaskButton.js Component  * *
+ * * * * * * * * * * * * * * * * * * * * * * * * */
+.delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.delete button {
+  width: 30px;
+  cursor: pointer;
+  background-color: darkslateblue;
+  color: white;
+  outline: none;
+}
+
+.delete_active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@keyframes deleteActive_fade {
+  0% {
+    background-color: darkslateblue;
+  }
+  50% {
+    background-color: red;
+  }
+  100% {
+    background-color: darkslateblue;
+  }
+}
+
+.delete_active button {
+  width: 30px;
+  cursor: pointer;
+  background-color: darkslateblue;
+  color: white;
+  animation: deleteActive_fade linear 2s infinite;
+  outline: none;
+}
+
+.add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.add button {
+  width: 30px;
+  cursor: pointer;
+  background-color: darkslateblue;
+  color: white;
+  outline: none;
+}

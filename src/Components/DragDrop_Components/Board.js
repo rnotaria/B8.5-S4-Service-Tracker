@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import styles from "../../Styles/DragDrop_Styles/Board.module.css";
+import styles from "../../Styles/DragDropStyles.module.css";
 import Column from "./Column";
 
 function Board({ prop_data, miles, updateData }) {
@@ -88,7 +88,7 @@ function Board({ prop_data, miles, updateData }) {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className={styles.container}>
+      <div className={styles.board_container}>
         {data.columnOrder.map((columnId) => {
           const column = data.columns[columnId];
           const tasks = column.taskIds.map((taskId) => data.tasks[taskId]);

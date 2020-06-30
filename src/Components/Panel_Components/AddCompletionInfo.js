@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 import styles from "../../Styles/Panel_Styles/AddCompletionInfo.module.css";
+import commonStyles from "../../Styles/commonStyles.module.css";
 import getDate from "../../utils/getDate";
 import useInput from "../../hooks/useInput";
 
@@ -66,9 +67,7 @@ export default function CompletionInfo({ taskId, intervalMiles }) {
         </div>
       </div>
       <div className={styles.btn_container}>
-        <button className={styles.btn} onClick={handleSubmit}>
-          Submit
-        </button>
+        <button onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   );

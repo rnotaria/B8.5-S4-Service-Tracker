@@ -1,11 +1,17 @@
-.title {
+.IntervalList_main {
+  margin-top: 50px;
+  margin-left: 160px;
+  margin-right: 160px;
+  margin-bottom: 50vh;
+}
+
+.Interval_title {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   line-height: 0;
 
-  /* background-color: rgb(110, 110, 110); */
   background-image: linear-gradient(rgb(100, 100, 100), slategrey);
   border: 1px solid black;
   border-radius: 10px;
@@ -14,6 +20,6 @@
   user-select: none;
 }
 
-.container {
+.Interval_container {
   padding: 10px;
 }

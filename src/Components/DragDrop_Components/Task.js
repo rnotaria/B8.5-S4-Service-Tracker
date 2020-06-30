@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useContext } from "react";
-import styles from "../../Styles/DragDrop_Styles/Task.module.css";
+import styles from "../../Styles/DragDropStyles.module.css";
 import { Draggable } from "react-beautiful-dnd";
 import { FaTools } from "react-icons/fa";
 import { GoInfo } from "react-icons/go";
@@ -33,7 +33,7 @@ function Task({ task, index, column, columnId, activateDelete, miles }) {
   }, [maintenanceTrackerContext, column, task.id, miles]); //ignore dependency warning for now
 
   return (
-    <div className={styles.mainContainer}>
+    <div className={styles.task_mainContainer}>
       <Draggable
         draggableId={task.id}
         index={index}
@@ -41,12 +41,12 @@ function Task({ task, index, column, columnId, activateDelete, miles }) {
       >
         {(provided, snapshot) => (
           <div
-            className={`
+            className={`${styles.task_container}
               ${
                 columnId === "column1"
-                  ? styles.taskContainer1
-                  : styles.taskContainer2
-              } ${activateDelete === true ? styles.deleteActive : null}
+                  ? styles.task_incomplete
+                  : styles.task_complete
+              } ${activateDelete === true ? styles.task_deleteActive : null}
             `}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
@@ -54,12 +54,12 @@ function Task({ task, index, column, columnId, activateDelete, miles }) {
             onClick={activateDelete === true ? () => handleDelete() : null}
           >
             <div>
-              <FaTools className={styles.icon} />
+              <FaTools className={styles.task_icon} />
             </div>
-            <div className={styles.ellipsis}>{task.title}</div>
+            <div className={styles.task_useEllipsis}>{task.title}</div>
             <div>
               <GoInfo
-                className={styles.info}
+                className={styles.task_info}
                 onClick={() =>
                   maintenanceTrackerContext.dispatch({
                     type: "viewInfo",

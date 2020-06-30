@@ -1,0 +1,9 @@
+.button {
+  background-color: slategray;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
+.input {
+  background-color: silver;
+}

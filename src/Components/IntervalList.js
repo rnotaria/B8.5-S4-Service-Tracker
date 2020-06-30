@@ -5,7 +5,7 @@ import {
   getServiceDataArray,
   getExistingData,
 } from "../utils/getMaintenanceData";
-import styles from "../Styles/IntervalList.module.css";
+import styles from "../Styles/Interval.module.css";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../Contexts/DataContext";
 
@@ -100,7 +100,7 @@ function IntervalList() {
   }, [dataContext.state.container.miles, currentMiles, milesArray]);
 
   return (
-    <div className={styles.main}>
+    <div className={styles.IntervalList_main}>
       {milesArray.map((miles, index) => (
         <Interval
           key={miles}
