@@ -253,8 +253,6 @@ const buildService = (key, n) => {
   };
 
   for (var i = 0; i < n; i++) {
-    // console.log(key);
-    // console.log(maintenanceList[key[i]]);
     service = {
       ...service,
       tasks: {
@@ -320,8 +318,6 @@ export const getInitData = (miles) => {
   for (var i of Object.keys(data)) {
     milesArray.push(parseInt(i));
   }
-
-  console.log(data);
 
   const serviceArray = buildServiceArray(Object.values(data));
 
