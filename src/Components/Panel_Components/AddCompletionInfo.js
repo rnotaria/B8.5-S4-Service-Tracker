@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 import styles from "../../Styles/Panel_Styles/AddCompletionInfo.module.css";
-import commonStyles from "../../Styles/commonStyles.module.css";
 import getDate from "../../utils/getDate";
 import useInput from "../../hooks/useInput";
 

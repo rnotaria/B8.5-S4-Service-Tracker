@@ -8,6 +8,9 @@ export default function LoginPage() {
   const [password, passwordInput] = useInput("", "Password");
   const dataContext = useContext(DataContext);
 
+  // Only here so we don't get warnings saying its unused. Delete when implemented
+  console.log(email, password);
+
   const handleLogin = () => {
     alert("Login system is under construction. Please select Guest");
   };

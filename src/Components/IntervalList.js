@@ -1,26 +1,24 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Interval from "./Interval";
 import {
-  getMilesArray,
-  getServiceDataArray,
-  getExistingData,
-} from "../utils/getMaintenanceData";
+  getInitData,
+  addInterval,
+  updateCurrentMiles,
+} from "../utils/defaultData/getMaintenanceData";
 import styles from "../Styles/Interval.module.css";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../Contexts/DataContext";
 
 function IntervalList() {
-  const didMount = useRef(false);
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const dataContext = useContext(DataContext);
   const [currentMiles, setCurrentMiles] = useState(
-    dataContext.state.container.miles
+    parseInt(dataContext.state.container.miles)
   );
 
-  const [milesArray, setMilesArray] = useState(getMilesArray(currentMiles));
-  const [serviceDataArray, setServiceDataArray] = useState(
-    getServiceDataArray(milesArray)
-  );
+  const [milesArrayInit, serviceArrayInit] = getInitData(currentMiles);
+  const [milesArray, setMilesArray] = useState(milesArrayInit);
+  const [serviceArray, setServiceArray] = useState(serviceArrayInit);
 
   // If user data already exists, retreive it
   // if(didMount.current === false &&  //file exists){
@@ -41,15 +39,18 @@ function IntervalList() {
       if (
         !milesArray.includes(maintenanceTrackerContext.state.container.interval)
       ) {
-        const newMilesArray = [...milesArray];
-        newMilesArray.push(maintenanceTrackerContext.state.container.interval);
-        newMilesArray.sort((a, b) => a - b);
+        const newInterval = maintenanceTrackerContext.state.container.interval;
+        const [newMilesArray, newServiceArray] = addInterval(
+          milesArray,
+          serviceArray,
+          newInterval
+        );
         setMilesArray(newMilesArray);
-        setServiceDataArray(getServiceDataArray(newMilesArray));
+        setServiceArray(newServiceArray);
       }
       setOpenBox(maintenanceTrackerContext.state.container.interval);
     }
-  }, [maintenanceTrackerContext, milesArray]);
+  }, [maintenanceTrackerContext, milesArray, serviceArray]);
 
   // Delete service mile interval
   useEffect(() => {
@@ -57,11 +58,11 @@ function IntervalList() {
       if (openBox != null) {
         const index = milesArray.indexOf(openBox);
         const milesArrayClone = [...milesArray];
-        const serviceDataArrayClone = [...serviceDataArray];
+        const serviceArrayClone = [...serviceArray];
         milesArrayClone.splice(index, 1);
-        serviceDataArrayClone.splice(index, 1);
+        serviceArrayClone.splice(index, 1);
         setMilesArray(milesArrayClone);
-        setServiceDataArray(serviceDataArrayClone);
+        setServiceArray(serviceArrayClone);
         maintenanceTrackerContext.dispatch({ type: "setStatus" });
         dataContext.dispatch({ type: "deleteInterval", value: openBox });
 
@@ -74,7 +75,7 @@ function IntervalList() {
     maintenanceTrackerContext,
     dataContext,
     milesArray,
-    serviceDataArray,
+    serviceArray,
     openBox,
   ]);
 
@@ -84,20 +85,20 @@ function IntervalList() {
       setCurrentMiles(dataContext.state.container.miles);
     }
     if (dataContext.state.container.miles > currentMiles) {
-      var tempMilesArray = getMilesArray(dataContext.state.container.miles);
-      const index = tempMilesArray.findIndex((number) => {
-        return number > milesArray[milesArray.length - 1];
-      });
-
-      if (index > -1) {
-        const newArray = [...milesArray].concat(
-          tempMilesArray.slice(index, tempMilesArray.length)
-        );
-        setMilesArray(newArray);
-        setServiceDataArray(getServiceDataArray(newArray));
-      }
+      const [newMilesArray, newServiceArray] = updateCurrentMiles(
+        milesArray,
+        serviceArray,
+        dataContext.state.container.miles
+      );
+      setMilesArray(newMilesArray);
+      setServiceArray(newServiceArray);
     }
-  }, [dataContext.state.container.miles, currentMiles, milesArray]);
+  }, [
+    dataContext.state.container.miles,
+    currentMiles,
+    milesArray,
+    serviceArray,
+  ]);
 
   return (
     <div className={styles.IntervalList_main}>
@@ -105,7 +106,7 @@ function IntervalList() {
         <Interval
           key={miles}
           miles={miles}
-          serviceData={serviceDataArray[index]}
+          serviceData={serviceArray[index]}
           open={miles === openBox ? true : false}
           handleSetOpenBox={handleSetOpenBox}
         />

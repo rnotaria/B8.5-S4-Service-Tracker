@@ -1,4 +1,6 @@
 .main {
+  margin-left: 32px;
+  margin-right: 32px;
   display: flex;
   justify-content: space-around;
 }
@@ -10,8 +12,9 @@
 }
 
 .componentContainer button {
-  background: silver;
+  background: slategray;
   width: 200px;
+  height: 25px;
 
   cursor: pointer;
 }
