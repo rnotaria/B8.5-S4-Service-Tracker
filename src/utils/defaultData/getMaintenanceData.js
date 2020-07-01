@@ -253,6 +253,8 @@ const buildService = (key, n) => {
   };
 
   for (var i = 0; i < n; i++) {
+    // console.log(key);
+    // console.log(maintenanceList[key[i]]);
     service = {
       ...service,
       tasks: {
@@ -300,13 +302,15 @@ export const getInitData = (miles) => {
     const start = maintenanceList[key].start;
     const repeat = maintenanceList[key].repeat;
     if (start < endMiles) {
-      data[start] ? (data[start] = [data[start], key]) : (data[start] = key);
+      data[start]
+        ? (data[start] = [...data[start], key])
+        : (data[start] = [key]);
 
       var currentMiles = start + repeat;
       while (currentMiles < endMiles) {
         data[currentMiles]
-          ? (data[currentMiles] = [data[currentMiles], key])
-          : (data[currentMiles] = key);
+          ? (data[currentMiles] = [...data[currentMiles], key])
+          : (data[currentMiles] = [key]);
         currentMiles += repeat;
       }
     }
@@ -316,6 +320,8 @@ export const getInitData = (miles) => {
   for (var i of Object.keys(data)) {
     milesArray.push(parseInt(i));
   }
+
+  console.log(data);
 
   const serviceArray = buildServiceArray(Object.values(data));
 
