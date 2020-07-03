@@ -52,14 +52,6 @@
   justify-content: flex-end;
 }
 
-.help {
-  cursor: pointer;
-
-  color: white;
-  padding-left: 2px;
-  padding-right: 2px;
-}
-
 .settings {
   cursor: pointer;
 
@@ -73,6 +65,8 @@
 
   padding-bottom: 2px;
   padding-left: 4px;
+
+  user-select: none;
 }
 
 .divider {
@@ -82,4 +76,18 @@
 
   cursor: default;
   user-select: none;
+}
+
+.helpIcon {
+  cursor: pointer;
+
+  color: white;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

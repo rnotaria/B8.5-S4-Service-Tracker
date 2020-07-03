@@ -1,0 +1,71 @@
+.Pages_container {
+  height: calc(100% + 10px);
+  width: calc(100% + 10px);
+  margin-top: -5px;
+  margin-left: -5px;
+
+  color: white;
+}
+
+.closeContainer {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  color: red;
+  z-index: 10;
+}
+
+.closeIconBg {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  height: 12px;
+  width: 12px;
+
+  background-color: black;
+}
+
+.PageNav_container {
+  position: absolute;
+  bottom: 0;
+  height: 25px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: red;
+}
+
+.PageNav_bubbleContainer {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.PageNav_bubble {
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+
+  background-color: white;
+  border-radius: 100px;
+}
+
+.PageNav_bubbleSelected {
+  cursor: default;
+  background-color: blue;
+}

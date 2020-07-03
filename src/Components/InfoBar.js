@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
+import Help from "./Help_Components/Help";
 import styles from "../Styles/InfoBar.module.css";
 import { MdSettings } from "react-icons/md";
 import { IoMdHelp } from "react-icons/io";
+
 import { DataContext } from "../Contexts/DataContext";
 
 function InfoBar() {
@@ -17,6 +19,11 @@ function InfoBar() {
     dataContext.dispatch({ type: "logout" });
   };
 
+  const [openHelp, setOpenHelp] = useState(true);
+  const handleOnClose = () => {
+    setOpenHelp(false);
+  };
+
   return (
     <div className={styles.main}>
       <div className={styles.car}>
@@ -27,7 +34,11 @@ function InfoBar() {
         <h5> mi</h5>
       </div>
       <div className={styles.options}>
-        <IoMdHelp className={styles.help} />
+        <Help open={openHelp} handleOnClose={handleOnClose} />
+        <IoMdHelp
+          className={styles.helpIcon}
+          onClick={() => setOpenHelp(true)}
+        />
         <h5 className={styles.divider}>|</h5>
         <MdSettings className={styles.settings} />
         <h5 className={styles.divider}>|</h5>
