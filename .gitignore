@@ -22,5 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#raw_src
-/raw_src
+#For Dev
+/for_dev
