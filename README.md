@@ -2,14 +2,14 @@
 
 This project is still in development...
 
-**To view the app go to b8s4.netlify.app and select _Guest_ at the Login Page**
+**To view the app go to [https://b8s4.netlify.app/](https://b8s4.netlify.app/) and select _Guest_ at the Login Page**
 **Click the "?" at the top of the page to view a tutorial on how to use the app**
 
 ## Summary
 
 The goal of this project is organize maintenance information all in one centralized location. This app will provide users information on upcoming maintenance services including instructions, where to purchase parts, etc. When a task is completed, the date and miles will be recorded which the user can reference in the future. This project was specifically built around the B8/B8.5 Audi S4 models by populating tasks for each service interval but is fully customizable and can be used for any car model by adding or removing tasks as needed. This will be described in further detail below.
 
-The site is currently deployed using Netlify and can be viewed at b8s4.netlify.app. Once the project is polished and the backend is complete, it will be moved to an official domain.
+The site is currently deployed using Netlify and can be viewed at [https://b8s4.netlify.app/](https://b8s4.netlify.app/). Once the project is polished and the backend is complete, it will be moved to an official domain.
 
 ## How to use a Custom Service Schedule Template
 
