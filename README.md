@@ -1,8 +1,7 @@
 # Maintenance Tracker
 This project is still in development...
 
-
-The goal of this project is organize information revolving around maintenance services on our cars all in one centralized location. This app will provide users information on upcoming serives including instructions, where to purchase parts, etc. When a task is completed, the date and miles will be recorded which the user can reference in the future. This project was specifically built around the B8/B8.5 Audi S4 models by populating tasks for each service interval but can be used for any car model by adding or removing tasks as needed.
+The goal of this project is organize maintenance information all in one centralized location. This app will provide users information on upcoming sericves including instructions, where to purchase parts, etc. When a task is completed, the date and miles will be recorded which the user can reference in the future. This project was specifically built around the B8/B8.5 Audi S4 models by populating tasks for each service interval but is fully customizable and can be used for any car model by adding or removing tasks as needed.
 
 ## Tutorial
 
