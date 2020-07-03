@@ -1,7 +1,58 @@
 # Maintenance Tracker
+
 This project is still in development...
 
-The goal of this project is organize maintenance information all in one centralized location. This app will provide users information on upcoming sericves including instructions, where to purchase parts, etc. When a task is completed, the date and miles will be recorded which the user can reference in the future. This project was specifically built around the B8/B8.5 Audi S4 models by populating tasks for each service interval but is fully customizable and can be used for any car model by adding or removing tasks as needed.
+**To view the app go to [b8s4.Netlify.app](b8s4.netlify.app) and select _Guest_ at the Login Page**
+**Click the "?" at the top of the page to view a tutorial on how to use the app**
+
+## Summary
+
+The goal of this project is organize maintenance information all in one centralized location. This app will provide users information on upcoming maintenance services including instructions, where to purchase parts, etc. When a task is completed, the date and miles will be recorded which the user can reference in the future. This project was specifically built around the B8/B8.5 Audi S4 models by populating tasks for each service interval but is fully customizable and can be used for any car model by adding or removing tasks as needed. This will be described in further detail below.
+
+The site is currently deployed using Netlify and can be viewed at [b8s4.Netlify.app](b8s4.netlify.app). Once the project is polished and the backend is complete, it will be moved to an official domain.
+
+## How to use a Custom Service Schedule Template
+
+As mentioned, this app was designed around the maintenance schedule of a specific make and model however, allowing users to easily import their own schedule is one of the future goals. In the meantime, customizing the schedule is still incredibly easy. Inside ../src/utils/defaultData there is a JavaScipt file called "maintenanceList.js". This fine contains a function that exports an object filled with the maintenance schedule. Each property in the object is structured as follows:
+
+```
+  <Task Name>: {
+    start: <integer - What miles will the task first be performed?>,
+    repeat: <integer - After how many miles will the task be repeated? Use "null" if task does not repeat.>,
+    title: <string - Title of task>,
+    info: {
+      instructions: <string - Set of instructions for the task. Use HTML for formatting>,
+      notes: <string - Any additional notes for the task>,
+      completionInfo: {
+        complete: false,
+        date: "",
+        miles: "",
+        notes: "",
+      },
+    },
+  },
+```
+
+**Example:**
+
+```
+  task_1: {
+    start: 5000,
+    repeat: 10000,
+    title: "Engine oil / Oil filter - Change oil and replace filter",
+    info: {
+      instructions:
+        '<iframe class="ql-video ql-align-center" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/5qKOrjDnFmg" height="315" width="560"></iframe><p><br></p>',
+      notes: "",
+      completionInfo: {
+        complete: false,
+        date: "",
+        miles: "",
+        notes: "",
+      },
+    },
+  },
+```
 
 ## Tutorial
 
