@@ -4,9 +4,27 @@
   margin-top: -5px;
   margin-left: -5px;
 
+  display: flex;
+  justify-content: center;
+
   color: white;
 }
 
+.videoContainer {
+  height: 579px;
+  border: 5px solid grey;
+}
+
+.textContainer {
+  height: calc(100% - 579px - 10px - 25px);
+
+  border-left: 5px solid grey;
+  border-right: 5px solid grey;
+}
+
+/* * * * * * * * * * * * * * * * *
+ * * * CloseButton.js Styles * * *
+ * * * * * * * * * * * * * * * * */
 .closeContainer {
   cursor: pointer;
   position: absolute;
@@ -23,7 +41,7 @@
   top: 0;
   right: 0;
 
-  color: red;
+  color: rgba(255, 0, 0, 0.8);
   z-index: 10;
 }
 
@@ -38,6 +56,9 @@
   background-color: black;
 }
 
+/* * * * * * * * * * * * * * * * *
+ * * * * PageNav.js Styles * * * *
+ * * * * * * * * * * * * * * * * */
 .PageNav_container {
   position: absolute;
   bottom: 0;
@@ -48,12 +69,12 @@
   justify-content: center;
   align-items: center;
 
-  background-color: red;
+  background-color: grey;
 }
 
 .PageNav_bubbleContainer {
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 .PageNav_bubble {
@@ -67,5 +88,5 @@
 
 .PageNav_bubbleSelected {
   cursor: default;
-  background-color: blue;
+  background-color: darkblue;
 }

@@ -11,6 +11,7 @@ export default function Pages({ onClose, content = <React.Fragment /> }) {
   return (
     <div className={styles.Pages_container}>
       <CloseButton onClose={onClose} />
+
       {currentPage}
       <PageNav
         numberOfPages={numberOfPages}

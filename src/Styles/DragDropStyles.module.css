@@ -30,12 +30,14 @@
   align-items: center;
   margin-top: 0;
   margin-bottom: 0px;
-  padding: 8px;
+  padding: 4px;
   padding-left: 16px;
   padding-right: 16px;
   background-image: linear-gradient(rgb(150, 30, 40), #600000);
 
+  font-size: 18px;
   color: rgb(240, 240, 240);
+
   border-bottom: 1px solid black;
 }
 
@@ -109,60 +111,51 @@
  * * * * * * * * * * * * AND * * * * * * * * * * *
  * * Styles for DeleteTaskButton.js Component  * *
  * * * * * * * * * * * * * * * * * * * * * * * * */
-.delete {
+
+.deleteContainer,
+.addContainer {
+  width: 24px;
+  height: 24px;
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
-.delete button {
-  width: 30px;
+.deleteIcon,
+.deleteIcon_active,
+.addIcon {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* z-index: 0.5; */
+
+  color: darkslateblue;
   cursor: pointer;
-  background-color: darkslateblue;
-  color: white;
-  outline: none;
 }
 
-.delete_active {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.deleteIcon_active {
+  animation: deleteIcon_active_fade linear 2s infinite;
 }
 
-@keyframes deleteActive_fade {
+.deleteIconBg,
+.addIconBg {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+
+  background-color: white;
+}
+
+@keyframes deleteIcon_active_fade {
   0% {
-    background-color: darkslateblue;
+    color: darkslateblue;
   }
   50% {
-    background-color: red;
+    color: red;
   }
   100% {
-    background-color: darkslateblue;
+    color: darkslateblue;
   }
-}
-
-.delete_active button {
-  width: 30px;
-  cursor: pointer;
-  background-color: darkslateblue;
-  color: white;
-  animation: deleteActive_fade linear 2s infinite;
-  outline: none;
-}
-
-.add {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.add button {
-  width: 30px;
-  cursor: pointer;
-  background-color: darkslateblue;
-  color: white;
-  outline: none;
 }
