@@ -16,10 +16,60 @@
 }
 
 .textContainer {
-  height: calc(100% - 579px - 10px - 25px);
+  height: calc(100% - 579px - 10px - 25px - 16px);
 
   border-left: 5px solid grey;
   border-right: 5px solid grey;
+  padding: 16px;
+
+  text-align: justify;
+}
+
+.iconContainer {
+  width: 20px;
+  height: 20px;
+
+  position: relative;
+  display: inline-block;
+  top: 3px;
+}
+
+.minusIcon,
+.plusIcon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+
+  color: darkslateblue;
+}
+
+.minusIconBg,
+.plusIconBg {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  left: 25%;
+  top: 25%;
+
+  background-color: white;
+}
+
+.editIcon {
+  width: 20px;
+  height: 20px;
+
+  position: absolute;
+  left: 2px;
+
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.infoIcon {
+  width: 20px;
+  height: 20px;
+
+  position: absolute;
 }
 
 /* * * * * * * * * * * * * * * * *
