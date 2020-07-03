@@ -150,12 +150,12 @@
 
 @keyframes deleteIcon_active_fade {
   0% {
-    color: darkslateblue;
+    color: darkred;
   }
   50% {
     color: red;
   }
   100% {
-    color: darkslateblue;
+    color: darkred;
   }
 }
