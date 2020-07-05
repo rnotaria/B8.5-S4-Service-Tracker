@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import IntervalList from "./IntervalList";
 import Panel from "./Panel_Components/Panel";
-import InfoBar from "./InfoBar";
+import NavBar from "./NavBar";
 import LoginPage from "./Login_Components/LoginPage";
 import NewUserInfo from "./Login_Components/NewUserInfo";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
@@ -21,7 +21,7 @@ export default function MaintenanceTracker() {
 
   return (
     <div>
-      <InfoBar />
+      <NavBar />
       <IntervalList />
       <Panel panelData={maintenanceTrackerContext.state.panelData} />
     </div>

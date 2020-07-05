@@ -37,6 +37,17 @@ const dataContextReducer = (state, action) => {
           miles: action.value.miles,
         },
       };
+
+    case "isNotNew": {
+      return {
+        ...state,
+        container: {
+          ...state.container,
+          isNew: false,
+        },
+      };
+    }
+
     case "updateCurrentMiles": {
       // Update the current miles of the vehicle
       return {

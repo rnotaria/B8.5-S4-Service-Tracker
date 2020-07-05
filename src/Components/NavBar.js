@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
 import Help from "./Help_Components/Help";
-import styles from "../Styles/InfoBar.module.css";
+import styles from "../Styles/NavBar.module.css";
 import { MdSettings } from "react-icons/md";
 import { IoMdHelp } from "react-icons/io";
 
 import { DataContext } from "../Contexts/DataContext";
 
-function InfoBar() {
+function NavBar() {
   const dataContext = useContext(DataContext);
   const vehicle =
     dataContext.state.container.vehicle.year +
@@ -19,7 +19,7 @@ function InfoBar() {
     dataContext.dispatch({ type: "logout" });
   };
 
-  const [openHelp, setOpenHelp] = useState(true);
+  const [openHelp, setOpenHelp] = useState(false);
   const handleOnClose = () => {
     setOpenHelp(false);
   };
@@ -50,4 +50,4 @@ function InfoBar() {
   );
 }
 
-export default React.memo(InfoBar);
+export default React.memo(NavBar);

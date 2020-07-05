@@ -1,29 +1,35 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import Interval from "./Interval";
 import {
-  getInitData,
+  getSchedule,
   addInterval,
   updateCurrentMiles,
-} from "../utils/defaultData/getMaintenanceData";
+} from "../utils/getServiceSchedule";
 import styles from "../Styles/Interval.module.css";
 import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../Contexts/DataContext";
 
 function IntervalList() {
+  const didMount = useRef(false);
+
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const dataContext = useContext(DataContext);
+
   const [currentMiles, setCurrentMiles] = useState(
     parseInt(dataContext.state.container.miles)
   );
 
-  const [milesArrayInit, serviceArrayInit] = getInitData(currentMiles);
+  // Get service schedule
+  var [milesArrayInit, serviceArrayInit] = [null, null];
+  if (didMount.current === false) {
+    didMount.current = true;
+    [milesArrayInit, serviceArrayInit] = getSchedule(
+      currentMiles,
+      dataContext.state.container.isNew
+    );
+  }
   const [milesArray, setMilesArray] = useState(milesArrayInit);
   const [serviceArray, setServiceArray] = useState(serviceArrayInit);
-
-  // If user data already exists, retreive it
-  // if(didMount.current === false &&  //file exists){
-  //   then...
-  // }
 
   // State that determines which collapsable Interval is open
   const [openBox, setOpenBox] = useState(
@@ -32,6 +38,11 @@ function IntervalList() {
   const handleSetOpenBox = (miles) => {
     setOpenBox(miles);
   };
+
+  // If component did mount, service schedule has been built so user is not new
+  useEffect(() => {
+    dataContext.dispatch({ type: "isNotNew" });
+  }, []);
 
   // Add service mile interval
   useEffect(() => {

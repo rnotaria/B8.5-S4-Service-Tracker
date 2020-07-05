@@ -1,4 +1,4 @@
-import { maintenanceList } from "./maintenanceList";
+import { maintenanceList } from "./defaultData/maintenanceList";
 
 const skeleton = {
   tasks: {},
@@ -78,7 +78,7 @@ const buildServiceArray = (keysArray) => {
   return serviceArray;
 };
 
-export const getInitData = (miles) => {
+export const buildSchedule = (miles) => {
   // We want to build data from 0 to user's current miles plus 50k
   const endMiles = parseInt(miles) + 50000;
   var data = {};
@@ -116,13 +116,22 @@ export const getInitData = (miles) => {
   return [milesArray, serviceArray];
 };
 
+export const getSchedule = (miles, isNew) => {
+  if (isNew === true) {
+    return buildSchedule(miles);
+  } else {
+    // get user data from firebase
+  }
+  return;
+};
+
 export const addInterval = (milesArray, serviceArray, newInterval) => {
   milesArray.push(newInterval);
   milesArray.sort((a, b) => a - b);
   const index = milesArray.indexOf(newInterval);
 
   // See if service already exists for new interval
-  const [tempMilesArray, tempServiceArray] = getInitData(newInterval);
+  const [tempMilesArray, tempServiceArray] = buildSchedule(newInterval);
   const tempIndex = tempMilesArray.indexOf(newInterval);
   if (tempIndex !== -1) {
     serviceArray.splice(index, 0, tempServiceArray[tempIndex]);
@@ -134,7 +143,7 @@ export const addInterval = (milesArray, serviceArray, newInterval) => {
 };
 
 export const updateCurrentMiles = (milesArray, serviceArray, newMiles) => {
-  var [tempMilesArray, tempServiceArray] = getInitData(newMiles);
+  var [tempMilesArray, tempServiceArray] = buildSchedule(newMiles);
   const index = tempMilesArray.findIndex(
     (number) => number > milesArray[milesArray.length - 1]
   );
