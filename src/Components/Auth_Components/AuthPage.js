@@ -16,20 +16,23 @@ function CreateAccount() {
 
   const handleCreateAccount = () => {
     if (password.localeCompare(confirmPassword) === 0) {
+      dataContext.dispatch({ type: "setStatus", value: "creatingUser" });
       auth.createUserWithEmailAndPassword(email, password).then((cred) => {
         // Create user doc
+        console.log("Creating User");
         db.collection("users")
           .doc(cred.user.uid)
           .set({
             user: cred.user.uid,
           })
           .then(() => {
+            console.log("User Created");
+            dataContext.dispatch({ type: "setStatus", value: null });
             dataContext.dispatch({
               type: "setCreateAccount",
               value: cred.user.uid,
             });
           });
-        console.log(cred.user.uid);
       });
     }
   };

@@ -18,7 +18,10 @@ function NavBar() {
     dataContext.state.container.vehicle.model;
 
   const handleLogout = () => {
-    auth.signOut().then(() => dataContext.dispatch({ type: "logout" }));
+    auth.signOut().then(() => {
+      dataContext.dispatch({ type: "logout" });
+      window.location.reload(false);
+    });
   };
 
   const [openHelp, setOpenHelp] = useState(false);

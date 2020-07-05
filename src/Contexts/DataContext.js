@@ -1,10 +1,11 @@
 import React, { useReducer } from "react";
-import { db } from "../Firebase/firebase";
+import { auth, db } from "../Firebase/firebase";
 
 export const DataContext = React.createContext();
 
 const dataContextInitialState = {
   data: {},
+  status: null,
   container: {
     user: null,
     isNew: true,
@@ -117,6 +118,12 @@ const dataContextReducer = (state, action) => {
           ...state.data,
           [action.value.miles]: { ...action.value },
         },
+      };
+
+    case "setStatus":
+      return {
+        ...state,
+        status: action.value,
       };
 
     case "deleteInterval":

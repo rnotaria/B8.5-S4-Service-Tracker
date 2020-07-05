@@ -16,15 +16,13 @@ export default function MaintenanceTracker() {
   useEffect(() => {
     if (dataContext.state.container.user === "guest") {
       setCurrentUser("guest");
-    } else {
+    } else if (dataContext.state.status !== "creatingUser") {
       auth.onAuthStateChanged((user) => {
         if (user === null) {
           // User is logged out
-          console.log("User is Logged Out");
           setCurrentUser(null);
         } else {
           // User is logged in
-          console.log("User is Logged In");
 
           db.collection("users")
             .doc(user.uid)
@@ -50,9 +48,12 @@ export default function MaintenanceTracker() {
         }
       });
     }
-  }, [auth.onAuthStateChanged, dataContext.state.container.user]);
+  }, [
+    auth.onAuthStateChanged,
+    dataContext.state.container.user,
+    dataContext.state.status,
+  ]);
 
-  console.log(currentUser);
   if (currentUser === "authenticating") {
     // Loading
     return <div style={{ color: "white" }}>Loading</div>;

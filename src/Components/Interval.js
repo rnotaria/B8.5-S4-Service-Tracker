@@ -12,7 +12,6 @@ import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext
 import { DataContext } from "../Contexts/DataContext";
 
 function Interval({ miles, serviceData, open, handleSetOpenBox }) {
-  // console.log("Rendering milagebox");
   const newTaskId = useRef(0);
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const dataContext = useContext(DataContext);
