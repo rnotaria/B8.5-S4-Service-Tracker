@@ -13,7 +13,7 @@ export default function UpdateCurrentMiles() {
   const handleUpdate = () => {
     dataContext.dispatch({
       type: "updateCurrentMiles",
-      value: { currentMiles: parseInt(miles) },
+      value: parseInt(miles),
     });
     maintenanceTrackerContext.dispatch({ type: "closePanel" });
   };

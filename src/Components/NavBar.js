@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
+import { auth } from "../Firebase/firebase";
 import Help from "./Help_Components/Help";
 import styles from "../Styles/NavBar.module.css";
 import { MdSettings } from "react-icons/md";
 import { IoMdHelp } from "react-icons/io";
+import { FaRegSave } from "react-icons/fa";
 
 import { DataContext } from "../Contexts/DataContext";
 
@@ -16,7 +18,7 @@ function NavBar() {
     dataContext.state.container.vehicle.model;
 
   const handleLogout = () => {
-    dataContext.dispatch({ type: "logout" });
+    auth.signOut().then(() => dataContext.dispatch({ type: "logout" }));
   };
 
   const [openHelp, setOpenHelp] = useState(false);
@@ -34,6 +36,8 @@ function NavBar() {
         <h5> mi</h5>
       </div>
       <div className={styles.options}>
+        <FaRegSave className={styles.settings} />
+        <h5 className={styles.divider}>|</h5>
         <Help open={openHelp} handleOnClose={handleOnClose} />
         <IoMdHelp
           className={styles.helpIcon}
@@ -43,7 +47,7 @@ function NavBar() {
         <MdSettings className={styles.settings} />
         <h5 className={styles.divider}>|</h5>
         <h5 className={styles.logout} onClick={() => handleLogout()}>
-          Logout
+          {dataContext.state.container.user === "guest" ? "Sign In" : "Logout"}
         </h5>
       </div>
     </div>

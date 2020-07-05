@@ -56,6 +56,10 @@
   flex-wrap: wrap;
 }
 
+.createAccount {
+  margin-top: 28px;
+}
+
 .options button {
   width: 150px;
   background-color: slategray;

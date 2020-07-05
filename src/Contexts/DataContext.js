@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import { db } from "../Firebase/firebase";
 
 export const DataContext = React.createContext();
 
@@ -6,33 +7,74 @@ const dataContextInitialState = {
   data: {},
   container: {
     user: null,
-    isNew: null,
+    isNew: true,
     vehicle: null,
-    miles: null,
+    miles: 0,
   },
 };
 
 const dataContextReducer = (state, action) => {
   switch (action.type) {
-    case "setLogin":
+    case "logout":
+      return dataContextInitialState;
+
+    case "setUser":
+      // action.value
       return {
         ...state,
         container: {
           ...state.container,
-          user: action.value.user,
-          isNew: action.value.isNew,
+          user: action.value,
+        },
+      };
+
+    case "setGuest":
+      // action.value: none
+      return {
+        ...state,
+        container: {
+          ...state.container,
+          user: "guest",
+          isNew: true,
+        },
+      };
+
+    case "setCreateAccount":
+      // action.value
+      return {
+        ...dataContextInitialState,
+        container: {
+          ...state.container,
+          user: action.value,
+          isNew: true,
         },
       };
 
     case "setVehicleInfo":
+      // action.value: {year, make, model, miles}
+
+      // Update database if not guest account
+      if (state.container.user !== "guest") {
+        db.collection("users")
+          .doc(state.container.user)
+          .update({
+            miles: action.value.miles,
+            vehicle: {
+              make: action.value.make,
+              model: action.value.model,
+              year: action.value.year,
+            },
+          });
+      }
+
       return {
         ...state,
         container: {
           ...state.container,
           vehicle: {
-            year: action.value.year,
             make: action.value.make,
             model: action.value.model,
+            year: action.value.year,
           },
           miles: action.value.miles,
         },
@@ -49,17 +91,25 @@ const dataContextReducer = (state, action) => {
     }
 
     case "updateCurrentMiles": {
-      // Update the current miles of the vehicle
+      // action.value
+
+      // Update database if not guest account
+      if (state.container.user !== "guest") {
+        db.collection("users").doc(state.container.user).update({
+          miles: action.value,
+        });
+      }
+
       return {
         ...state,
         container: {
           ...state.container,
-          miles: action.value.currentMiles,
+          miles: action.value,
         },
       };
     }
 
-    case "update":
+    case "updateData":
       // Update task info in specific interval if it has been updated
       return {
         ...state,
@@ -72,9 +122,6 @@ const dataContextReducer = (state, action) => {
     case "deleteInterval":
       delete state.data[action.value];
       return state;
-
-    case "logout":
-      return dataContextInitialState;
 
     default:
       return state;

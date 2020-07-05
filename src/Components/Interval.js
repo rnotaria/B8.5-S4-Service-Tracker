@@ -156,7 +156,7 @@ function Interval({ miles, serviceData, open, handleSetOpenBox }) {
   // Update overall data
   useEffect(() => {
     dataContext.dispatch({
-      type: "update",
+      type: "updateData",
       value: { miles, ...data },
     });
   }, [data, miles]);
