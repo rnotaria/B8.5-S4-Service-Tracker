@@ -10,39 +10,45 @@ import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext
 import { DataContext } from "../Contexts/DataContext";
 
 function IntervalList() {
-  const didMount = useRef(false);
-
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const dataContext = useContext(DataContext);
-
   const [currentMiles, setCurrentMiles] = useState(
     parseInt(dataContext.state.container.miles)
   );
 
-  // Get service schedule
-  var [milesArrayInit, serviceArrayInit] = [null, null];
-  if (didMount.current === false) {
-    didMount.current = true;
-    [milesArrayInit, serviceArrayInit] = getSchedule(
-      currentMiles,
-      dataContext.state.container.isNew
-    );
-  }
-  const [milesArray, setMilesArray] = useState(milesArrayInit);
-  const [serviceArray, setServiceArray] = useState(serviceArrayInit);
+  // The following states get set after fetching data
+  const [milesArray, setMilesArray] = useState(null);
+  const [serviceArray, setServiceArray] = useState(null);
+  const [openBox, setOpenBox] = useState(null);
 
-  // State that determines which collapsable Interval is open
-  const [openBox, setOpenBox] = useState(
-    milesArray[milesArray.findIndex((miles) => miles > currentMiles)]
-  );
-  const handleSetOpenBox = (miles) => {
-    setOpenBox(miles);
+  // Fetch data from db. If none, build using defaults
+  const fetchData = async () => {
+    var [milesArrayInit, serviceArrayInit] = await getSchedule(
+      currentMiles,
+      dataContext.state.container.user
+    );
+    setMilesArray(milesArrayInit);
+    setServiceArray(serviceArrayInit);
   };
 
-  // If component did mount, service schedule has been built so user is not new
   useEffect(() => {
-    dataContext.dispatch({ type: "isNotNew" });
+    fetchData();
   }, []);
+
+  // setOpenBox after component correctly renders
+  useEffect(() => {
+    /* Note: we are using the following conditional because in fetchData(),
+     * we are calling setState for serviceArray AFTER milesArray. Therefore,
+     * the component will rerender with milesArray != null and serviceArray = null
+     * and then setState for serviceArray right after. Since we only want to call
+     * this useEffect once, we can use this window to our advantage
+     */
+    if (milesArray && !serviceArray) {
+      setOpenBox(
+        milesArray[milesArray.findIndex((miles) => miles > currentMiles)]
+      );
+    }
+  }, [milesArray, serviceArray, currentMiles]);
 
   // Add service mile interval
   useEffect(() => {
@@ -110,6 +116,19 @@ function IntervalList() {
     milesArray,
     serviceArray,
   ]);
+
+  // This function gets passed as a prop to Interval.js
+  const handleSetOpenBox = (miles) => {
+    setOpenBox(miles);
+  };
+
+  if (!milesArray || !serviceArray) {
+    return (
+      <div style={{ height: "50px", width: "50px", backgroundColor: "white" }}>
+        jkhdashjska
+      </div>
+    );
+  }
 
   return (
     <div className={styles.IntervalList_main}>

@@ -23,14 +23,24 @@ function Task({ task, index, column, columnId, activateDelete, miles }) {
 
   // Side Effect on Task Complete
   useEffect(() => {
-    if (isComplete.current === false && column === "Complete") {
+    if (
+      isComplete.current === false &&
+      column === "Complete" &&
+      task.info.completionInfo.complete !== true
+    ) {
       isComplete.current = true;
       maintenanceTrackerContext.dispatch({
         type: "addCompletionInfo.1",
         value: { taskId: task.id, miles },
       });
     }
-  }, [maintenanceTrackerContext, column, task.id, miles]); //ignore dependency warning for now
+  }, [
+    maintenanceTrackerContext,
+    column,
+    task.id,
+    miles,
+    task.info.completionInfo.complete,
+  ]);
 
   return (
     <div className={styles.task_mainContainer}>

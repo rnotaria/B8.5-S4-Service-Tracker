@@ -16,19 +16,17 @@ export default function MaintenanceTracker() {
   useEffect(() => {
     if (dataContext.state.container.user === "guest") {
       setCurrentUser("guest");
-    } else if (dataContext.state.status !== "creatingUser") {
+    } else if (!dataContext.state.status) {
       auth.onAuthStateChanged((user) => {
         if (user === null) {
           // User is logged out
           setCurrentUser(null);
         } else {
-          // User is logged in
-
+          // User is logged in, check if vehicle data is in database
           db.collection("users")
             .doc(user.uid)
             .get()
             .then((doc) => {
-              console.log(doc.data());
               setCurrentUser(user.uid);
               dataContext.dispatch({ type: "setUser", value: user.uid });
               if (doc.data().vehicle) {

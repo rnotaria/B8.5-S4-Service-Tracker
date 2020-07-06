@@ -16,11 +16,9 @@ export default function NewUserInfo() {
   );
 
   const handleContinue = () => {
-    const user = dataContext.state.container.user;
-    console.log(user);
     dataContext.dispatch({
       type: "setVehicleInfo",
-      value: { make, model, year, miles },
+      value: { make, model, year, miles: parseInt(miles) },
     });
   };
 

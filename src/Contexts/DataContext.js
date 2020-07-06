@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { auth, db } from "../Firebase/firebase";
+import { db } from "../Firebase/firebase";
 
 export const DataContext = React.createContext();
 
@@ -8,7 +8,6 @@ const dataContextInitialState = {
   status: null,
   container: {
     user: null,
-    isNew: true,
     vehicle: null,
     miles: 0,
   },
@@ -36,7 +35,6 @@ const dataContextReducer = (state, action) => {
         container: {
           ...state.container,
           user: "guest",
-          isNew: true,
         },
       };
 
@@ -47,7 +45,6 @@ const dataContextReducer = (state, action) => {
         container: {
           ...state.container,
           user: action.value,
-          isNew: true,
         },
       };
 
@@ -81,24 +78,22 @@ const dataContextReducer = (state, action) => {
         },
       };
 
-    case "isNotNew": {
-      return {
-        ...state,
-        container: {
-          ...state.container,
-          isNew: false,
-        },
-      };
-    }
-
     case "updateCurrentMiles": {
       // action.value
 
       // Update database if not guest account
       if (state.container.user !== "guest") {
-        db.collection("users").doc(state.container.user).update({
-          miles: action.value,
-        });
+        db.collection("users")
+          .doc(state.container.user)
+          .update({
+            miles: action.value,
+          })
+          .then(() => {
+            console.log("Miles successfully updated");
+          })
+          .catch((e) => {
+            console.log("Error: ", e);
+          });
       }
 
       return {
@@ -116,8 +111,31 @@ const dataContextReducer = (state, action) => {
         ...state,
         data: {
           ...state.data,
-          [action.value.miles]: { ...action.value },
+          [action.value.miles]: {
+            tasks: action.value.tasks,
+            columns: action.value.columns,
+            columnOrder: action.value.columnOrder,
+          },
         },
+      };
+
+    case "saveData":
+      //saves current data to database
+      if (state.container.user !== "guest") {
+        db.collection("users")
+          .doc(state.container.user)
+          .update({
+            data: state.data,
+          })
+          .then(() => {
+            console.log("Data saved.");
+          })
+          .catch((e) => {
+            console.log("Error: ", e);
+          });
+      }
+      return {
+        ...state,
       };
 
     case "setStatus":

@@ -1,4 +1,5 @@
 import { maintenanceList } from "./defaultData/maintenanceList";
+import { db } from "../Firebase/firebase";
 
 const skeleton = {
   tasks: {},
@@ -116,13 +117,34 @@ export const buildSchedule = (miles) => {
   return [milesArray, serviceArray];
 };
 
-export const getSchedule = (miles, isNew) => {
-  if (isNew === true) {
+const fetchDataFromDB = (user) => {
+  return db
+    .collection("users")
+    .doc(user)
+    .get()
+    .then((doc) => {
+      const data = doc.data().data;
+      return data;
+    });
+};
+
+export const getSchedule = async (miles, user) => {
+  if (user === "guest") {
+    return buildSchedule(miles);
+  }
+
+  const firebaseData = await fetchDataFromDB(user);
+
+  if (!firebaseData) {
+    console.log("NOT getting data from FB");
     return buildSchedule(miles);
   } else {
-    // get user data from firebase
+    console.log("getting data from FB");
+    const milesArray = Object.keys(firebaseData);
+    const serviceArray = Object.values(firebaseData);
+
+    return [milesArray, serviceArray];
   }
-  return;
 };
 
 export const addInterval = (milesArray, serviceArray, newInterval) => {

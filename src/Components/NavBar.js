@@ -17,6 +17,10 @@ function NavBar() {
     " " +
     dataContext.state.container.vehicle.model;
 
+  const handleSave = () => {
+    dataContext.dispatch({ type: "saveData" });
+  };
+
   const handleLogout = () => {
     auth.signOut().then(() => {
       dataContext.dispatch({ type: "logout" });
@@ -39,7 +43,12 @@ function NavBar() {
         <h5> mi</h5>
       </div>
       <div className={styles.options}>
-        <FaRegSave className={styles.settings} />
+        <FaRegSave
+          className={styles.settings}
+          onClick={() => {
+            handleSave();
+          }}
+        />
         <h5 className={styles.divider}>|</h5>
         <Help open={openHelp} handleOnClose={handleOnClose} />
         <IoMdHelp
