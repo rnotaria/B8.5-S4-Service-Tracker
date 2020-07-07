@@ -136,10 +136,10 @@ export const getSchedule = async (miles, user) => {
   const firebaseData = await fetchDataFromDB(user);
 
   if (!firebaseData) {
-    console.log("NOT getting data from FB");
+    console.log("Data not in DB, building new schedule.");
     return buildSchedule(miles);
   } else {
-    console.log("getting data from FB");
+    console.log("Data found in DB.");
     const milesArray = Object.keys(firebaseData);
     const serviceArray = Object.values(firebaseData);
 

@@ -30,23 +30,28 @@ function CreateAccount() {
   const handleCreateAccount = () => {
     if (password.localeCompare(confirmPassword) === 0) {
       dataContext.dispatch({ type: "setStatus", value: "creatingUser" });
-      auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-        // Create user doc
-        console.log("Creating User");
-        db.collection("users")
-          .doc(cred.user.uid)
-          .set({
-            user: cred.user.uid,
-          })
-          .then(() => {
-            console.log("User Created");
-            dataContext.dispatch({ type: "setStatus", value: null });
-            dataContext.dispatch({
-              type: "setCreateAccount",
-              value: cred.user.uid,
+      auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((cred) => {
+          // Create user doc
+          console.log("Creating User");
+          db.collection("users")
+            .doc(cred.user.uid)
+            .set({
+              user: cred.user.uid,
+            })
+            .then(() => {
+              console.log("User Created");
+              dataContext.dispatch({ type: "setStatus", value: null });
+              dataContext.dispatch({
+                type: "setCreateAccount",
+                value: cred.user.uid,
+              });
             });
-          });
-      });
+        })
+        .catch((error) => {
+          console.log("Error: ", error.message);
+        });
     }
   };
 
@@ -70,19 +75,23 @@ export default function AuthPage() {
   const [email, emailInput] = useInput("", "Email");
   const [password, passwordInput] = useInput("", "Password", "password");
 
-  const handleLogin = () => {
-    auth.signInWithEmailAndPassword(email, password).then((cred) => {
-      dataContext.dispatch({
-        type: "setUser",
-        value: cred.user.uid,
-      });
-      db.collection("users")
-        .doc(cred.user.uid)
-        .get()
-        .then((doc) => {
-          console.log(doc.data());
+  const handleLogin = (e) => {
+    e.preventDefault();
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((cred) => {
+        dataContext.dispatch({
+          type: "setUser",
+          value: cred.user.uid,
         });
-    });
+        db.collection("users")
+          .doc(cred.user.uid)
+          .get()
+          .then((doc) => {});
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleGuest = () => {
@@ -101,16 +110,20 @@ export default function AuthPage() {
 
   return (
     <AuthPageLayout title={"LOGIN"}>
-      <div className={styles.login_info}>
-        {emailInput}
-        {passwordInput}
-      </div>
-      <div className={styles.options}>
-        <button onClick={() => handleLogin()}>Login</button>
-        <button onClick={() => handleGuest()}>Guest</button>
-        <button onClick={() => handleForgotPassword()}>Forgot Password</button>
-        <button onClick={() => setDisplay("create")}>Create Account</button>
-      </div>
+      <form onSubmit={(e) => handleLogin(e)}>
+        <div className={styles.login_info}>
+          {emailInput}
+          {passwordInput}
+        </div>
+        <div className={styles.options}>
+          <button type="submit">Login</button>
+          <button onClick={() => handleGuest()}>Guest</button>
+          <button onClick={() => handleForgotPassword()}>
+            Forgot Password
+          </button>
+          <button onClick={() => setDisplay("create")}>Create Account</button>
+        </div>
+      </form>
     </AuthPageLayout>
   );
 }

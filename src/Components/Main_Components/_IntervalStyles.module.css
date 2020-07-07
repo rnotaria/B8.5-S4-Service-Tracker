@@ -12,12 +12,19 @@
   position: relative;
   line-height: 0;
 
-  background-image: linear-gradient(rgb(100, 100, 100), slategrey);
   border: 1px solid black;
   border-radius: 10px;
 
   overflow: hidden;
   user-select: none;
+}
+
+.standardBG {
+  background-image: linear-gradient(rgb(100, 100, 100), slategrey);
+}
+
+.nextIntervalBG {
+  background-image: linear-gradient(#6ca6cd, #607b8b);
 }
 
 .Interval_container {

@@ -11,7 +11,13 @@ import Board from "../DragDrop_Components/Board";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../../Contexts/DataContext";
 
-function Interval({ miles, serviceData, open, handleSetOpenBox }) {
+function Interval({
+  nextInterval,
+  miles,
+  serviceData,
+  open,
+  handleSetOpenBox,
+}) {
   const newTaskId = useRef(0);
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
   const dataContext = useContext(DataContext);
@@ -158,6 +164,11 @@ function Interval({ miles, serviceData, open, handleSetOpenBox }) {
       type: "updateData",
       value: { miles, ...data },
     });
+    // Reason: We only want to update the data in the dataContext ONLY when data
+    // or miles is updated. Adding dataContext to the dependency array would cause
+    // an infinite loop. There may be a better solution that I will look into in the
+    // future.
+    // eslint-disable-next-line
   }, [data, miles]);
 
   // Update data state when task is moved between columns. Passed as prop to <Board/>
@@ -169,7 +180,11 @@ function Interval({ miles, serviceData, open, handleSetOpenBox }) {
     <div className={styles.Interval_container}>
       <Collapsible
         trigger={
-          <div className={styles.Interval_title}>
+          <div
+            className={`${styles.Interval_title} ${
+              nextInterval === miles ? styles.nextIntervalBG : styles.standardBG
+            }`}
+          >
             <h2>{miles + " Miles"}</h2>
           </div>
         }

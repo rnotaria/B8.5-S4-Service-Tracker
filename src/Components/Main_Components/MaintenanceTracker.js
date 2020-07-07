@@ -46,12 +46,17 @@ export default function MaintenanceTracker() {
         }
       });
     }
-  }, [
-    auth.onAuthStateChanged,
-    dataContext.state.container.user,
-    dataContext.state.status,
-  ]);
+    // Reason: We only want to rerender this component when the user
+    // or status changes. Look into this in the future.
+    // eslint-disable-next-line
+  }, [dataContext.state.container.user, dataContext.state.status]);
 
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   * If still fetching auth, render loading
+   * If no user logged in render AuthPage to allow user to log in.
+   * If user is logged in but no vehicle info is recorded, render NewUserInfo
+   * Else, render main components
+   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   if (currentUser === "authenticating") {
     // Loading
     return <div style={{ color: "white" }}>Loading</div>;
@@ -59,11 +64,9 @@ export default function MaintenanceTracker() {
     // User is not logged in
     return <AuthPage />;
   }
-
   if (dataContext.state.container.vehicle === null) {
     return <NewUserInfo />;
   }
-
   return (
     <div>
       <NavBar />

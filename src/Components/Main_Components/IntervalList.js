@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Interval from "./Interval";
 import {
   getSchedule,
@@ -20,6 +20,7 @@ function IntervalList() {
   const [milesArray, setMilesArray] = useState(null);
   const [serviceArray, setServiceArray] = useState(null);
   const [openBox, setOpenBox] = useState(null);
+  const [nextInterval, setNextInterval] = useState(null);
 
   // Fetch data from db. If none, build using defaults
   const fetchData = async () => {
@@ -33,6 +34,8 @@ function IntervalList() {
 
   useEffect(() => {
     fetchData();
+    // Reason: Want to call useEffect only once after first render
+    // eslint-disable-next-line
   }, []);
 
   // setOpenBox after component correctly renders
@@ -44,9 +47,10 @@ function IntervalList() {
      * this useEffect once, we can use this window to our advantage
      */
     if (milesArray && !serviceArray) {
-      setOpenBox(
-        milesArray[milesArray.findIndex((miles) => miles > currentMiles)]
-      );
+      const tempNextInterval =
+        milesArray[milesArray.findIndex((miles) => miles > currentMiles)];
+      setOpenBox(tempNextInterval);
+      setNextInterval(tempNextInterval);
     }
   }, [milesArray, serviceArray, currentMiles]);
 
@@ -64,6 +68,11 @@ function IntervalList() {
         );
         setMilesArray(newMilesArray);
         setServiceArray(newServiceArray);
+        setNextInterval(
+          newMilesArray[
+            newMilesArray.findIndex((miles) => miles > currentMiles)
+          ]
+        );
       }
       setOpenBox(maintenanceTrackerContext.state.container.interval);
     }
@@ -98,17 +107,27 @@ function IntervalList() {
 
   // Check if CurrentMiles was updated
   useEffect(() => {
-    if (dataContext.state.container.miles !== currentMiles) {
-      setCurrentMiles(dataContext.state.container.miles);
-    }
-    if (dataContext.state.container.miles > currentMiles) {
-      const [newMilesArray, newServiceArray] = updateCurrentMiles(
-        milesArray,
-        serviceArray,
-        dataContext.state.container.miles
-      );
-      setMilesArray(newMilesArray);
-      setServiceArray(newServiceArray);
+    const newCurrentMiles = dataContext.state.container.miles;
+    if (newCurrentMiles !== currentMiles) {
+      setCurrentMiles(newCurrentMiles);
+      if (newCurrentMiles > currentMiles) {
+        const [newMilesArray, newServiceArray] = updateCurrentMiles(
+          milesArray,
+          serviceArray,
+          newCurrentMiles
+        );
+        setMilesArray(newMilesArray);
+        setServiceArray(newServiceArray);
+        setNextInterval(
+          newMilesArray[
+            newMilesArray.findIndex((miles) => miles > newCurrentMiles)
+          ]
+        );
+      } else {
+        setNextInterval(
+          milesArray[milesArray.findIndex((miles) => miles > newCurrentMiles)]
+        );
+      }
     }
   }, [
     dataContext.state.container.miles,
@@ -138,6 +157,7 @@ function IntervalList() {
           miles={miles}
           serviceData={serviceArray[index]}
           open={miles === openBox ? true : false}
+          nextInterval={nextInterval}
           handleSetOpenBox={handleSetOpenBox}
         />
       ))}
