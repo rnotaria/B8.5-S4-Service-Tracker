@@ -1,8 +1,8 @@
 import React, { useReducer } from "react";
-import AddTask from "../Components/Panel_Components/AddTask";
-import DefaultPanelContent from "../Components/Panel_Components/DefaultPanelContent";
-import ViewInfo from "../Components/Panel_Components/ViewInfo";
-import AddCompletionInfo from "../Components/Panel_Components/AddCompletionInfo";
+import AddTask from "../Components/Panel_Components/OtherPanel_Components/AddTask";
+import DefaultPanelContent from "../Components/Panel_Components/DefaultPanelContent_Components/DefaultPanelContent";
+import ViewInfo from "../Components/Panel_Components/OtherPanel_Components/ViewInfo";
+import AddCompletionInfo from "../Components/Panel_Components/OtherPanel_Components/AddCompletionInfo";
 
 export const MaintenanceTrackerContext = React.createContext();
 

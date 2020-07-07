@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../Styles/HelpStyles.module.css";
+import styles from "./_HelpStyles.module.css";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 export default function CloseButton({ onClose }) {

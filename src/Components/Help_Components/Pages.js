@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PageNav from "./PageNav";
 import CloseButton from "./CloseButton";
-import styles from "../../Styles/HelpStyles.module.css";
+import styles from "./_HelpStyles.module.css";
 
 export default function Pages({ onClose, content = <React.Fragment /> }) {
   const numberOfPages = content.length;

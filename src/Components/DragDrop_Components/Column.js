@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Task from "./Task";
-import styles from "../../Styles/DragDropStyles.module.css";
+import styles from "./_DragDropStyles.module.css";
 import { Droppable } from "react-beautiful-dnd";
-import AddTaskButton from "./AddTaskButton";
+import CreateTaskButton from "./CreateTaskButton";
 import DeleteTaskButton from "./DeleteTaskButton";
 
 function Column({ column, tasks, miles }) {
@@ -16,7 +16,7 @@ function Column({ column, tasks, miles }) {
   return (
     <div className={styles.column_container}>
       <div className={styles.column_title}>
-        <AddTaskButton miles={miles} tasks={tasks} column={column} />
+        <CreateTaskButton miles={miles} tasks={tasks} column={column} />
         {column.title}
         <DeleteTaskButton
           activateDelete={activateDelete}

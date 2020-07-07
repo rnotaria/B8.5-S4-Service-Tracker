@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../Styles/Panel_Styles/DefaultPanelContent.module.css";
+import styles from "./_DefaultPanelContentStyles.module.css";
 import AddServiceInterval from "./AddServiceInterval";
 import DeleteServiceInterval from "./DeleteServiceInterval";
 import UpdateCurrentMiles from "./UpdateCurrentMiles";

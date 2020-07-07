@@ -4,10 +4,10 @@ import {
   getSchedule,
   addInterval,
   updateCurrentMiles,
-} from "../utils/getServiceSchedule";
-import styles from "../Styles/Interval.module.css";
-import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
-import { DataContext } from "../Contexts/DataContext";
+} from "../../utils/getServiceSchedule";
+import styles from "./_IntervalStyles.module.css";
+import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
+import { DataContext } from "../../Contexts/DataContext";
 
 function IntervalList() {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);

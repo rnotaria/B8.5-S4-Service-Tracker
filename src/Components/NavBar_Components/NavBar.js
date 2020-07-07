@@ -1,12 +1,11 @@
 import React, { useState, useContext } from "react";
-import { auth } from "../Firebase/firebase";
-import Help from "./Help_Components/Help";
-import styles from "../Styles/NavBar.module.css";
+import { auth } from "../../Firebase/firebase";
+import Help from "../Help_Components/Help";
+import styles from "./_NavBarStyles.module.css";
 import { MdSettings } from "react-icons/md";
 import { IoMdHelp } from "react-icons/io";
 import { FaRegSave } from "react-icons/fa";
-
-import { DataContext } from "../Contexts/DataContext";
+import { DataContext } from "../../Contexts/DataContext";
 
 function NavBar() {
   const dataContext = useContext(DataContext);

@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import { auth, db } from "../Firebase/firebase";
+import { auth, db } from "../../Firebase/firebase";
 import IntervalList from "./IntervalList";
-import Panel from "./Panel_Components/Panel";
-import NavBar from "./NavBar";
-import AuthPage from "./Auth_Components/AuthPage";
-import NewUserInfo from "./Auth_Components/NewUserInfo";
-import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
-import { DataContext } from "../Contexts/DataContext";
+import Panel from "../Panel_Components/MainPanel_Components/Panel";
+import NavBar from "../NavBar_Components/NavBar";
+import AuthPage from "../Auth_Components/AuthPage";
+import NewUserInfo from "../Auth_Components/NewUserInfo";
+import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
+import { DataContext } from "../../Contexts/DataContext";
 
 export default function MaintenanceTracker() {
   const [currentUser, setCurrentUser] = useState("authenticating");

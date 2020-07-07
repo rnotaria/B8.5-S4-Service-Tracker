@@ -1,8 +1,21 @@
 import React, { useState, useContext } from "react";
 import { auth, db } from "../../Firebase/firebase";
-import styles from "./styles.module.css";
+import styles from "./_AuthStyles.module.css";
 import useInput from "../../hooks/useInput";
 import { DataContext } from "../../Contexts/DataContext";
+
+function AuthPageLayout({ title, children }) {
+  return (
+    <div className={styles.main}>
+      <div className={styles.box}>
+        <div className={styles.title}>
+          <h3>{title}</h3>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+}
 
 function CreateAccount() {
   const dataContext = useContext(DataContext);
@@ -38,21 +51,16 @@ function CreateAccount() {
   };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.box}>
-        <div className={styles.title}>
-          <h3>CREATE ACCOUNT</h3>
-        </div>
-        <div className={styles.login_info}>
-          {emailInput}
-          {passwordInput}
-          {confirmPasswordInput}
-        </div>
-        <div className={`${styles.options} ${styles.createAccount}`}>
-          <button onClick={() => handleCreateAccount()}>Create Account</button>
-        </div>
+    <AuthPageLayout title={"CREATE ACCOUNT"}>
+      <div className={styles.login_info}>
+        {emailInput}
+        {passwordInput}
+        {confirmPasswordInput}
       </div>
-    </div>
+      <div className={`${styles.options} ${styles.createAccount}`}>
+        <button onClick={() => handleCreateAccount()}>Create Account</button>
+      </div>
+    </AuthPageLayout>
   );
 }
 
@@ -84,7 +92,7 @@ export default function AuthPage() {
   };
 
   const handleForgotPassword = () => {
-    alert("Login system is under construction. Please select Guest");
+    alert("This option is not currently available.");
   };
 
   if (display === "create") {
@@ -92,24 +100,17 @@ export default function AuthPage() {
   }
 
   return (
-    <div className={styles.main}>
-      <div className={styles.box}>
-        <div className={styles.title}>
-          <h3>LOGIN</h3>
-        </div>
-        <div className={styles.login_info}>
-          {emailInput}
-          {passwordInput}
-        </div>
-        <div className={styles.options}>
-          <button onClick={() => handleLogin()}>Login</button>
-          <button onClick={() => handleGuest()}>Guest</button>
-          <button onClick={() => handleForgotPassword()}>
-            Forgot Password
-          </button>
-          <button onClick={() => setDisplay("create")}>Create Account</button>
-        </div>
+    <AuthPageLayout title={"LOGIN"}>
+      <div className={styles.login_info}>
+        {emailInput}
+        {passwordInput}
       </div>
-    </div>
+      <div className={styles.options}>
+        <button onClick={() => handleLogin()}>Login</button>
+        <button onClick={() => handleGuest()}>Guest</button>
+        <button onClick={() => handleForgotPassword()}>Forgot Password</button>
+        <button onClick={() => setDisplay("create")}>Create Account</button>
+      </div>
+    </AuthPageLayout>
   );
 }

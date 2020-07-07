@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useContext } from "react";
-import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
-import styles from "../../Styles/Panel_Styles/DefaultPanelContent.module.css";
+import { MaintenanceTrackerContext } from "../../../Contexts/MaintenanceTrackerContext";
+import styles from "./_DefaultPanelContentStyles.module.css";
 
 export default function AddServiceInterval() {
   const [renderInputField, setRenderInputField] = useState(false);

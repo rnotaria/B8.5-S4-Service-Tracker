@@ -5,11 +5,11 @@ import React, {
   useRef,
   useCallback,
 } from "react";
-import styles from "../Styles/Interval.module.css";
+import styles from "./_IntervalStyles.module.css";
 import Collapsible from "react-collapsible";
-import Board from "./DragDrop_Components/Board";
-import { MaintenanceTrackerContext } from "../Contexts/MaintenanceTrackerContext";
-import { DataContext } from "../Contexts/DataContext";
+import Board from "../DragDrop_Components/Board";
+import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
+import { DataContext } from "../../Contexts/DataContext";
 
 function Interval({ miles, serviceData, open, handleSetOpenBox }) {
   const newTaskId = useRef(0);

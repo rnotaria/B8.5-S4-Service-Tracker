@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../../Styles/HelpStyles.module.css";
+import styles from "./_HelpStyles.module.css";
 
 export default function PageNav({ numberOfPages = 0, handleCurrentPage }) {
   const [selectedBubble, setSelectedBubble] = useState(0);

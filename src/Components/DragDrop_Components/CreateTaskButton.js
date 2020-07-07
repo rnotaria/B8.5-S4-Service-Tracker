@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
-import styles from "../../Styles/DragDropStyles.module.css";
+import styles from "./_DragDropStyles.module.css";
 import { IoMdAddCircle } from "react-icons/io";
 
-export default function AddTaskButton({ miles, tasks, column }) {
+export default function CreateTaskButton({ miles, tasks, column }) {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   return (

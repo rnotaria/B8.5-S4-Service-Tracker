@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styles from "./styles.module.css";
+import styles from "./_AuthStyles.module.css";
 import useInput from "../../hooks/useInput";
 import { DataContext } from "../../Contexts/DataContext";
 

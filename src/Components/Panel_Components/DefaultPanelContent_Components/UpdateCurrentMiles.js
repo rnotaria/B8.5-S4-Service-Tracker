@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import useInput from "../../hooks/useInput";
-import { DataContext } from "../../Contexts/DataContext";
-import styles from "../../Styles/Panel_Styles/DefaultPanelContent.module.css";
-import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
+import useInput from "../../../hooks/useInput";
+import { DataContext } from "../../../Contexts/DataContext";
+import styles from "./_DefaultPanelContentStyles.module.css";
+import { MaintenanceTrackerContext } from "../../../Contexts/MaintenanceTrackerContext";
 
 export default function UpdateCurrentMiles() {
   const [renderInput, setRenderInput] = useState(false);

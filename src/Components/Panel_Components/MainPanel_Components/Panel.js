@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import SlidingPane from "./react-sliding-pane/react-sliding-pane";
-import "./react-sliding-pane/react-sliding-pane.css";
-import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
+import SlidingPane from "./SlidingPane/react-sliding-pane";
+import "./SlidingPane/react-sliding-pane.css";
+import { MaintenanceTrackerContext } from "../../../Contexts/MaintenanceTrackerContext";
 import PanelButton from "./PanelButton";
 
 export default function Panel({

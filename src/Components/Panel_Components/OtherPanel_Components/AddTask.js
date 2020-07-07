@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
-import commonStyles from "../../Styles/commonStyles.module.css";
+import { MaintenanceTrackerContext } from "../../../Contexts/MaintenanceTrackerContext";
+import commonStyles from "../../../Styles/commonStyles.module.css";
 
 export default function AddTask() {
   const [task, setTask] = useState("");

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../Styles/DragDropStyles.module.css";
+import styles from "./_DragDropStyles.module.css";
 import { IoMdRemoveCircle } from "react-icons/io";
 
 export default function DeleteTaskButton({

@@ -107,7 +107,7 @@
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * *
- * * * Styles for AddTaskButton.js Component * * *
+ * * * Styles for CreateTaskButton.js Component * * *
  * * * * * * * * * * * * AND * * * * * * * * * * *
  * * Styles for DeleteTaskButton.js Component  * *
  * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -129,7 +129,6 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  /* z-index: 0.5; */
 
   color: darkslateblue;
   cursor: pointer;

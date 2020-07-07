@@ -51,7 +51,7 @@ export const closedButtonPosition = () => ({
   left: "50%",
   bottom: "0px",
   transform: "translate(-50%)",
-  zIndex: 1,
+  zIndex: 5,
 });
 
 export const openedButtonPosition = (height) => ({
@@ -59,5 +59,5 @@ export const openedButtonPosition = (height) => ({
   left: "50%",
   bottom: height,
   transform: "translate(-50%)",
-  zIndex: 1,
+  zIndex: 5,
 });

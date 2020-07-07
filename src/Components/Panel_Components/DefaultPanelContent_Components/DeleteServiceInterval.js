@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import styles from "../../Styles/Panel_Styles/DefaultPanelContent.module.css";
-import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
+import styles from "./_DefaultPanelContentStyles.module.css";
+import { MaintenanceTrackerContext } from "../../../Contexts/MaintenanceTrackerContext";
 
 export default function DeleteServiceInterval() {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);

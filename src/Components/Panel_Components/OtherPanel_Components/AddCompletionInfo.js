@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
-import styles from "../../Styles/Panel_Styles/AddCompletionInfo.module.css";
-import getDate from "../../utils/getDate";
-import useInput from "../../hooks/useInput";
+import { MaintenanceTrackerContext } from "../../../Contexts/MaintenanceTrackerContext";
+import styles from "./_AddCompletionInfoStyles.module.css";
+import getDate from "../../../utils/getDate";
+import useInput from "../../../hooks/useInput";
 
 import ReactQuill from "react-quill";
-import "../../Styles/react-quill/quill.snow.css";
-import "../../Styles/react-quill/quill.bubble.css";
-import modules from "../../Styles/react-quill/modules";
+import "../../../Styles/react-quill/quill.snow.css";
+import "../../../Styles/react-quill/quill.bubble.css";
+import modules from "../../../Styles/react-quill/modules";
 
 export default function CompletionInfo({ taskId, intervalMiles }) {
   const didMount = useRef(false);

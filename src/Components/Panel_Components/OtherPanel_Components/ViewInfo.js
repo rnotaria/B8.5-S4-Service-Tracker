@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
-import styles from "../../Styles/Panel_Styles/ViewInfo.module.css";
-import useInput from "../../hooks/useInput";
-import useEdit from "../../hooks/useEdit";
+import styles from "./_ViewInfoStyles.module.css";
+import useInput from "../../../hooks/useInput";
+import useEdit from "../../../hooks/useEdit";
 
 import ReactQuill from "react-quill";
-import "../../Styles/react-quill/quill.snow.css";
-import "../../Styles/react-quill/quill.bubble.css";
-import modules from "../../Styles/react-quill/modules";
+import "../../../Styles/react-quill/quill.snow.css";
+import "../../../Styles/react-quill/quill.bubble.css";
+import modules from "../../../Styles/react-quill/modules";
 
 function Section({ title, handleEdit, children }) {
   return (
