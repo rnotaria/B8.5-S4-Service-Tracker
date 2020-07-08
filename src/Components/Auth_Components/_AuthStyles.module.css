@@ -63,12 +63,16 @@
 
 .options button {
   width: 150px;
-  background-color: slategray;
-  border: 1px solid grey;
+  height: 20px;
   margin: 8px;
   margin-top: -2px;
 
-  color: black;
+  background-image: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150));
+  border: 1px solid black;
+  border-radius: 5px;
+
+  font-weight: bold;
+  outline: none;
   cursor: pointer;
 }
 

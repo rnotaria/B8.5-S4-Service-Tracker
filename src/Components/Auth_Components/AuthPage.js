@@ -13,8 +13,7 @@ export default function AuthPage() {
   const [password, passwordInput] = useInput("", "Password", "password");
   const [error, setError] = useState(null);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogin = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((cred) => {
@@ -40,7 +39,16 @@ export default function AuthPage() {
   };
 
   const handleForgotPassword = () => {
-    alert("This option is not currently available.");
+    auth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        setError(
+          "An email was sent with instructions on resetting your password."
+        );
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   if (display === "create") {
@@ -49,20 +57,20 @@ export default function AuthPage() {
 
   return (
     <PageContainer title={"LOGIN"} error={error}>
-      <form onSubmit={(e) => handleLogin(e)}>
+      <React.Fragment>
         <div className={styles.login_info}>
           {emailInput}
           {passwordInput}
         </div>
         <div className={styles.options}>
-          <button type="submit">Login</button>
+          <button onClick={() => handleLogin()}>Login</button>
           <button onClick={() => handleGuest()}>Guest</button>
           <button onClick={() => handleForgotPassword()}>
             Forgot Password
           </button>
           <button onClick={() => setDisplay("create")}>Create Account</button>
         </div>
-      </form>
+      </React.Fragment>
     </PageContainer>
   );
 }
