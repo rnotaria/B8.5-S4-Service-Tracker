@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { MaintenanceTrackerContext } from "../../../Contexts/MaintenanceTrackerContext";
-import commonStyles from "../../../Styles/commonStyles.module.css";
+import styles from "./AddTaskStyles.module.css";
 
 export default function AddTask() {
   const [task, setTask] = useState("");
@@ -23,10 +23,8 @@ export default function AddTask() {
   }, [task, maintenanceTrackerContext]);
 
   return (
-    <div>
+    <div className={styles.main}>
       <input
-        className={commonStyles.input}
-        style={{ marginRight: "8px" }}
         autoFocus={true}
         type="text"
         id="addText"
@@ -35,7 +33,6 @@ export default function AddTask() {
         onChange={(e) => setTask(e.target.value)}
       />
       <button
-        className={commonStyles.button}
         type="submit"
         onClick={() => {
           maintenanceTrackerContext.dispatch({

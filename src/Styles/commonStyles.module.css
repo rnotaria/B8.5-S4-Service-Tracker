@@ -1,10 +1,32 @@
 .button {
-  background-color: slategray;
-  border: 1px solid grey;
+  width: 200px;
+  height: 25px;
+
+  background-image: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150));
+  border: 1px solid black;
+  border-radius: 5px;
+
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+}
+
+.button button {
+  width: 200px;
+  height: 25px;
+
+  background-image: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150));
+  border: 1px solid black;
+  border-radius: 5px;
+
+  font-weight: bold;
+  outline: none;
   cursor: pointer;
 }
 
 .input {
+  height: 20px;
+  width: 250px;
   background-color: silver;
   outline: none;
 }

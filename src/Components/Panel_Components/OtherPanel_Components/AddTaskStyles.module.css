@@ -1,17 +1,10 @@
 .main {
-  margin-left: 24px;
-  margin-right: 24px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.componentContainer {
-  width: 250px;
-  display: flex;
-  justify-content: center;
-}
-
-.componentContainer button {
+.main button {
   width: 200px;
   height: 25px;
 
@@ -24,11 +17,13 @@
   cursor: pointer;
 }
 
-.componentContainer input {
-  background-color: silver;
+.main input {
+  height: 20px;
+  width: 250px;
   margin-right: 8px;
+  background-color: silver;
 
-  border-radius: 3px;
   border: 1px solid black;
+  border-radius: 3px;
   outline: none;
 }

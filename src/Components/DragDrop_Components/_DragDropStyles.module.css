@@ -82,7 +82,7 @@
 }
 
 .task_complete {
-  background-image: linear-gradient(green, lightgreen);
+  background: linear-gradient(lightgreen, limegreen);
 }
 
 .task_deleteActive {

@@ -84,14 +84,13 @@
   min-width: 0;
 }
 .slide-pane .slide-pane__title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  max-width: 80%;
+  text-align: center;
+  margin-left: -32px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 0;
-  padding: 0;
 }
 .slide-pane__close {
   margin-left: 24px;
