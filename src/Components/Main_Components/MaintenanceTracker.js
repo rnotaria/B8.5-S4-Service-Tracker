@@ -7,6 +7,8 @@ import AuthPage from "../Auth_Components/AuthPage";
 import NewUserInfo from "../Auth_Components/NewUserInfo";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../../Contexts/DataContext";
+import ReactLoading from "react-loading";
+import styles from "../../Styles/loading.module.css";
 
 export default function MaintenanceTracker() {
   const [currentUser, setCurrentUser] = useState("authenticating");
@@ -58,10 +60,12 @@ export default function MaintenanceTracker() {
    * Else, render main components
    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   if (currentUser === "authenticating") {
-    // Loading
-    return <div style={{ color: "white" }}>Loading</div>;
+    return (
+      <div className={styles.loading}>
+        <ReactLoading type={"spinningBubbles"} />
+      </div>
+    );
   } else if (!currentUser) {
-    // User is not logged in
     return <AuthPage />;
   }
   if (dataContext.state.container.vehicle === null) {

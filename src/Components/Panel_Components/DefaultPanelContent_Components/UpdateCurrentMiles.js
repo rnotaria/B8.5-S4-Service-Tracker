@@ -11,9 +11,13 @@ export default function UpdateCurrentMiles() {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   const handleUpdate = () => {
+    var realMiles = parseInt(miles);
+    if (!Number.isInteger(realMiles) || realMiles < 0) {
+      realMiles = 0;
+    }
     dataContext.dispatch({
       type: "updateCurrentMiles",
-      value: parseInt(miles),
+      value: realMiles,
     });
     maintenanceTrackerContext.dispatch({ type: "closePanel" });
   };

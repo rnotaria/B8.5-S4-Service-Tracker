@@ -8,16 +8,16 @@ export default function AddServiceInterval() {
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
   const handleSubmit = useCallback(() => {
-    if (!Number.isInteger(parseInt(interval)) || parseInt(interval) < 0) {
-      alert("Please enter a positive number.");
-    } else {
-      maintenanceTrackerContext.dispatch({
-        type: "addInterval",
-        value: {
-          interval: parseInt(interval),
-        },
-      });
+    var realInterval = parseInt(interval);
+    if (!Number.isInteger(realInterval) || realInterval < 0) {
+      realInterval = 0;
     }
+    maintenanceTrackerContext.dispatch({
+      type: "addInterval",
+      value: {
+        interval: realInterval,
+      },
+    });
   }, [maintenanceTrackerContext, interval]);
 
   // useEffect(() => {
@@ -34,9 +34,7 @@ export default function AddServiceInterval() {
 
   if (renderInputField === false) {
     return (
-      <div
-        className={`${styles.componentContainer} ${styles.addInterval_input} `}
-      >
+      <div className={`${styles.componentContainer} `}>
         <button onClick={() => setRenderInputField(true)}>
           Add Service Interval
         </button>{" "}

@@ -6,6 +6,8 @@ import {
   updateCurrentMiles,
 } from "../../utils/getServiceSchedule";
 import styles from "./_IntervalStyles.module.css";
+import loadingStyles from "../../Styles/loading.module.css";
+import ReactLoading from "react-loading";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../../Contexts/DataContext";
 
@@ -141,10 +143,11 @@ function IntervalList() {
     setOpenBox(miles);
   };
 
+  //
   if (!milesArray || !serviceArray) {
     return (
-      <div style={{ height: "50px", width: "50px", backgroundColor: "white" }}>
-        jkhdashjska
+      <div className={loadingStyles.loading}>
+        <ReactLoading type={"spinningBubbles"} />
       </div>
     );
   }
