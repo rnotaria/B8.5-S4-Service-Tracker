@@ -13,6 +13,7 @@
 .videoContainer {
   height: 579px;
   border: 5px solid grey;
+  background-color: black;
 }
 
 .textContainer {
@@ -43,7 +44,16 @@
   color: darkslateblue;
 }
 
+.minusIconActive {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+
+  color: red;
+}
+
 .minusIconBg,
+.minusIconActiveBg,
 .plusIconBg {
   width: 10px;
   height: 10px;
@@ -68,6 +78,22 @@
 .infoIcon {
   width: 20px;
   height: 20px;
+
+  position: absolute;
+}
+
+.saveIcon {
+  width: 20px;
+  height: 20px;
+
+  position: absolute;
+}
+
+.arrowIcon {
+  width: 20px;
+  height: 20px;
+
+  color: red;
 
   position: absolute;
 }

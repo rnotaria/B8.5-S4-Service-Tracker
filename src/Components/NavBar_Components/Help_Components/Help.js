@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Popup from "reactjs-popup";
 import Pages from "./Pages";
 import styles from "./_HelpStyles.module.css";
@@ -14,12 +14,23 @@ const contentStyle = {
 };
 
 export default function Help({ open, handleOnClose }) {
+  const [firstRender, setFirstRender] = useState(false);
+
+  // Slight delay to render so new accounts are not immediately
+  // bombarded with help box.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFirstRender(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className={`${styles.center} ${styles.popup}`}>
       <Popup
         modal={true}
         contentStyle={contentStyle}
-        open={open}
+        open={firstRender && open}
         onClose={() => handleOnClose()}
       >
         <Pages onClose={handleOnClose} content={helpContent} />

@@ -114,9 +114,14 @@
 
 .continue_btn button {
   width: 150px;
-  background-color: slategray;
-  border: 1px solid grey;
-  color: black;
+  height: 20px;
+
+  background-image: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150));
+  border: 1px solid black;
+  border-radius: 5px;
+
+  font-weight: bold;
+  outline: none;
   cursor: pointer;
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { auth } from "../../Firebase/firebase";
-import Help from "../Help_Components/Help";
+import Help from "./Help_Components/Help";
 import styles from "./_NavBarStyles.module.css";
 import { MdSettings } from "react-icons/md";
 import { IoMdHelp } from "react-icons/io";
@@ -31,9 +31,11 @@ function NavBar() {
     dataContext.state.container.vehicle.make +
     " " +
     dataContext.state.container.vehicle.model;
-  const [openHelp, setOpenHelp] = useState(false);
+  const [openHelp, setOpenHelp] = useState(dataContext.state.isNew);
+
   const handleOnClose = () => {
     setOpenHelp(false);
+    dataContext.dispatch({ type: "setUsed" });
   };
 
   const handleLogout = () => {

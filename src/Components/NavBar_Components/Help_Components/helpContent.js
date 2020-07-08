@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./_HelpStyles.module.css";
-import help1 from "../../other/help_videos/help1.mp4";
-import help2 from "../../other/help_videos/help2.mp4";
-import help3 from "../../other/help_videos/help3.mp4";
-import help4 from "../../other/help_videos/help4.mp4";
+import help1 from "./help_videos/help1.mp4";
+import help2 from "./help_videos/help2.mp4";
+import help3 from "./help_videos/help3.mp4";
+import help4 from "./help_videos/help4.mp4";
+import help5 from "./help_videos/help5.mp4";
 import { IoMdAddCircle, IoMdRemoveCircle } from "react-icons/io";
-import { FaRegEdit } from "react-icons/fa";
+import { FaChevronUp, FaRegEdit, FaRegSave } from "react-icons/fa";
 import { GoInfo } from "react-icons/go";
 
 const video = (src) => {
@@ -34,6 +35,13 @@ const minusIcon = () => (
   </span>
 );
 
+const minusIconActive = () => (
+  <span className={styles.iconContainer}>
+    <span className={styles.minusIconActiveBg} />
+    <IoMdRemoveCircle className={styles.minusIconActive} />
+  </span>
+);
+
 const editIcon = () => (
   <span className={styles.iconContainer}>
     <FaRegEdit className={styles.editIcon} />
@@ -46,11 +54,24 @@ const infoIcon = () => (
   </span>
 );
 
+const saveIcon = () => (
+  <span className={styles.iconContainer}>
+    <FaRegSave className={styles.saveIcon} />
+  </span>
+);
+
+const arrowIcon = () => (
+  <span className={styles.iconContainer}>
+    <FaChevronUp className={styles.arrowIcon} />
+  </span>
+);
+
 const step1 = (
   <div>
     {video(help1)}
     {text(
       <span>
+        Your upcoming service interval will be highlighted and open by default.
         You can view tasks for different service intervals by clicking the
         respective header.
       </span>
@@ -63,8 +84,8 @@ const step2 = (
     {text(
       <span>
         Pressing &nbsp;{infoIcon()}&nbsp; brings up the Information Panel and
-        provides more details on a particular task such as instructions, parts,
-        and helpful links.
+        provides more details on a particular task such as instructions, where
+        to purchase parts, and useful links.
         <br />
         <br />
         When you complete a task by dragging it into the "Complete" column, you
@@ -81,14 +102,15 @@ const step3 = (
       <span>
         Press &nbsp;{minusIcon()}&nbsp; to activate delete mode followed by
         clicking any tasks you want to remove from the list. Be sure to
-        deactivate delete mode by pressing &nbsp;{minusIcon()}&nbsp; again when
-        you are done.
+        deactivate delete mode by pressing &nbsp;{minusIconActive()}&nbsp; again
+        when you are done.
         <br />
         <br />
         You can add custom tasks to the list by pressing &nbsp;{plusIcon()}
         &nbsp;. This will bring up a panel where you can type in the task name.
         You can then click &nbsp;{infoIcon()}&nbsp; to bring up the information
         panel and click &nbsp;{editIcon()}&nbsp; to add details to your task.
+        Press &nbsp;{editIcon()}&nbsp; again to save.
       </span>
     )}
   </div>
@@ -98,13 +120,24 @@ const step4 = (
     {video(help4)}
     {text(
       <span>
-        Press the arrow at the bottom to open the Options Panel. Here you can
-        add or remove service intervals or update your current miles. When
-        updating your current miles, additional service intervals will be
-        created and prefilled with default tasks based on your input.
+        Press &nbsp;{arrowIcon()}&nbsp; at the bottom to open the Options Panel.
+        Here you can add or remove service intervals or update your current
+        miles. When updating your current miles, additional service intervals
+        will be created and prefilled with default tasks based on your input.
+      </span>
+    )}
+  </div>
+);
+const step5 = (
+  <div>
+    {video(help5)}
+    {text(
+      <span>
+        Click &nbsp;{saveIcon()}&nbsp; in the navigation bar to save your data.
+        The save icon will turn green when it has successfully saved.
       </span>
     )}
   </div>
 );
 
-export const helpContent = [step1, step2, step3, step4];
+export const helpContent = [step1, step2, step3, step4, step5];

@@ -31,7 +31,8 @@ const dataContextReducer = (state, action) => {
     case "setGuest":
       // action.value: none
       return {
-        ...state,
+        ...dataContextInitialState,
+        isNew: true,
         container: {
           ...state.container,
           user: "guest",
@@ -42,6 +43,7 @@ const dataContextReducer = (state, action) => {
       // action.value
       return {
         ...dataContextInitialState,
+        isNew: true,
         container: {
           ...state.container,
           user: action.value,
@@ -119,24 +121,11 @@ const dataContextReducer = (state, action) => {
         },
       };
 
-    // case "saveData":
-    //   //saves current data to database
-    //   if (state.container.user !== "guest") {
-    //     db.collection("users")
-    //       .doc(state.container.user)
-    //       .update({
-    //         data: state.data,
-    //       })
-    //       .then(() => {
-    //         console.log("Data saved.");
-    //       })
-    //       .catch((e) => {
-    //         console.log("Error: ", e);
-    //       });
-    //   }
-    //   return {
-    //     ...state,
-    //   };
+    case "setUsed":
+      return {
+        ...state,
+        isNew: false,
+      };
 
     case "setStatus":
       return {
