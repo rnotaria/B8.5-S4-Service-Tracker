@@ -1,9 +1,10 @@
 .main {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: -200px;
+  margin-top: -150px;
 }
 
 .box {
@@ -71,6 +72,10 @@
   cursor: pointer;
 }
 
+/* * * * * * * * * * * * * * * 
+ * * * * Vehicle Info  * * * *
+ * * * * * * * * * * * * * * */
+
 .vehicle_info {
   display: flex;
   flex-direction: column;
@@ -78,30 +83,19 @@
   margin-top: 32px;
 }
 
+.vehicle {
+  width: calc(100% - 100px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .vehicle_info input {
   background-color: silver;
 }
 
-.vehicle {
-  display: flex;
-  flex-direction: row;
-}
-
-.year {
-  width: 50px;
-  margin-right: 8px;
-}
-
-.make {
-  width: 100px;
-  margin-left: 8px;
-  margin-right: 8px;
-}
-
-.model {
-  width: 100px;
-  margin-left: 8px;
-  margin-right: 8px;
+.vehicle_info select {
+  background-color: silver;
 }
 
 .miles {
@@ -109,7 +103,7 @@
 }
 
 .continue_btn {
-  margin-top: 32px;
+  margin-top: 24px;
   display: flex;
   justify-content: center;
 }
@@ -120,4 +114,17 @@
   border: 1px solid grey;
   color: black;
   cursor: pointer;
+}
+
+/* * * * * * * * * * * * * * * *
+ * * * * Error Container * * * *
+ * * * * * * * * * * * * * * * */
+
+.errorContainer {
+  height: 100px;
+  width: 400px;
+  padding-top: 16px;
+
+  text-align: center;
+  color: tomato;
 }

@@ -3,77 +3,15 @@ import { auth, db } from "../../Firebase/firebase";
 import styles from "./_AuthStyles.module.css";
 import useInput from "../../hooks/useInput";
 import { DataContext } from "../../Contexts/DataContext";
-
-function AuthPageLayout({ title, children }) {
-  return (
-    <div className={styles.main}>
-      <div className={styles.box}>
-        <div className={styles.title}>
-          <h3>{title}</h3>
-        </div>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function CreateAccount() {
-  const dataContext = useContext(DataContext);
-  const [email, emailInput] = useInput("", "Email");
-  const [password, passwordInput] = useInput("", "Password", "password");
-  const [confirmPassword, confirmPasswordInput] = useInput(
-    "",
-    "Confirm Password",
-    "password"
-  );
-
-  const handleCreateAccount = () => {
-    if (password.localeCompare(confirmPassword) === 0) {
-      dataContext.dispatch({ type: "setStatus", value: "creatingUser" });
-      auth
-        .createUserWithEmailAndPassword(email, password)
-        .then((cred) => {
-          // Create user doc
-          console.log("Creating User");
-          db.collection("users")
-            .doc(cred.user.uid)
-            .set({
-              user: cred.user.uid,
-            })
-            .then(() => {
-              console.log("User Created");
-              dataContext.dispatch({ type: "setStatus", value: null });
-              dataContext.dispatch({
-                type: "setCreateAccount",
-                value: cred.user.uid,
-              });
-            });
-        })
-        .catch((error) => {
-          console.log("Error: ", error.message);
-        });
-    }
-  };
-
-  return (
-    <AuthPageLayout title={"CREATE ACCOUNT"}>
-      <div className={styles.login_info}>
-        {emailInput}
-        {passwordInput}
-        {confirmPasswordInput}
-      </div>
-      <div className={`${styles.options} ${styles.createAccount}`}>
-        <button onClick={() => handleCreateAccount()}>Create Account</button>
-      </div>
-    </AuthPageLayout>
-  );
-}
+import PageContainer from "./PageContainer";
+import CreateAccount from "./CreateAccount";
 
 export default function AuthPage() {
   const dataContext = useContext(DataContext);
   const [display, setDisplay] = useState("login");
   const [email, emailInput] = useInput("", "Email");
   const [password, passwordInput] = useInput("", "Password", "password");
+  const [error, setError] = useState(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -91,6 +29,7 @@ export default function AuthPage() {
       })
       .catch((error) => {
         console.log(error);
+        setError(error.message);
       });
   };
 
@@ -109,7 +48,7 @@ export default function AuthPage() {
   }
 
   return (
-    <AuthPageLayout title={"LOGIN"}>
+    <PageContainer title={"LOGIN"} error={error}>
       <form onSubmit={(e) => handleLogin(e)}>
         <div className={styles.login_info}>
           {emailInput}
@@ -124,6 +63,6 @@ export default function AuthPage() {
           <button onClick={() => setDisplay("create")}>Create Account</button>
         </div>
       </form>
-    </AuthPageLayout>
+    </PageContainer>
   );
 }

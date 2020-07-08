@@ -76,7 +76,7 @@ function IntervalList() {
       }
       setOpenBox(maintenanceTrackerContext.state.container.interval);
     }
-  }, [maintenanceTrackerContext, milesArray, serviceArray]);
+  }, [maintenanceTrackerContext, milesArray, serviceArray, currentMiles]);
 
   // Delete service mile interval
   useEffect(() => {
