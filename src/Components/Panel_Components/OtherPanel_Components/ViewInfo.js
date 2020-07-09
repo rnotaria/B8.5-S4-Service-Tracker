@@ -27,11 +27,6 @@ function CompletionDetails({ id, info }) {
   const [miles, milesInput] = useInput(info.miles);
   const [notes, setNotes] = useState(info.notes);
 
-  // const [notes, notesInput] = useTextArea(
-  //   info.notes,
-  //   "Enter relevant completion notes such as cost, material used, etc."
-  // );
-
   const [edit, handleEdit] = useEdit(id, {
     completionInfo: { complete: true, date, miles, notes },
   });

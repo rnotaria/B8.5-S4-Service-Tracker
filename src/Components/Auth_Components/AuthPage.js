@@ -9,11 +9,12 @@ import CreateAccount from "./CreateAccount";
 export default function AuthPage() {
   const dataContext = useContext(DataContext);
   const [display, setDisplay] = useState("login");
-  const [email, emailInput] = useInput("", "Email");
+  const [email, emailInput] = useInput("", "Email", undefined, undefined, true);
   const [password, passwordInput] = useInput("", "Password", "password");
   const [error, setError] = useState(null);
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     auth
       .signInWithEmailAndPassword(email, password)
       .then((cred) => {
@@ -57,20 +58,24 @@ export default function AuthPage() {
 
   return (
     <PageContainer title={"LOGIN"} error={error}>
-      <React.Fragment>
+      <form onSubmit={(e) => handleLogin(e)}>
         <div className={styles.login_info}>
           {emailInput}
           {passwordInput}
         </div>
         <div className={styles.options}>
-          <button onClick={() => handleLogin()}>Login</button>
-          <button onClick={() => handleGuest()}>Guest</button>
-          <button onClick={() => handleForgotPassword()}>
+          <button onSubmit={(e) => handleLogin(e)}>Login</button>
+          <button type="button" onClick={() => handleGuest()}>
+            Guest
+          </button>
+          <button type="button" onClick={() => handleForgotPassword()}>
             Forgot Password
           </button>
-          <button onClick={() => setDisplay("create")}>Create Account</button>
+          <button type="button" onClick={() => setDisplay("create")}>
+            Create Account
+          </button>
         </div>
-      </React.Fragment>
+      </form>
     </PageContainer>
   );
 }

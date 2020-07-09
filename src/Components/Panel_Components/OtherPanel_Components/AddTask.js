@@ -1,48 +1,33 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { MaintenanceTrackerContext } from "../../../Contexts/MaintenanceTrackerContext";
 import styles from "./AddTaskStyles.module.css";
+import useInput from "../../../hooks/useInput";
 
 export default function AddTask() {
-  const [task, setTask] = useState("");
-
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
+  const [task, taskInput] = useInput(
+    "",
+    "Enter new task",
+    undefined,
+    undefined,
+    true
+  );
 
-  useEffect(() => {
-    const listener = (event) => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        maintenanceTrackerContext.dispatch({
-          type: "addTask.2",
-          value: task,
-        });
-      }
-    };
-    document.addEventListener("keydown", listener);
-    return () => {
-      document.removeEventListener("keydown", listener);
-    };
-  }, [task, maintenanceTrackerContext]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    maintenanceTrackerContext.dispatch({
+      type: "addTask.2",
+      value: task,
+    });
+  };
 
   return (
-    <div className={styles.main}>
-      <input
-        autoFocus={true}
-        type="text"
-        id="addText"
-        placeholder="Enter new task..."
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-      />
-      <button
-        type="submit"
-        onClick={() => {
-          maintenanceTrackerContext.dispatch({
-            type: "addTask.2",
-            value: task,
-          });
-        }}
-      >
-        Add Task
-      </button>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div className={styles.main}>
+        {taskInput}
+        <button onSubmit={handleSubmit}>Add Task</button>
+      </div>
+    </form>
   );
 }

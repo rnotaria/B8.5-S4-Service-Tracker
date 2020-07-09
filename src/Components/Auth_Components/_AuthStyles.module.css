@@ -46,6 +46,10 @@
   margin-top: 16px;
   margin-bottom: -8px;
   background-color: silver;
+
+  border-radius: 3px;
+  border: 1px solid black;
+  outline: none;
 }
 
 .options {
@@ -96,10 +100,18 @@
 
 .vehicle_info input {
   background-color: silver;
+
+  border-radius: 3px;
+  border: 1px solid black;
+  outline: none;
 }
 
 .vehicle_info select {
   background-color: silver;
+
+  border-radius: 3px;
+  border: 1px solid black;
+  outline: none;
 }
 
 .miles {

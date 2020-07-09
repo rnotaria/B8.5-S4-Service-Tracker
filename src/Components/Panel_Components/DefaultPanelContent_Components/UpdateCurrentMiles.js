@@ -6,11 +6,19 @@ import { MaintenanceTrackerContext } from "../../../Contexts/MaintenanceTrackerC
 
 export default function UpdateCurrentMiles() {
   const [renderInput, setRenderInput] = useState(false);
-  const [miles, milesInput] = useInput("", "Enter current miles");
+  const [miles, milesInput] = useInput(
+    "",
+    "Enter current miles",
+    undefined,
+    undefined,
+    true
+  );
   const dataContext = useContext(DataContext);
   const maintenanceTrackerContext = useContext(MaintenanceTrackerContext);
 
-  const handleUpdate = () => {
+  const handleUpdate = (e) => {
+    e.preventDefault();
+
     var realMiles = parseInt(miles);
     if (!Number.isInteger(realMiles) || realMiles < 0) {
       realMiles = 0;
@@ -33,11 +41,13 @@ export default function UpdateCurrentMiles() {
   }
 
   return (
-    <div
-      className={`${styles.componentContainer} ${styles.addInterval_input} `}
-    >
-      {milesInput}
-      <button onClick={handleUpdate}>Submit</button>
-    </div>
+    <form onSubmit={handleUpdate}>
+      <div
+        className={`${styles.componentContainer} ${styles.addInterval_input} `}
+      >
+        {milesInput}
+        <button onSubmit={handleUpdate}>Submit</button>
+      </div>
+    </form>
   );
 }

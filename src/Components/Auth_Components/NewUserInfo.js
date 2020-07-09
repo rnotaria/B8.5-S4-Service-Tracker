@@ -13,10 +13,18 @@ export default function NewUserInfo() {
   );
   const [make, makeDropDown] = useDropDown(["Audi", "BMW", "Genesis"]);
   const [model, modelDropDown] = useDropDown(["S4"]);
-  const [miles, milesInput] = useInput(57000, "Miles", undefined, styles.miles);
+  const [miles, milesInput] = useInput(
+    57000,
+    "Miles",
+    undefined,
+    styles.miles,
+    true
+  );
   const [error, setError] = useState(null);
 
-  const handleContinue = () => {
+  const handleContinue = (e) => {
+    e.preventDefault();
+
     if (Number.isInteger(parseInt(miles)) && parseInt(miles) >= 0) {
       dataContext.dispatch({
         type: "setVehicleInfo",
@@ -29,17 +37,19 @@ export default function NewUserInfo() {
 
   return (
     <PageContainer title={"VEHICLE INFO"} error={error}>
-      <div className={styles.vehicle_info}>
-        <div className={styles.vehicle}>
-          {yearDropDown}
-          {makeDropDown}
-          {modelDropDown}
+      <form onSubmit={(e) => handleContinue(e)}>
+        <div className={styles.vehicle_info}>
+          <div className={styles.vehicle}>
+            {yearDropDown}
+            {makeDropDown}
+            {modelDropDown}
+          </div>
+          <div className={styles.miles}>{milesInput}</div>
         </div>
-        <div className={styles.miles}>{milesInput}</div>
-      </div>
-      <div className={styles.continue_btn}>
-        <button onClick={() => handleContinue()}>Continue</button>
-      </div>
+        <div className={styles.continue_btn}>
+          <button onSubmit={(e) => handleContinue(e)}>Continue</button>
+        </div>
+      </form>
     </PageContainer>
   );
 }

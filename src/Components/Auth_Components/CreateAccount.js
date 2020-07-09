@@ -16,8 +16,12 @@ export default function CreateAccount() {
   );
   const [error, setError] = useState(null);
 
-  const handleCreateAccount = () => {
-    if (password.localeCompare(confirmPassword) === 0) {
+  const handleCreateAccount = (e) => {
+    e.preventDefault();
+
+    if (password.localeCompare(confirmPassword) !== 0) {
+      setError("Passwords do not match.");
+    } else {
       dataContext.dispatch({ type: "setStatus", value: "creatingUser" });
       auth
         .createUserWithEmailAndPassword(email, password)
@@ -47,14 +51,18 @@ export default function CreateAccount() {
 
   return (
     <PageContainer title={"CREATE ACCOUNT"} error={error}>
-      <div className={styles.login_info}>
-        {emailInput}
-        {passwordInput}
-        {confirmPasswordInput}
-      </div>
-      <div className={`${styles.options} ${styles.createAccount}`}>
-        <button onClick={() => handleCreateAccount()}>Create Account</button>
-      </div>
+      <form onSubmit={(e) => handleCreateAccount(e)}>
+        <div className={styles.login_info}>
+          {emailInput}
+          {passwordInput}
+          {confirmPasswordInput}
+        </div>
+        <div className={`${styles.options} ${styles.createAccount}`}>
+          <button onSubmit={(e) => handleCreateAccount(e)}>
+            Create Account
+          </button>
+        </div>
+      </form>
     </PageContainer>
   );
 }

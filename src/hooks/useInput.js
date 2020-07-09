@@ -4,9 +4,11 @@ export default function useInput(
   setState = "",
   placeholder = "",
   type = "text",
-  className = null
+  className = null,
+  autofocus = false
 ) {
   const [value, setValue] = useState(setState);
+
   const input = (
     <input
       value={value}
@@ -14,6 +16,7 @@ export default function useInput(
       placeholder={placeholder}
       type={type}
       className={className}
+      autoFocus={autofocus}
     />
   );
   return [value, input];
