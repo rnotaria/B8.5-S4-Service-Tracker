@@ -9,6 +9,14 @@ import "../../../Styles/react-quill/quill.snow.css";
 import "../../../Styles/react-quill/quill.bubble.css";
 import modules from "../../../Styles/react-quill/modules";
 
+function QuillContainer({ children }) {
+  return (
+    <div className={styles.quill_parent}>
+      <div className={styles.quill_container}>{children}</div>
+    </div>
+  );
+}
+
 function Section({ title, handleEdit, children }) {
   return (
     <div className={styles.section_divider}>
@@ -34,25 +42,29 @@ function CompletionDetails({ id, info }) {
   if (edit === false) {
     return (
       <Section title="COMPLETION DETAILS" handleEdit={handleEdit}>
-        <div className={styles.main}>
-          <div className={styles.row}>
-            <div className={styles.column1}>Date:</div>
-            <div className={styles.column2}>{date}</div>
-          </div>
-          <div className={styles.row}>
-            <div className={styles.column1}>Miles:</div>
-            <div className={styles.column2}>{miles}</div>
-          </div>
-          <div className={styles.row}>
-            <div className={styles.column1}>Notes:</div>
-            <div className={styles.notes}>
-              <ReactQuill
-                modules={modules}
-                theme="bubble"
-                value={notes}
-                onChange={setNotes}
-                readOnly={true}
-              />
+        <div className={styles.wrapper}>
+          <div className={styles.main}>
+            <div className={styles.row}>
+              <div className={styles.column1}>Date:</div>
+              <div className={styles.column2}>{date}</div>
+            </div>
+            <div className={styles.row}>
+              <div className={styles.column1}>Miles:</div>
+              <div className={styles.column2}>{miles}</div>
+            </div>
+            <div className={styles.row}>
+              <div className={styles.column1}>Notes:</div>
+              <div className={styles.notes}>
+                <QuillContainer>
+                  <ReactQuill
+                    modules={modules}
+                    theme="bubble"
+                    value={notes}
+                    onChange={setNotes}
+                    readOnly={true}
+                  />
+                </QuillContainer>
+              </div>
             </div>
           </div>
         </div>
@@ -62,24 +74,28 @@ function CompletionDetails({ id, info }) {
 
   return (
     <Section title="COMPLETION DETAILS" handleEdit={handleEdit}>
-      <div className={styles.main}>
-        <div className={styles.row}>
-          <div className={styles.column1}>Date:</div>
-          <div className={styles.column2}>{dateInput}</div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.column1}>Miles:</div>
-          <div className={styles.column2}>{milesInput}</div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.column1}>Notes:</div>
-          <div className={styles.notes_edit}>
-            <ReactQuill
-              modules={modules}
-              theme="snow"
-              value={notes}
-              onChange={setNotes}
-            />
+      <div className={styles.wrapper}>
+        <div className={styles.main}>
+          <div className={styles.row}>
+            <div className={styles.column1}>Date:</div>
+            <div className={styles.column2}>{dateInput}</div>
+          </div>
+          <div className={styles.row}>
+            <div className={styles.column1}>Miles:</div>
+            <div className={styles.column2}>{milesInput}</div>
+          </div>
+          <div className={styles.row}>
+            <div className={styles.column1}>Notes:</div>
+            <div className={styles.notes_edit}>
+              <QuillContainer>
+                <ReactQuill
+                  modules={modules}
+                  theme="snow"
+                  value={notes}
+                  onChange={setNotes}
+                />
+              </QuillContainer>
+            </div>
           </div>
         </div>
       </div>
@@ -94,25 +110,29 @@ function Intructions({ id, info }) {
   if (edit === false) {
     return (
       <Section title="INSTRUCTIONS" handleEdit={handleEdit}>
-        <ReactQuill
-          modules={modules}
-          theme="bubble"
-          value={instructions}
-          onChange={setInstructions}
-          readOnly={true}
-        />
+        <QuillContainer>
+          <ReactQuill
+            modules={modules}
+            theme="bubble"
+            value={instructions}
+            onChange={setInstructions}
+            readOnly={true}
+          />
+        </QuillContainer>
       </Section>
     );
   }
 
   return (
     <Section title="INSTRUCTIONS" handleEdit={handleEdit}>
-      <ReactQuill
-        modules={modules}
-        theme="snow"
-        value={instructions}
-        onChange={setInstructions}
-      />
+      <QuillContainer>
+        <ReactQuill
+          modules={modules}
+          theme="snow"
+          value={instructions}
+          onChange={setInstructions}
+        />
+      </QuillContainer>
     </Section>
   );
 }
@@ -124,25 +144,29 @@ function Notes({ id, info }) {
   if (edit === false) {
     return (
       <Section title="NOTES" handleEdit={handleEdit}>
-        <ReactQuill
-          modules={modules}
-          theme="bubble"
-          value={notes}
-          onChange={setNotes}
-          readOnly={true}
-        />
+        <QuillContainer>
+          <ReactQuill
+            modules={modules}
+            theme="bubble"
+            value={notes}
+            onChange={setNotes}
+            readOnly={true}
+          />
+        </QuillContainer>
       </Section>
     );
   }
 
   return (
     <Section title="NOTES" handleEdit={handleEdit}>
-      <ReactQuill
-        modules={modules}
-        theme="snow"
-        value={notes}
-        onChange={setNotes}
-      />
+      <QuillContainer>
+        <ReactQuill
+          modules={modules}
+          theme="snow"
+          value={notes}
+          onChange={setNotes}
+        />
+      </QuillContainer>
     </Section>
   );
 }

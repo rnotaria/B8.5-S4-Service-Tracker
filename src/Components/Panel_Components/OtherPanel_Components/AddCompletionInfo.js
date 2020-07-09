@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { MaintenanceTrackerContext } from "../../../Contexts/MaintenanceTrackerContext";
-import styles from "./_AddCompletionInfoStyles.module.css";
+import styles from "./_ViewInfoStyles.module.css";
 import getDate from "../../../utils/getDate";
 import useInput from "../../../hooks/useInput";
 
@@ -8,6 +8,14 @@ import ReactQuill from "react-quill";
 import "../../../Styles/react-quill/quill.snow.css";
 import "../../../Styles/react-quill/quill.bubble.css";
 import modules from "../../../Styles/react-quill/modules";
+
+function QuillContainer({ children }) {
+  return (
+    <div className={styles.quill_parent}>
+      <div className={styles.quill_container}>{children}</div>
+    </div>
+  );
+}
 
 export default function CompletionInfo({ taskId, intervalMiles }) {
   const didMount = useRef(false);
@@ -44,29 +52,60 @@ export default function CompletionInfo({ taskId, intervalMiles }) {
     }
   }, [didMount, maintenanceTrackerContext, taskId, intervalMiles]);
 
+  // // return (
+  // <div className={styles.main}>
+  //   <div className={styles.row}>
+  //     <div className={styles.column1}>Date:</div>
+  //     <div className={styles.column2}>{dateInput}</div>
+  //   </div>
+  //   <div className={styles.row}>
+  //     <div className={styles.column1}>Miles:</div>
+  //     <div className={styles.column2}>{milesInput}</div>
+  //   </div>
+  //   <div className={styles.row}>
+  //     <div className={styles.column1}>Notes:</div>
+  //     <div className={styles.notes_edit}>
+  //       <ReactQuill
+  //         modules={modules}
+  //         theme="snow"
+  //         value={notes}
+  //         onChange={setNotes}
+  //       />
+  //     </div>
+  //   </div>
+  //   <div className={styles.btn_container}>
+  //     <button onClick={handleSubmit}>Submit</button>
+  //   </div>
+  // </div>;
+  // // );
+
   return (
-    <div className={styles.main}>
-      <div className={styles.row}>
-        <div className={styles.column1}>Date:</div>
-        <div className={styles.column2}>{dateInput}</div>
-      </div>
-      <div className={styles.row}>
-        <div className={styles.column1}>Miles:</div>
-        <div className={styles.column2}>{milesInput}</div>
-      </div>
-      <div className={styles.row}>
-        <div className={styles.column1}>Notes:</div>
-        <div className={styles.notes_edit}>
-          <ReactQuill
-            modules={modules}
-            theme="snow"
-            value={notes}
-            onChange={setNotes}
-          />
+    <div className={styles.wrapper}>
+      <div className={styles.main}>
+        <div className={styles.row}>
+          <div className={styles.column1}>Date:</div>
+          <div className={styles.column2}>{dateInput}</div>
         </div>
-      </div>
-      <div className={styles.btn_container}>
-        <button onClick={handleSubmit}>Submit</button>
+        <div className={styles.row}>
+          <div className={styles.column1}>Miles:</div>
+          <div className={styles.column2}>{milesInput}</div>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.column1}>Notes:</div>
+          <div className={styles.notes_edit}>
+            <QuillContainer>
+              <ReactQuill
+                modules={modules}
+                theme="snow"
+                value={notes}
+                onChange={setNotes}
+              />
+            </QuillContainer>
+          </div>
+        </div>
+        <div className={styles.btn_container}>
+          <button onClick={handleSubmit}>Submit</button>
+        </div>
       </div>
     </div>
   );

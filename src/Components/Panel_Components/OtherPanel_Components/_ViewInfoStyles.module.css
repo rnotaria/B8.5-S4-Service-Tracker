@@ -1,9 +1,12 @@
-.main_main {
-  /* overflow-y: scroll; */
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .main {
-  width: 100%;
+  max-width: 1120px;
+  width: calc(100% - 64px);
   color: white;
 }
 
@@ -36,7 +39,11 @@
 
 .column2 input {
   width: 80px;
-  background-color: slategray;
+  background-color: silver;
+
+  border: 1px solid black;
+  border-radius: 3px;
+  outline: none;
 }
 
 .edit_btn {
@@ -62,4 +69,35 @@
   max-width: calc(100% - 80px);
   margin-left: -16px;
   margin-right: -16px;
+}
+
+.quill_container {
+  width: 100%;
+  max-width: 1120px;
+}
+
+.quill_parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn_container button {
+  width: 200px;
+  height: 25px;
+
+  background-image: linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150));
+  border: 1px solid black;
+  border-radius: 5px;
+
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
 }
