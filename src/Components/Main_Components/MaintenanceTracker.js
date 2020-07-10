@@ -8,7 +8,7 @@ import NewUserInfo from "../Auth_Components/NewUserInfo";
 import { MaintenanceTrackerContext } from "../../Contexts/MaintenanceTrackerContext";
 import { DataContext } from "../../Contexts/DataContext";
 import ReactLoading from "react-loading";
-import styles from "../../Styles/loading.module.css";
+import loadingStyles from "../../Styles/loading.module.css";
 
 export default function MaintenanceTracker() {
   const [currentUser, setCurrentUser] = useState("authenticating");
@@ -61,7 +61,7 @@ export default function MaintenanceTracker() {
    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   if (currentUser === "authenticating") {
     return (
-      <div className={styles.loading}>
+      <div className={loadingStyles.loading}>
         <ReactLoading type={"spinningBubbles"} />
       </div>
     );
