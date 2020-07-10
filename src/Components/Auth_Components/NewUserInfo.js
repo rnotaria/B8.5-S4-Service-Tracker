@@ -8,13 +8,11 @@ import PageContainer from "./PageContainer";
 
 export default function NewUserInfo() {
   const dataContext = useContext(DataContext);
-  const [year, yearDropDown] = useDropDown(
-    yearList(1900, new Date().getFullYear() + 1)
-  );
+  const [year, yearDropDown] = useDropDown(yearList(2008, 2016));
   const [make, makeDropDown] = useDropDown(["Audi", "BMW", "Genesis"]);
   const [model, modelDropDown] = useDropDown(["S4"]);
   const [miles, milesInput] = useInput(
-    57000,
+    "",
     "Miles",
     undefined,
     styles.miles,

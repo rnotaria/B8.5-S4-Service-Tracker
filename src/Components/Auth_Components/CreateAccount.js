@@ -7,7 +7,7 @@ import PageContainer from "./PageContainer";
 
 export default function CreateAccount() {
   const dataContext = useContext(DataContext);
-  const [email, emailInput] = useInput("", "Email");
+  const [email, emailInput] = useInput("", "Email", undefined, undefined, true);
   const [password, passwordInput] = useInput("", "Password", "password");
   const [confirmPassword, confirmPasswordInput] = useInput(
     "",
