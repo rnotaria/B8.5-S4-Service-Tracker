@@ -5,8 +5,8 @@ import styles from "./_HelpStyles.module.css";
 import { helpContent } from "./helpContent";
 
 const contentStyle = {
-  height: "800px",
-  width: "700px",
+  height: "600px",
+  width: "500px",
   border: "1px solid black",
 
   backgroundColor: "rgba(100, 100, 100, 0.8)",
