@@ -16,19 +16,31 @@
   background-color: black;
 }
 
+.videoContainer video {
+  height: 100%;
+  width: 100%;
+}
+
 .textContainer {
   height: calc(100% - 413px - 10px - 25px - 16px);
 
   border-left: 5px solid grey;
   border-right: 5px solid grey;
-  padding: 16px;
+  
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
 
   text-align: justify;
+
+  /* font-size: 12px; */
 }
 
+
 .iconContainer {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 
   position: relative;
   display: inline-block;
@@ -37,16 +49,16 @@
 
 .minusIcon,
 .plusIcon {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   position: absolute;
 
   color: darkslateblue;
 }
 
 .minusIconActive {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   position: absolute;
 
   color: red;
@@ -55,8 +67,8 @@
 .minusIconBg,
 .minusIconActiveBg,
 .plusIconBg {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   position: absolute;
   left: 25%;
   top: 25%;
@@ -65,8 +77,8 @@
 }
 
 .editIcon {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 
   position: absolute;
   left: 2px;
@@ -76,22 +88,22 @@
 }
 
 .infoIcon {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 
   position: absolute;
 }
 
 .saveIcon {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 
   position: absolute;
 }
 
 .arrowIcon {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 
   color: red;
 

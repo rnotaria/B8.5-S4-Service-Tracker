@@ -12,7 +12,7 @@ import { GoInfo } from "react-icons/go";
 const video = (src) => {
   return (
     <div className={styles.videoContainer}>
-      <video loop width="500px" autoPlay src={src} type="video/mp4" />
+      <video loop autoPlay src={src} type="video/mp4" />
     </div>
   );
 };
