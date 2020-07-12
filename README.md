@@ -1,15 +1,18 @@
 # Maintenance Tracker
+---
 
-This project is still in development...
+This project is still in development but can be viewed at [https://b8s4.netlify.app/](https://b8s4.netlify.app/). Once the project is polished, it will be moved to an official domain.
 
 **To view the app go to [https://b8s4.netlify.app/](https://b8s4.netlify.app/) and select _Guest_ at the Login Page**
-**Click the "?" at the top of the page to view a tutorial on how to use the app**
 
 ## Summary
 
-The goal of this project is organize maintenance information all in one centralized location. This app will provide users information on upcoming maintenance services including instructions, where to purchase parts, etc. When a task is completed, the date and miles will be recorded which the user can reference in the future. This project was specifically built around the B8/B8.5 Audi S4 models by populating tasks for each service interval but is fully customizable and can be used for any car model by adding or removing tasks as needed. This will be described in further detail below.
+The goal of this project is organize maintenance information all in one centralized location. This app will provide users information on upcoming maintenance services including instructions, where to purchase parts, etc. When a task is completed, the date and miles will be recorded which the user can reference in the future. The user can also create their own service intervals and tasks as well as add any relevant information to them.
 
-The site is currently deployed using Netlify and can be viewed at [https://b8s4.netlify.app/](https://b8s4.netlify.app/). Once the project is polished and the backend is complete, it will be moved to an official domain.
+This app was specifically built around the B8/B8.5 Audi S4 models by populating tasks for each service interval but was designed with generalization in mind and new makes and models will be supported in the future. In the meantime, it is very easy to create a custom schedule for any car so long as you know the three things: the service task, when to perform the service in miles, and after how many miles does the service repeat. This will be discussed in the next section.
+
+
+
 
 ## How to use a Custom Service Schedule Template
 
@@ -55,8 +58,13 @@ As mentioned, this app was designed around the maintenance schedule of a specifi
 ```
 
 ## Tutorial
-
 ---
+
+### Quickstart
+1) Clone the github repo
+2) Change directory to that of the cloned repo
+3) Perform `npm update` to install required node modules
+4) Run `npm start` to run app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
