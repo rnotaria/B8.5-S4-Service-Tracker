@@ -1,9 +1,9 @@
 # Maintenance Tracker
 ---
 
-This project is still in development but can be viewed at [https://b8s4.netlify.app/](https://b8s4.netlify.app/). Once the project is polished, it will be moved to an official domain.
+This project is still in development but can currently be viewed at [https://www.audis4.me/](https://www.audis4.me/).
 
-**To view the app go to [https://b8s4.netlify.app/](https://b8s4.netlify.app/) and select _Guest_ at the Login Page**
+**To view the app go to [https://www.audis4.me/](https://www.audis4.me/) and select _Guest_ at the Login Page**
 
 ## Summary
 
