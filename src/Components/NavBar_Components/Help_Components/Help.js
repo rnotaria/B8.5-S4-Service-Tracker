@@ -5,7 +5,7 @@ import styles from "./_HelpStyles.module.css";
 import { helpContent } from "./helpContent";
 
 const contentStyle = {
-  height: "600px",
+  height: "620px",
   width: "500px",
   border: "1px solid black",
 
