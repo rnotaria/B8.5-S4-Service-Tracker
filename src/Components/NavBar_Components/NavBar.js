@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { auth } from "../../Firebase/firebase";
 import Help from "./Help_Components/Help";
 import styles from "./_NavBarStyles.module.css";
-import { MdSettings } from "react-icons/md";
+import { AiFillGithub } from "react-icons/ai";
 import { IoMdHelp } from "react-icons/io";
 import { DataContext } from "../../Contexts/DataContext";
 import SaveData from "./SaveData";
@@ -55,6 +55,7 @@ function NavBar() {
         <h5> mi</h5>
       </div>
       <Options>
+        <AiFillGithub className={styles.githubIcon} onClick={()=>window.open('https://github.com/rnotaria/B8.5-S4-Service-Tracker')}/>
         <SaveData />
         <React.Fragment>
           <Help open={openHelp} handleOnClose={handleOnClose} />
@@ -63,7 +64,6 @@ function NavBar() {
             onClick={() => setOpenHelp(true)}
           />
         </React.Fragment>
-        <MdSettings className={styles.settingsIcon} />
         <h5 className={styles.logout} onClick={() => handleLogout()}>
           {dataContext.state.container.user === "guest" ? "Sign In" : "Logout"}
         </h5>
